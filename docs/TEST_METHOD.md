@@ -32,6 +32,7 @@ Each suite can also run on its own, for example
 | `test_state_and_storage.py` | the state file's permissions, locking, retries and pruning |
 | `test_guards.py` | the run guards (below), in a throwaway copy of the repository |
 | `test_live_scoring.py` | the live harness's scoring and isolation rules, on made-up transcripts |
+| `test_precheck_ts2.py` | reports which ts-2 prompts the hook treats as work, next to the 0.4.0 hook; it does not judge (see [`ANALYSIS_PLAN_0.4.1.md`](ANALYSIS_PLAN_0.4.1.md)) |
 
 **Check counts can differ by machine.** `test_live_scoring.py` has three checks that need
 Claude Code sign-in credentials (`~/.claude/.credentials.json`). Without them, the three are

@@ -87,4 +87,15 @@ When it is reached, no new session starts and the report lists every incomplete 
 
 ## Changes to this plan
 
-None yet.
+- Before any live run, after the 0.4.1 classifier was committed: the offline pre-check is the suite
+  `tests/offline/test_precheck_ts2.py`. Its ledger row is written by `tools/run_offline.py` on the
+  test machine right before stage 1, with the other offline suites. Result when first run (offline,
+  not yet in the ledger): the 0.4.1 hook treats 23 of 24 substantive and 0 of 24 non-substantive
+  ts-2 prompts as work; the 0.4.0 hook treats 23 of 24 and 12 of 24. Both miss `NM07-mention-search`
+  ("Search the web for ..."), a gap that was already in 0.4.0. Per this plan the classifier is not
+  changed for it.
+- The harness takes `--tasks tasks-ts2.json --plan-doc docs/ANALYSIS_PLAN_0.4.1.md`, and
+  `tools/summarize.py` reads the prompt kinds of every `tests/live/tasks*.json`.
+- `run_live.py plan` estimates $101.49 for this run, from the phase-1 means x 1.4. The 0.4.0 run
+  used the same method, estimated $205.42 and cost $99.59 in the ledger, so the ts-1-based $50.04
+  above is the better guide.

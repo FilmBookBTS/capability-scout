@@ -330,7 +330,8 @@ def cmd_run(a):
                 "resumes": resumed_from, "sessions_recorded_before_resume": len(done_before),
                 "repeat": f"git checkout {commit} && python3 -I tests/live/run_live.py run --label {a.label} "
                           f"--seed {a.seed} --budget-usd {a.budget_usd} --models {','.join(a.models)} "
-                          f"--arms {','.join(a.arms)} --reps {a.reps}" + (f" --resume {a.resume}" if a.resume else "")}
+                          f"--arms {','.join(a.arms)} --reps {a.reps} --tasks {os.path.basename(TASKS)} --plan-doc {PLAN_DOC}"
+                          + (f" --resume {a.resume}" if a.resume else "")}
     mpath = os.path.join(run_dir, "manifest.json")
 
     def write_manifest():
@@ -441,7 +442,16 @@ def main(argv):
     p.add_argument("--jobs", type=int, default=4)
     p.add_argument("--budget-usd", type=float, default=None)
     p.add_argument("--resume", default=None, help="run id of an interrupted run to finish")
+    p.add_argument("--tasks", default="tasks.json", help="task set file in tests/live (default tasks.json, ts-1)")
+    p.add_argument("--plan-doc", default="docs/ANALYSIS_PLAN.md", help="analysis plan recorded in the manifest")
     a = p.parse_args(argv[1:])
+    global TASKS, PLAN_DOC
+    if not re.fullmatch(r"tasks[\w.-]*\.json", a.tasks):
+        p.error("--tasks: a tasks*.json file in tests/live")
+    if not re.fullmatch(r"docs/ANALYSIS_PLAN[\w.-]*\.md", a.plan_doc):
+        p.error("--plan-doc: a docs/ANALYSIS_PLAN*.md file")
+    TASKS, PLAN_DOC = os.path.join(HERE, a.tasks), a.plan_doc
+    REQUIRED[-1] = PLAN_DOC
     a.models = [m.strip() for m in a.models.split(",") if m.strip()]
     a.arms = [x.strip() for x in a.arms.split(",") if x.strip()]
     if any(x not in ARMS for x in a.arms):

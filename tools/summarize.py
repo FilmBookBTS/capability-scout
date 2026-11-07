@@ -138,14 +138,17 @@ NAMED_KINDS = {"names-other-tool"}
 
 
 def task_kinds():
-    """task_set_version -> {task_id: kind}, from tests/live/tasks.json (current task set only)."""
-    path = os.path.join(REPO, "tests", "live", "tasks.json")
-    if not os.path.exists(path):
-        return {}
-    t = json.load(open(path))
-    kinds = {x["id"]: "substantive" for x in t["substantive"]}
-    kinds.update({x["id"]: x["kind"] for x in t["non_substantive"]})
-    return {t["task_set_version"]: kinds}
+    """task_set_version -> {task_id: kind}, from every tests/live/tasks*.json."""
+    d = os.path.join(REPO, "tests", "live")
+    out = {}
+    for name in sorted(os.listdir(d)) if os.path.isdir(d) else []:
+        if not (name.startswith("tasks") and name.endswith(".json")):
+            continue
+        t = json.load(open(os.path.join(d, name)))
+        kinds = {x["id"]: "substantive" for x in t["substantive"]}
+        kinds.update({x["id"]: x["kind"] for x in t["non_substantive"]})
+        out[t["task_set_version"]] = kinds
+    return out
 
 
 def manifests():
