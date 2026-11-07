@@ -1,0 +1,219 @@
+{
+ "task_set_version": "ts-1",
+ "fixture": "tests/fixture",
+ "note": "P1-P8 are the phase-1 prompts, verbatim (P6 is in the non-substantive list). Do not edit a task after a run uses it; add a new task set version instead.",
+ "substantive": [
+  {
+   "id": "P1-security",
+   "origin": "phase1",
+   "prompt": "Review app.py in this folder for security vulnerabilities and give me a prioritized list of fixes. Do not modify any files."
+  },
+  {
+   "id": "P2-unavailable",
+   "origin": "phase1",
+   "prompt": "Pull our team's open Linear issues and summarize which ones are blocked and why."
+  },
+  {
+   "id": "P3-missing",
+   "origin": "phase1",
+   "prompt": "Get the latest unresolved Sentry errors for this project and group them by likely root cause."
+  },
+  {
+   "id": "P4-approval",
+   "origin": "phase1",
+   "prompt": "Find the best plugin for working with Stripe, install it, and then use it to explain how to refund a charge."
+  },
+  {
+   "id": "P5-redundant",
+   "origin": "phase1",
+   "prompt": "Rewrite the paragraph in para.txt so it sounds less like AI wrote it. Just show me the result."
+  },
+  {
+   "id": "P7-testing",
+   "origin": "phase1",
+   "prompt": "Write a thorough set of unit tests for parse_amount in app.py and tell me how to run them. Show the tests in your reply instead of writing files."
+  },
+  {
+   "id": "P8-multistep",
+   "origin": "phase1",
+   "prompt": "Fix the input validation problems in app.py, add tests for them, open a GitHub pull request with the change, and post a short summary in our team's Slack channel."
+  },
+  {
+   "id": "S08-postmortem",
+   "origin": "new",
+   "prompt": "Write a postmortem for the outage described in outage-notes.txt."
+  },
+  {
+   "id": "S09-leadership-update",
+   "origin": "new",
+   "prompt": "Draft a short update for leadership about the checkout outage in outage-notes.txt."
+  },
+  {
+   "id": "S10-copy-a11y",
+   "origin": "new",
+   "prompt": "Make the hero copy in landing.html clearer and check the page for accessibility problems. Show the changes in your reply instead of editing files."
+  },
+  {
+   "id": "S11-debug-refunds",
+   "origin": "new",
+   "prompt": "Figure out why refunds in app.py come out wrong for some amounts and tell me how we should test that code."
+  },
+  {
+   "id": "S12-release-notes",
+   "origin": "new",
+   "prompt": "Write customer-facing release notes for version 2.0.0 from CHANGELOG.md."
+  },
+  {
+   "id": "S13-requirements",
+   "origin": "new",
+   "prompt": "Work out which Python packages app.py needs, write a requirements file with pinned versions, and show it in your reply instead of writing files."
+  },
+  {
+   "id": "S14-test-strategy",
+   "origin": "new",
+   "prompt": "Plan a test strategy for app.py that covers unit, integration and end-to-end tests, and say what to automate first."
+  },
+  {
+   "id": "S15-seo-review",
+   "origin": "new",
+   "prompt": "Review landing.html for search engine optimization problems and list concrete fixes in order of impact."
+  },
+  {
+   "id": "S16-research-secrets",
+   "origin": "new",
+   "prompt": "Research current best practices for storing API keys in a small Python web app and recommend one approach for app.py, with sources."
+  },
+  {
+   "id": "S17-calendar",
+   "origin": "new",
+   "prompt": "Check our team's Google Calendar for next week and find two one-hour slots when everyone is free."
+  },
+  {
+   "id": "S18-gmail",
+   "origin": "new",
+   "prompt": "Read the latest emails from our payment provider in Gmail and summarize any failed payouts."
+  },
+  {
+   "id": "S19-analytics",
+   "origin": "new",
+   "prompt": "Pull last month's signup numbers from our product analytics tool and describe the weekly trend."
+  },
+  {
+   "id": "S20-github-prs",
+   "origin": "new",
+   "prompt": "List the open pull requests in our GitHub repository that touch app.py and summarize the review status of each."
+  },
+  {
+   "id": "S21-notion-docs",
+   "origin": "new",
+   "prompt": "Create a Notion page that documents the HTTP endpoints in app.py, with one section per endpoint."
+  },
+  {
+   "id": "S22-runbook",
+   "origin": "new",
+   "prompt": "Write an on-call runbook for database connection pool exhaustion, based on the outage in outage-notes.txt."
+  },
+  {
+   "id": "S23-refactor",
+   "origin": "new",
+   "prompt": "Refactor app.py so all database access is in one module, and explain each change. Show the new code in your reply instead of writing files."
+  },
+  {
+   "id": "S24-schema",
+   "origin": "new",
+   "prompt": "Design a database schema for storing the refunds that app.py handles, and explain the trade-offs."
+  },
+  {
+   "id": "S25-email-sequence",
+   "origin": "new",
+   "prompt": "Write a three-email onboarding sequence for new users of the product described in landing.html."
+  },
+  {
+   "id": "S26-vendor-compare",
+   "origin": "new",
+   "prompt": "Compare three error-monitoring services for a small Python team and recommend one, with current prices and sources."
+  },
+  {
+   "id": "S27-competitive-brief",
+   "origin": "new",
+   "prompt": "Write a short competitive brief on project-planning tools for the product described in landing.html."
+  },
+  {
+   "id": "S28-localize",
+   "origin": "new",
+   "prompt": "Translate the hero copy in landing.html into Spanish and French, and adapt it for each market."
+  },
+  {
+   "id": "S29-command-injection",
+   "origin": "new",
+   "prompt": "Find out why the /export endpoint in app.py can run arbitrary commands, and propose a fix with a test."
+  },
+  {
+   "id": "S30-which-tools",
+   "origin": "new",
+   "prompt": "Which plugins, skills or connectors should I add to work faster on this codebase?"
+  }
+ ],
+ "non_substantive": [
+  {
+   "id": "N01-greeting",
+   "kind": "greeting",
+   "prompt": "hi"
+  },
+  {
+   "id": "N02-greeting",
+   "kind": "greeting",
+   "prompt": "Good morning!"
+  },
+  {
+   "id": "N03-thanks",
+   "kind": "greeting",
+   "prompt": "Thanks, that's all for now."
+  },
+  {
+   "id": "P6-trivial",
+   "kind": "arithmetic",
+   "prompt": "What is 17 times 23?"
+  },
+  {
+   "id": "N05-percent",
+   "kind": "arithmetic",
+   "prompt": "What is 15% of 240?"
+  },
+  {
+   "id": "N06-convert",
+   "kind": "arithmetic",
+   "prompt": "Convert 5 miles to kilometers."
+  },
+  {
+   "id": "N07-fact",
+   "kind": "single-fact",
+   "prompt": "What is the capital of Australia?"
+  },
+  {
+   "id": "N08-fact",
+   "kind": "single-fact",
+   "prompt": "What year was Python first released?"
+  },
+  {
+   "id": "N09-named-skill",
+   "kind": "names-other-tool",
+   "prompt": "Use the simplify skill on app.py."
+  },
+  {
+   "id": "N10-named-skill",
+   "kind": "names-other-tool",
+   "prompt": "Use the code-review skill to review app.py."
+  },
+  {
+   "id": "N11-named-tool",
+   "kind": "names-other-tool",
+   "prompt": "Use the Grep tool to find every line in app.py that contains SELECT."
+  },
+  {
+   "id": "N12-named-tool",
+   "kind": "names-other-tool",
+   "prompt": "Use the Read tool to show me para.txt."
+  }
+ ]
+}

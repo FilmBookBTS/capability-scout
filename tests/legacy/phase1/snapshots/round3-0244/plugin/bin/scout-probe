@@ -1,0 +1,224 @@
+#!/usr/bin/env python3
+"""Capability Scout read-only probe.
+
+Wraps Claude Code's own inventory commands and prints a compact summary.
+It never installs, enables, configures or writes settings. The only file it
+writes is a cache of the marketplace catalog under the system temp dir.
+
+Usage:
+  scout-probe inventory            plugins, skills, MCP health (compact)
+  scout-probe inventory --costs    also per-plugin always-on token estimate
+  scout-probe search TERM [TERM..] rank uninstalled marketplace plugins
+  scout-probe digest "PROMPT"      one-paragraph, task-matched summary (used by the hook)
+"""
+import json
+import os
+import re
+import subprocess
+import sys
+import tempfile
+import time
+
+CACHE = os.path.join(tempfile.gettempdir(), "capability-scout-catalog.json")
+CACHE_TTL_S = 6 * 3600
+
+
+def run(args, timeout=60):
+    try:
+        p = subprocess.run(args, capture_output=True, text=True, timeout=timeout)
+        return p.returncode, p.stdout
+    except FileNotFoundError:
+        return 127, ""
+    except subprocess.TimeoutExpired:
+        return 124, ""
+
+
+def plugins():
+    code, out = run(["claude", "plugin", "list", "--json"])
+    if code != 0:
+        return None
+    data = json.loads(out)
+    return data if isinstance(data, list) else data.get("installed", [])
+
+
+def plugin_skills(install_path):
+    d = os.path.join(install_path or "", "skills")
+    try:
+        return sorted(n for n in os.listdir(d) if os.path.isfile(os.path.join(d, n, "SKILL.md")))
+    except OSError:
+        return []
+
+
+def plugin_skill_list(install_path):
+    names = plugin_skills(install_path)
+    if not names and os.path.isfile(os.path.join(install_path or "", "SKILL.md")):
+        names = ["(root SKILL.md)"]
+    return names
+
+
+MCP_LINE = re.compile(r"^(?P<name>[^:]+(?::[^:]+:[^:]+)?): (?P<target>.*?) - (?P<status>.*)$")
+
+
+def mcp_health():
+    code, out = run(["claude", "mcp", "list"], timeout=90)
+    if code != 0:
+        return None
+    rows = []
+    for line in out.splitlines():
+        m = MCP_LINE.match(line.strip())
+        if not m or "Checking MCP" in line:
+            continue
+        s = m.group("status")
+        if "Connected" in s or "✓" in s:
+            state = "ok"
+        elif "Needs authentication" in s:
+            state = "needs-auth"
+        elif "Not configured" in s:
+            state = "not-configured"
+        elif "403" in s or "PROXY" in s:
+            state = "blocked-by-network"
+        elif "Pending approval" in s:
+            state = "pending-approval"
+        else:
+            state = "failed"
+        rows.append((m.group("name"), state))
+    return rows
+
+
+def always_on_tokens(plugin_id):
+    code, out = run(["claude", "plugin", "details", plugin_id])
+    m = re.search(r"Always-on:\s+~?([\d.,]+k?)\s*tok", out or "")
+    return m.group(1) if m else "?"
+
+
+def inventory(costs):
+    out = {"scope": "execution-environment (this machine/container, via claude CLI)"}
+    pl = plugins()
+    if pl is None:
+        out["plugins"] = "unavailable: claude CLI not found or failed"
+    else:
+        out["plugins"] = []
+        for p in pl:
+            row = {
+                "id": p.get("id"),
+                "enabled": p.get("enabled"),
+                "scope": p.get("scope"),
+                "skills": plugin_skill_list(p.get("installPath")),
+            }
+            if costs:
+                row["always_on_tok"] = always_on_tokens(p.get("id"))
+            out["plugins"].append(row)
+    rows = mcp_health()
+    if rows is None:
+        out["mcp"] = "unavailable"
+    else:
+        summary = {}
+        for name, state in rows:
+            summary.setdefault(state, []).append(name)
+        out["mcp"] = {k: (v if k == "ok" or len(v) <= 6 else v[:6] + [f"+{len(v) - 6} more"])
+                      for k, v in summary.items()}
+        out["mcp_counts"] = {k: len(v) for k, v in summary.items()}
+    out["note"] = ("Session tool list in context is authoritative for what is callable now. "
+                   "'loaded' plugins can still have failing MCP servers.")
+    print(json.dumps(out, separators=(",", ":")))
+
+
+def catalog():
+    try:
+        if time.time() - os.path.getmtime(CACHE) < CACHE_TTL_S:
+            with open(CACHE) as f:
+                return json.load(f), True
+    except (OSError, ValueError):
+        pass
+    code, out = run(["claude", "plugin", "list", "--available", "--json"], timeout=120)
+    if code != 0:
+        return None, False
+    data = json.loads(out)
+    slim = {
+        "installed": [p.get("id") for p in data.get("installed", [])],
+        "available": [{"id": p.get("pluginId"), "d": (p.get("description") or "")[:300],
+                       "src": (p.get("source") or {}).get("url", "")}
+                      for p in data.get("available", [])],
+    }
+    try:
+        with open(CACHE, "w") as f:
+            json.dump(slim, f)
+    except OSError:
+        pass
+    return slim, False
+
+
+FIRST_PARTY = ("github.com/anthropics/",)
+
+
+def search(terms):
+    cat, cached = catalog()
+    if cat is None:
+        print(json.dumps({"error": "marketplace listing unavailable (claude plugin list --available --json failed)"}))
+        return
+    terms = [t.lower() for t in terms if t.strip()]
+    hits = []
+    for p in cat["available"]:
+        name = p["id"].split("@")[0].lower()
+        text = (name + " " + p["d"]).lower()
+        score = sum(3 if t in name else 1 for t in terms if t in text)
+        if score:
+            fp = any(p["src"].startswith("https://" + x) for x in FIRST_PARTY)
+            hits.append((score + (1 if fp else 0), p, fp))
+    hits.sort(key=lambda h: -h[0])
+    print(json.dumps({
+        "scope": "marketplace (configured marketplaces only)",
+        "catalog_size": len(cat["available"]),
+        "from_cache": cached,
+        "installed": cat["installed"],
+        "top": [{"id": p["id"], "first_party": fp, "desc": p["d"][:160]} for _, p, fp in hits[:8]],
+        "reminder": "Recommend only on material benefit. Never install; the user approves and installs.",
+    }, separators=(",", ":")))
+
+
+WORD = re.compile(r"[a-z][a-z0-9-]{2,}")
+STOP = {"the", "and", "for", "with", "this", "that", "our", "your", "from", "into", "then", "them",
+        "what", "which", "why", "how", "give", "make", "tell", "show", "list", "get", "pull", "find",
+        "best", "use", "write", "set", "add", "all", "any", "are", "can", "not", "one", "out", "its"}
+
+
+def digest(prompt):
+    words = {w for w in WORD.findall(prompt.lower()) if w not in STOP}
+    parts = []
+    rows = mcp_health() or []
+    bad = [(n, st) for n, st in rows if st != "ok"]
+    named_bad = sorted({n.split(":")[-1] for n, st in bad if n.split(":")[-1].lower() in words})
+    if named_bad:
+        parts.append("Not working here: " + ", ".join(named_bad) + " (MCP server failed, blocked or needs auth).")
+    ok = sorted({n.split(":")[-1] for n, st in rows if st == "ok"})
+    if rows:
+        parts.append(f"MCP servers: {len(ok)} working, {len(bad)} not working.")
+    cat, _ = catalog()
+    if cat:
+        installed = {i.split("@")[0] for i in cat["installed"]}
+        hits = [p["id"] for p in cat["available"]
+                if p["id"].split("@")[0] in words and p["id"].split("@")[0] not in installed]
+        if hits:
+            parts.append("Available in marketplace, not installed: " + ", ".join(hits[:3]) + ".")
+    parts.append("Run the capability-scout skill once before starting this task; never install anything yourself.")
+    print("Capability Scout: " + " ".join(parts))
+
+
+def main(argv):
+    if len(argv) < 2 or argv[1] in ("-h", "--help"):
+        print(__doc__)
+        return 0
+    if argv[1] == "inventory":
+        inventory("--costs" in argv[2:])
+    elif argv[1] == "digest" and len(argv) > 2:
+        digest(" ".join(argv[2:]))
+    elif argv[1] == "search" and len(argv) > 2:
+        search(argv[2:])
+    else:
+        print(__doc__)
+        return 2
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv))

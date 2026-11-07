@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+"""EXPERIMENTAL activation hook (UserPromptSubmit).
+
+Off unless CAPABILITY_SCOUT_HOOK is set. Modes:
+  nudge     one soft sentence suggesting the skill (no probes)
+  directive one firm sentence: run the skill before other tools (no probes)
+  digest    runs `scout-probe digest` (about 3 s) and injects a short,
+            task-matched summary plus the directive
+It fires at most once per session, and only on prompts of 8+ words.
+"""
+import json
+import os
+import subprocess
+import sys
+import tempfile
+
+MODE = {"1": "nudge"}.get(os.environ.get("CAPABILITY_SCOUT_HOOK", ""), os.environ.get("CAPABILITY_SCOUT_HOOK", ""))
+if MODE not in ("nudge", "directive", "digest"):
+    sys.exit(0)
+
+try:
+    event = json.load(sys.stdin)
+except ValueError:
+    sys.exit(0)
+
+prompt = (event.get("prompt") or "").strip()
+if len(prompt.split()) < 8:
+    sys.exit(0)
+
+session = "".join(c for c in str(event.get("session_id", "unknown")) if c.isalnum() or c in "-_")
+marker = os.path.join(tempfile.gettempdir(), f"capability-scout-nudged-{session}")
+if os.path.exists(marker):
+    sys.exit(0)
+try:
+    open(marker, "w").close()
+except OSError:
+    pass
+
+if MODE == "nudge":
+    text = ("Capability Scout: if this request is substantial or multi-step work, "
+            "invoke the capability-scout skill once before starting, then proceed. "
+            "Skip it for quick answers.")
+elif MODE == "directive":
+    text = ("Capability Scout: before any other tool call for this request, invoke the "
+            "capability-scout skill once, then do the task. Never install anything yourself.")
+else:
+    probe = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "bin", "scout-probe")
+    try:
+        text = subprocess.run([probe, "digest", prompt[:2000]], capture_output=True,
+                              text=True, timeout=20).stdout.strip()
+    except (OSError, subprocess.TimeoutExpired):
+        text = ""
+    text = text[:1500] or ("Capability Scout: before any other tool call for this request, invoke the "
+                           "capability-scout skill once, then do the task.")
+
+print(json.dumps({"hookSpecificOutput": {"hookEventName": "UserPromptSubmit", "additionalContext": text}}))

@@ -1,0 +1,45 @@
+{
+  "run_id": "20261105T214223Z-v0.4.0-offline",
+  "kind": "offline",
+  "started_utc": "2026-11-05T21:42:23+00:00",
+  "repo_commit": "26811f0a617fa6ad9c441d48cb682f0f2c2ca6ee",
+  "plugin_version": "0.4.0",
+  "skill_sha256": "7c356a735ef4b3578e9871b3f311549f2f0e15760fe726e3df83b11ff9d4c117",
+  "hook_sha256": "2eae877e21d3cad730978768ada105b3a2682420f97e77713c751807193b28aa",
+  "claude_code_version": "2.1.318 (Claude Code)",
+  "python": "3.13.18",
+  "suites": [
+    {
+      "suite": "test_default_on",
+      "command": "-I tests/offline/test_default_on.py /home/claude/staging/capability-scout/plugins/capability-scout",
+      "returncode": 0,
+      "summary": "37/37 passed"
+    },
+    {
+      "suite": "test_hook_classifier",
+      "command": "-I tests/offline/test_hook_classifier.py /home/claude/staging/capability-scout/plugins/capability-scout",
+      "returncode": 0,
+      "summary": "88/88 passed"
+    },
+    {
+      "suite": "test_pasted_and_followups",
+      "command": "-I tests/offline/test_pasted_and_followups.py /home/claude/staging/capability-scout/plugins/capability-scout",
+      "returncode": 0,
+      "summary": "28/28 passed"
+    },
+    {
+      "suite": "test_state_and_storage",
+      "command": "-I tests/offline/test_state_and_storage.py /home/claude/staging/capability-scout/plugins/capability-scout",
+      "returncode": 0,
+      "summary": "59/59 passed"
+    },
+    {
+      "suite": "test_guards",
+      "command": "-I tests/offline/test_guards.py /home/claude/staging/capability-scout/plugins/capability-scout",
+      "returncode": 0,
+      "summary": "10/10 passed"
+    }
+  ],
+  "analysis_plan": "not applicable (offline)",
+  "repeat": "git checkout 26811f0a617fa6ad9c441d48cb682f0f2c2ca6ee && python3 -I tools/run_offline.py v0.4.0-offline"
+}

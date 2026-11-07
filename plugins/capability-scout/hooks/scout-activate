@@ -1,0 +1,337 @@
+#!/usr/bin/env python3
+"""Capability Scout activation hook.
+
+On by default (since 0.4.0). Set CAPABILITY_SCOUT_HOOK to off or 0 to turn it
+off. EVAL_CAPABILITY_SCOUT_HOOK=on (for `claude plugin eval`) still turns it on,
+even when CAPABILITY_SCOUT_HOOK is off.
+
+UserPromptSubmit (no argument): when a prompt looks like substantive work, add
+one sentence asking Claude to run the capability-scout skill, if this task has
+not had a confirmed assessment yet or the prompt starts a materially different
+task. An unconfirmed request is retried on the next substantive prompt, at most
+MAX_REQUESTS times per task. When a prompt asks to install, download, enable or
+connect something, also add a reminder of what counts as approval. The host's
+permission rules, not this reminder, are what block an unapproved install.
+
+PostToolUse on Skill (argument "confirm"): records an assessment as confirmed
+only when Claude Code reports that the capability-scout skill was actually
+invoked. That shows the skill ran, not that its advice was good.
+
+Only the user's own request counts: pasted material (commands, code, quotes, tables, long
+documents) and prohibitions ("don't install anything") trigger neither message. Approving or
+installing what the current task's assessment proposed continues that task (v0.3.3).
+
+No probes, no network. State lives in owner-only storage (see lib/scout_store.py).
+"""
+import json
+import os
+import re
+import sys
+
+sys.dont_write_bytecode = True  # keep the plugin folder free of __pycache__
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "lib"))
+import scout_store  # noqa: E402
+
+OFF_VALUES = {"off", "0"}
+ON_VALUES = {"1", "on", "directive"}
+MAX_REQUESTS = 2
+SKILL_NAME = re.compile(r"^(?:[\w-]+:)?capability-scout$")
+
+ACTION = re.compile(
+    r"\b(review|audit|fix|debug|refactor|implement|build|create|add|write|rewrite|draft|"
+    r"set ?up|setup|configure|install|deploy|ship|release|migrate|upgrade|integrate|connect|"
+    r"automate|test|investigate|diagnose|analy[sz]e|optimi[sz]e|profile|benchmark|"
+    r"design|plan|summari[sz]e|triage|pull|fetch|sync|import|export|publish|post|open|"
+    r"scan|harden|secure|document|convert|generate|research|compare|evaluate|monitor|"
+    r"clean ?up|restructure|translate|edit|polish|check|download|run|execute|launch|send|email|"
+    r"merge|push|commit|delete|remove|provision|spin up|find|look (?:at|into|through)|figure out|"
+    r"work out|track down|go through|clone|get|list|show|pull up)\b",
+    re.I)
+ARTIFACT = re.compile(
+    r"(\b[\w./-]+\.(py|js|ts|tsx|jsx|go|rs|java|rb|php|cs|cpp|c|h|sql|ya?ml|json|toml|md|"
+    r"csv|xlsx|docx|pptx|pdf|html|css|sh|txt)\b|`[^`]+`|\b(repo|repository|codebase|branch|"
+    r"pull request|pr|issues?|tickets?|pipeline|ci|endpoints?|api|database|schema|server|"
+    r"service|app|website|site|dashboard|spreadsheet|deck|report|tests?|bugs?|errors?|"
+    r"crash|incidents?|outage|logs?|deployment|plugins?|connectors?|mcp|integration|dependencies|"
+    r"docs?|copy|landing page|migration|channel|code)\b)",
+    re.I)
+TRIVIAL = re.compile(
+    r"^\s*(hi|hello|hey|thanks|thank you|ok|okay|yes|no|yep|nope|sure|great|cool|got it|"
+    r"sounds good|go ahead|do it|continue|stop)\b[\s.!?]*$|^\s*[\d\s+\-*/().x×÷=^%]+\??\s*$|"
+    r"^\s*what(?:'s| is)\s+[\d\s+\-*/().x×÷^%]+(times|plus|minus|divided by|[\d\s+\-*/().x×÷^%])*\??\s*$",
+    re.I)
+STOP = set("""a an the and or but for with this that these those our your my their its from into
+onto then than them they what which who why how when where is are was were be been being do does
+did can could should would will shall may might must please just also me us you it to of in on at
+by as about so if not no all any some more most very really get make let now too""".split())
+SPECIFIC = re.compile(r"\b[\w./-]+\.[a-z]{1,5}\b|`[^`]+`|\b(our|my|this|these|the team's)\s+\w+", re.I)
+SOFT_VERB = re.compile(r"^\s*(compare|research|evaluate|plan|design|summari[sz]e|translate)\b", re.I)
+THE_ARTIFACT = re.compile(r"\bthe\s+(\w+\s+)?(repo|repository|codebase|database|schema|server|service|app|site|"
+                          r"website|tests?|build|pipeline|deploy(ment)?|incidents?|errors?|logs?|api|endpoints?|"
+                          r"project|dependencies|migration|branch|ci)\b", re.I)
+# Retrieval verbs ("Get the latest Sentry errors") start new work only when they name something
+# concrete; "Show me again" or "Pull it up" is a follow-up.
+LOOKUP = re.compile(r"^\s*(get|list|show|pull\s+(\w+\s+)?up)\b", re.I)
+# Requests to obtain something: install, download, enable or connect a tool, package or integration.
+OBTAIN = re.compile(
+    r"\b(install|reinstall|download|pip3? install|npm (install|i)|npx|uvx|pipx|brew install|git clone|curl|wget)\b|"
+    r"\b(get|grab|add|enable|connect|set ?up|fetch)\s+(\w+\s+){0,3}?(plugins?|connectors?|integrations?|mcp|"
+    r"packages?|librar(y|ies)|modules?|dependenc(y|ies)|tools?|cli|binar(y|ies)|scanners?|linters?|"
+    r"extensions?|marketplaces?)\b",
+    re.I)
+_OBTAIN_VERB = (r"(?:pip3? install|npm install|brew install|git clone|installation|install|reinstall|download|enable|"
+                r"connect|add|fetch|get|grab|setting up|set ?up|curl|wget|npx|uvx|pipx)(?:ing|ed|s)?\b")
+# "Do not install software", "without downloading or installing anything": a prohibition, not a request.
+NEG_OBTAIN = re.compile(
+    r"\b(?:do not|don't|dont|never|without|not|no|avoid|refrain from)\s+(?:\w+\s+){0,3}?" + _OBTAIN_VERB +
+    r"(?:\s*(?:,|or|and|nor)\s*(?:\w+\s+){0,2}?" + _OBTAIN_VERB + r")*",
+    re.I)
+# Pasted material: fenced blocks, shell commands, quoted lines, table rows and indented code.
+FENCE = re.compile(r"```.*?(?:```|\Z)", re.S)
+PASTED_LINE = re.compile(
+    r"^(?:\s*(?:\$\s|>|\||#{1,6}\s|#!|[A-Z_][A-Z0-9_]*=|\[\s|(?:cd|mkdir|cp|mv|rm|rmdir|ls|cat|chmod|unzip|claude|python3?|bash|sh|"
+    r"export|git|brew|pip3?|npm|npx|curl|wget|diff|echo|sed|grep|comm)\s)|\s{4,}|\t)")
+LONG_PROMPT_LINES = 12  # from this many lines on, only lines that ask for something count
+EDGE_LINES = 3
+# A follow-up that points back at the current task ("install whichever you recommended", "I approve only X").
+FOLLOWUP = re.compile(
+    r"\b(you (just )?(recommended|recommend|proposed|suggested|mentioned|found|listed|flagged)|whichever|"
+    r"i approve|approved?|approval|proposed|the (plan|proposal|recommendation|assessment)|"
+    r"(as|from) (above|before|earlier)|that (one|item|command)|those (items|commands))\b",
+    re.I)
+POLITE = re.compile(r"^\s*(can|could|would|will)\s+you\s+(please\s+)?", re.I)
+BOLD_LINE = re.compile(r"^\s*(?:[-*]\s+)?\*\*[^*]+\*\*[\s.:]*$")
+LEAD = re.compile(r"^(?:[-*\d.)\s]+|\*\*|please\s+|now\s+|then\s+|also\s+|next,?\s+)+", re.I)
+DIRECT = re.compile(r"\b(can|could|would|will) you\b|\bi(?: want|'d like| would like| need) you to\b|\blet'?s\b", re.I)
+PLEASE = re.compile(r"\bplease\b", re.I)
+QUESTION = re.compile(r"^\s*(what|how|why|who|when|where|which|is|are|can|could|does|do|should|would)\b", re.I)
+WORD = re.compile(r"[a-z][a-z0-9_.-]{2,}")
+
+
+def enabled():
+    """On unless CAPABILITY_SCOUT_HOOK is "off" or "0" (case and surrounding spaces ignored)."""
+    if os.environ.get("EVAL_CAPABILITY_SCOUT_HOOK", "").strip().lower() in ON_VALUES:
+        return True
+    return os.environ.get("CAPABILITY_SCOUT_HOOK", "").strip().lower() not in OFF_VALUES
+
+
+def instruction_text(prompt):
+    """The part of a prompt that is the user's own request, not material they pasted.
+
+    A one- or two-line prompt is returned as is, so "pip install requests" stays a request.
+    Otherwise fenced blocks and lines that look like commands, quotes, table rows or indented
+    code are dropped. Long prompts are narrowed further by request_lines().
+    """
+    text = prompt or ""
+    if len([l for l in text.splitlines() if l.strip()]) < 3 and "```" not in text:
+        return text
+    lines = [l for l in FENCE.sub("\n", text).splitlines() if l.strip() and not PASTED_LINE.match(l)]
+    return "\n".join(lines)
+
+
+def is_long(prompt):
+    return len([l for l in (prompt or "").splitlines() if l.strip()]) >= LONG_PROMPT_LINES
+
+
+def is_request(prompt):
+    """Substantive work the user is asking for. In a long prompt, one of its own lines must ask for it,
+    so a pasted procedure or document doesn't count just because it is long."""
+    if is_long(prompt):
+        return bool(request_lines(prompt))
+    return is_substantive(instruction_text(prompt))
+
+
+def request_lines(prompt):
+    """The lines of a long prompt that ask for something. An imperative counts only near the start
+    or end, where people put their ask around pasted material; a direct request counts anywhere."""
+    lines = instruction_text(prompt).splitlines()
+    edge = set(range(EDGE_LINES)) | set(range(len(lines) - EDGE_LINES, len(lines)))
+    return [l for i, l in enumerate(lines) if asks_in_line(l, i in edge)]
+
+
+def asks_in_line(line, imperative_ok=True):
+    """One line of a long prompt that asks for work: an imperative ("Figure out why checkout failed")
+    or a direct request ("Can you review it?"). Bold headings and plain description don't count."""
+    if BOLD_LINE.match(line):
+        return False
+    p = LEAD.sub("", POLITE.sub("", line.strip()))
+    if imperative_ok and len(p.split()) >= 3 and ACTION.match(p):
+        return True
+    return bool(DIRECT.search(line) or (PLEASE.search(line) and ACTION.search(line)))
+
+
+def keywords(text):
+    # Action verbs are left out: "write release notes" and "write a postmortem" are different tasks.
+    return {w.strip(".-") for w in WORD.findall(text.lower()) if w not in STOP and not ACTION.fullmatch(w)}
+
+
+def is_substantive(prompt):
+    """Cheap heuristic: an action on something concrete, or a long request."""
+    p = POLITE.sub("", prompt.strip())  # "Could you fix the failing tests?" is an instruction
+    if not p or TRIVIAL.search(p):
+        return False
+    words = p.split()
+    artifact = bool(ARTIFACT.search(p))
+    # A question ("How do I write a test in pytest?") is work only when it names something specific.
+    if QUESTION.match(p) and not (SPECIFIC.search(p) or THE_ARTIFACT.search(p)):
+        return False
+    if len(words) >= 25:
+        return True
+    if LOOKUP.match(p) and not (artifact or THE_ARTIFACT.search(p)):
+        return False
+    action = bool(ACTION.search(p))
+    # An imperative ("Audit our dependencies.") is a task even when it is short.
+    if len(words) >= 3 and ACTION.match(p) and (artifact or not SOFT_VERB.match(p)):
+        return True
+    if action and (artifact or len(words) >= 6):
+        return True
+    # Several clauses ("X, then Y and post Z") read as multi-step work.
+    if action and len(re.findall(r",|;|\bthen\b|\band\b", p, re.I)) >= 2:
+        return True
+    return False
+
+
+def is_new_task(prev_kw, kw):
+    """True when the prompt shares little vocabulary with the last assessed task."""
+    if not prev_kw:
+        return True
+    overlap = len(prev_kw & kw) / max(1, min(len(prev_kw), len(kw)))
+    return overlap < 0.25
+
+
+FIRST_MSG = ("Capability Scout: before any other tool call for this request, invoke the "
+             "capability-scout skill once, show its short capability plan, invoke any installed "
+             "specialist skill the plan picks, then do the task. Never install, download or change "
+             "anything, or take an outward-facing action, without the user's explicit approval.")
+NEW_TASK_MSG = ("Capability Scout: this looks like a different task from the one already assessed. "
+                "Before any other tool call, invoke the capability-scout skill again for this task "
+                "(reuse the earlier inventory; redo selection and the marketplace check), show the plan, "
+                "invoke any specialist skill it picks, then do it.")
+RETRY_MSG = ("Capability Scout: the capability assessment requested for this task has not run yet. "
+             "Before any other tool call, invoke the capability-scout skill once, show its short "
+             "capability plan, then continue.")
+
+
+APPROVAL_MSG = ("Capability Scout approval check: this message asks to install, download, enable or connect "
+                "something. It approves only an item you already proposed by exact name, with its source, purpose, "
+                "the access it gets and what installing it changes, and that the user has now confirmed. A generic "
+                "or \"whichever you recommend\" instruction, an item you never proposed, or a different kind of item "
+                "from the one you recommended (for example a plugin when you recommended a connector) is not "
+                "approval: propose the specific item in that form and stop. The host's permission prompt, answered "
+                "by the user, is still the final check.")
+
+
+def approval_check(prompt):
+    """Reminder for prompts that ask to obtain something. Stateless.
+
+    Questions about how to install, prohibitions ("don't install anything") and pasted
+    material don't count."""
+    return APPROVAL_MSG if asks_to_obtain(prompt) else None
+
+
+def asks_to_obtain(prompt):
+    text = instruction_text(prompt)
+    parts = request_lines(prompt) if is_long(prompt) else [text]
+    for part in parts:
+        p = POLITE.sub("", part.strip())
+        if p and not QUESTION.match(p) and OBTAIN.search(NEG_OBTAIN.sub(" ", p)):
+            return True
+    return False
+
+
+def decide(prompt, state):
+    """Return (message or None, new_state). Pure function, unit-tested.
+
+    state = {"task": {"kw": [...], "requests": n, "confirmed": bool} or None,
+             "requested_total": n, "confirmed_total": n, "last_kw": [...]}
+    """
+    if not is_request(prompt):
+        return None, state
+    text = instruction_text(prompt)
+    kw = keywords(text)
+    state = dict(state)
+    state["last_kw"] = sorted(kw)[:60]
+    task = state.get("task")
+    # Approving, installing or otherwise acting on what the current task's assessment proposed
+    # continues that task, even when it shares few words with it.
+    follow_up = bool(task) and (bool(FOLLOWUP.search(text)) or (task.get("confirmed") and asks_to_obtain(prompt)))
+    if task and (follow_up or not is_new_task(set(task.get("kw", [])), kw)):
+        # Same task: fold the follow-up's words in so a conversation can drift without re-firing.
+        task = dict(task, kw=sorted(set(task.get("kw", [])) | kw)[:120])
+        state["task"] = task
+        if task.get("confirmed") or task.get("requests", 0) >= MAX_REQUESTS:
+            return None, state  # assessed, or retries used up: don't nag
+        task = dict(task, requests=task.get("requests", 0) + 1)
+        msg = RETRY_MSG
+    else:
+        # "Reuse the earlier inventory" is only true if an earlier assessment actually ran.
+        msg = NEW_TASK_MSG if state.get("confirmed_total") else FIRST_MSG
+        task = {"kw": sorted(kw)[:60], "requests": 1, "confirmed": False}
+    state["task"] = task
+    state["requested_total"] = state.get("requested_total", 0) + 1
+    return msg, state
+
+
+def confirm(event, state):
+    """Mark the current task assessed if the host reports a capability-scout Skill call."""
+    if event.get("tool_name") != "Skill":
+        return state
+    tool_input = event.get("tool_input")
+    skill = tool_input.get("skill") if isinstance(tool_input, dict) else None
+    resp = event.get("tool_response")
+    # Only an explicit success counts: missing, null, malformed or failed responses don't.
+    if not (isinstance(skill, str) and SKILL_NAME.match(skill)
+            and isinstance(resp, dict) and resp.get("success") is True):
+        return state
+    command = resp.get("commandName")
+    if command is not None and not (isinstance(command, str) and SKILL_NAME.match(command)):
+        return state
+    state = dict(state)
+    state["confirmed_total"] = state.get("confirmed_total", 0) + 1
+    if state.get("task"):
+        state["task"] = dict(state["task"], confirmed=True)
+    # With no current task (the user ran the skill, or the prompt wasn't substantive) there is
+    # nothing reliable to attach the assessment to, so only the count is kept.
+    return state
+
+
+def main(argv):
+    if not enabled():
+        return 0
+    try:
+        event = json.load(sys.stdin)
+    except ValueError:
+        return 0
+    if not isinstance(event, dict) or not event.get("session_id"):
+        return 0  # without a session id, state could mix unrelated sessions
+    d = scout_store.private_dir()
+    if d is None:
+        return 0  # no safe place for state: stay silent rather than guess
+    path = os.path.join(d, "state-" + scout_store.session_key(
+        event.get("session_id"), event.get("transcript_path")) + ".json")
+    msg = None
+    try:
+        with scout_store.locked(d):
+            state = scout_store.read_json(path) or {}
+            if len(argv) > 1 and argv[1] == "confirm":
+                new_state = confirm(event, state)
+            else:
+                msg, new_state = decide(event.get("prompt") or "", state)
+            if new_state != state:
+                if not os.path.exists(path):
+                    scout_store.prune(d)
+                if not scout_store.write_json(path, new_state):
+                    msg = None  # state wasn't saved: don't ask for something we can't track
+    except scout_store.LockUnavailable:
+        return 0  # fail closed: no state change and no message
+    if len(argv) <= 1 or argv[1] != "confirm":
+        # Stateless, so it is added even if the state write above failed.
+        msg = " ".join(m for m in (msg, approval_check(event.get("prompt") or "")) if m)
+    if msg:
+        print(json.dumps({"hookSpecificOutput": {"hookEventName": "UserPromptSubmit",
+                                                 "additionalContext": msg}}))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv))

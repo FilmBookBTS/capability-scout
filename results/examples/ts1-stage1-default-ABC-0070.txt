@@ -1,0 +1,13 @@
+Capability plan
+- Unavailable: Sentry access. No Sentry MCP server, plugin, or connector is loaded here. The environment inventory is empty, and `ListConnectors` shows no Sentry connector.
+- Worth adding: the Sentry connector from the claude.ai directory (first-party MCP). It has `find_issues` and `get_issue_details`, which can pull unresolved issues and stack traces directly. Setup is an OAuth sign-in to your Sentry org, which you do in claude.ai connector settings. I haven't installed or connected anything.
+- Fallback: I can't pull the errors without Sentry access, and I won't guess at them.
+
+I can't get the latest unresolved Sentry errors from this session, so I have nothing to group yet.
+
+You can get me the data in one of these ways:
+1. **Connect the Sentry connector** in claude.ai connector settings, then start a new session so its tools load. I can then query unresolved issues and group them by root cause.
+2. **Paste or save an export** of the issues, such as the JSON from the Sentry issues API or a CSV from the Issues page. I'll group those, and I won't need any new access.
+3. **Use an auth token.** If you give me a Sentry auth token and tell me to use it, I can call the Sentry API with `curl`. That would be a new credential and outbound call, so I need your explicit approval first.
+
+Which one do you want?

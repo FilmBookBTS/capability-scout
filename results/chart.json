@@ -1,0 +1,13 @@
+{
+  "file": "activation-chart.svg",
+  "title": "Skill ran on substantive tasks: hook off vs. published default",
+  "alt_prefix": "Bar chart of the live test (task set ts-1, 30 substantive tasks, each run 3 times). Vertical axis from 0 to 100 percent.",
+  "caption": "Live test, version 0.4.0, Claude Code 2.1.318. 90 sessions per bar (30 tasks, each run 3 times). Hook off means the same plugin with CAPABILITY_SCOUT_HOOK=off. Source: rows with task set ts-1 in results/ledger.csv.",
+  "width": 760,
+  "bars": [
+    {"label": "Default, hook off", "filter": {"task_set": "ts-1", "arm": "B-skill-hook-off", "model_prefix": "claude-sonnet"}},
+    {"label": "Default, published", "filter": {"task_set": "ts-1", "arm": "C-published-default", "model_prefix": "claude-sonnet"}},
+    {"label": "Opus, hook off", "filter": {"task_set": "ts-1", "arm": "B-skill-hook-off", "model_prefix": "claude-opus"}},
+    {"label": "Opus, published", "filter": {"task_set": "ts-1", "arm": "C-published-default", "model_prefix": "claude-opus"}}
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "filesystem": [
+    "~/capability-scout-evidence"
+  ],
+  "_note": "Copy to backup_targets.json (not committed) and list every folder that must hold a copy of the ledger and each run. A run fails with NOT BACKED UP if any copy fails."
+}

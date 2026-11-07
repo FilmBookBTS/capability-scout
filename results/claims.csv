@@ -1,0 +1,6 @@
+claim_id,source_document,source_location,claim_as_reported,recomputed_from,recomputed_value,status,note
+C1,phase1-results.md,section 1 item 1,skill only (revised description) 4/14 default and 3/5 Opus,legacy-phase1 rows arm=B-skill rounds r2,4/14 and 3/5,MATCHES,counts sessions not tasks; 7 tasks x 2 runs
+C2,phase1-results.md,section 1 item 2,directive hook 30/30 (22/22 default and 8/8 Opus),legacy-phase1 rows arm=D-skill+directive,30/30,MATCHES,pools rounds r2 and r3; r3 used revised skill text and had no skill-only arm
+C3,phase1-results.md,section 1 item 2,never fired on the trivial prompt (0 of 9),legacy-phase1 rows task P6,0/9,MATCHES,one trivial prompt; 2 of the 9 sessions had the directive hook
+C4,phase1-final-report.md,section 3 table row Automatic activation,live runs with the final hook 24/25 single-turn runs called the skill first,legacy-v0.2.0-final-refinement rows arm=H-skill+hook rounds r3 and r4,24/25 (all hook-on rounds r2-r4: 33/35),MATCHES,"The Phase 1 verification report (2026-11-05) said 25/26 and called this a discrepancy. Recounting from the ledger gives 24/25: the verification miscounted the Opus r3 sessions (6, not 7). Both numbers are recorded here; the ledger supports 24/25."
+C5,source-review-report.md,section 3 table row Activation,20/20 single-turn runs assessed first,legacy-v0.3.0-source-review rows,20/20,MATCHES,

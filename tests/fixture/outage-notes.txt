@@ -1,0 +1,8 @@
+Checkout outage, Oct 16
+21:02 deploy 4.18.0 (new payment retry logic)
+21:05 error rate on /checkout jumps to 38%
+21:11 on-call paged (PagerDuty), Datadog shows DB connection pool exhausted
+21:24 rollback started; 21:31 rollback done
+21:42 error rate normal
+Cause: retry loop opened a new DB connection per retry without releasing it.
+Impact: ~1,900 failed checkouts, est. $61k delayed revenue.

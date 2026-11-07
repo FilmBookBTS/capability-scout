@@ -1,0 +1,50 @@
+Capability plan
+- Using: my own read-only code review of app.py (session, verified). No installed specialist skill covers a dedicated security scan.
+- Worth adding (optional): `claude-security@anthropic-plugin-directory` (first-party). It does deeper vulnerability scanning and challenges each finding before reporting it. I haven't installed it. If you want it, I'll propose it in the full approval format first.
+
+## Prioritized fixes for app.py
+
+**1. Critical: command injection in `/export` (line 30)**
+- `subprocess.check_output(f"... {fmt}", shell=True)` puts the user-controlled `format` parameter straight into a shell command.
+- A request like `?format=csv; cat /etc/passwd` runs arbitrary commands on the server.
+- Fix: drop `shell=True`, pass a list, and allowlist the format.
+  ```python
+  if fmt not in {"csv", "json"}: abort(400)
+  subprocess.check_output(["python", "export.py", "--format", fmt])
+  ```
+
+**2. Critical: Werkzeug debugger on a public interface (line 41)**
+- `debug=True` with `host="0.0.0.0"` exposes the interactive debugger to the network. That is remote code execution, even with the PIN.
+- Fix: remove `debug=True` and bind to `127.0.0.1`. In production, run behind gunicorn or uwsgi and read the debug setting from the environment, defaulting to off.
+
+**3. High: SQL injection in `/orders` (line 23)**
+- The f-string query lets `customer` rewrite the SQL. For example, `' OR '1'='1` dumps every order, and a UNION payload can read other tables.
+- Fix: use a parameterized query.
+  ```python
+  conn.execute("SELECT * FROM orders WHERE customer = ?", (customer,))
+  ```
+
+**4. High: no authentication or authorization on any endpoint**
+- Anyone can list any customer's orders (an IDOR), trigger exports, or call `/refund`.
+- Fix: require authentication, such as sessions or tokens. Check that the caller owns the `customer` they query. Restrict `/refund` and `/export` to privileged roles. Add CSRF protection on `/refund`, since it is a POST using form data.
+
+**5. Medium: hardcoded secret (line 7)**
+- `API_KEY` is committed in source. The comment says it's a demo value, but the pattern will leak real keys.
+- It is also unused. Remove it, or load it from an environment variable or secrets manager. Check git history if a real key was ever there.
+
+**6. Medium: unvalidated money parsing in `/refund` (lines 10–16, 36)**
+- A missing `amount` field raises a 400 (bad request). Malformed input such as `"1.2.3"`, `"abc"`, or an empty string raises `ValueError` and returns a 500, which leaks details while `debug=True`.
+- Negative values are accepted, so a refund of `-$50` is possible.
+- `"$1.5"` parses as 101 cents instead of 150, because the cents are not padded. That is a money-correctness bug.
+- Fix: use `decimal.Decimal` with `quantize`, reject negatives and zero, set an upper bound, and return a clean 400 on parse errors.
+- The endpoint also doesn't verify or record anything. It just echoes the number, so add real refund authorization logic.
+
+**7. Low: resource and robustness issues**
+- The SQLite connection in `/orders` is never closed. Use a context manager or `closing()`.
+- `/orders` returns `SELECT *`, which may expose sensitive columns. Select explicit columns.
+- `/export` returns raw subprocess bytes with no content type or error handling. A failing script surfaces as a 500.
+- There is no rate limiting, and no HTTPS or security headers. Handle these at the proxy or with Flask-Limiter and Flask-Talisman.
+
+Fixes 1 to 3 are the urgent ones. Each is exploitable by an unauthenticated remote user today, and #1 and #2 give full code execution.
+
+I didn't modify any files.

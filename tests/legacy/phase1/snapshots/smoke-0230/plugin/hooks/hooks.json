@@ -1,0 +1,12 @@
+{
+  "description": "EXPERIMENTAL. Does nothing unless CAPABILITY_SCOUT_HOOK=1 is set in the environment.",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {"type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/scout-nudge\"", "timeout": 5}
+        ]
+      }
+    ]
+  }
+}

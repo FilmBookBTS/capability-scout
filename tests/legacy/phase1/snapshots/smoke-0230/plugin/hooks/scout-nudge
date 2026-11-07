@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+"""EXPERIMENTAL activation hook (UserPromptSubmit).
+
+Off unless CAPABILITY_SCOUT_HOOK=1. When on, it adds one short reminder the
+first time a substantial-looking prompt arrives in a session. It runs no
+probes and makes no network calls, so it costs only the reminder text.
+"""
+import json
+import os
+import sys
+import tempfile
+
+if os.environ.get("CAPABILITY_SCOUT_HOOK") != "1":
+    sys.exit(0)
+
+try:
+    event = json.load(sys.stdin)
+except ValueError:
+    sys.exit(0)
+
+prompt = (event.get("prompt") or "").strip()
+if len(prompt.split()) < 8:
+    sys.exit(0)
+
+session = "".join(c for c in str(event.get("session_id", "unknown")) if c.isalnum() or c in "-_")
+marker = os.path.join(tempfile.gettempdir(), f"capability-scout-nudged-{session}")
+if os.path.exists(marker):
+    sys.exit(0)
+try:
+    open(marker, "w").close()
+except OSError:
+    pass
+
+print(json.dumps({"hookSpecificOutput": {
+    "hookEventName": "UserPromptSubmit",
+    "additionalContext": ("Capability Scout: if this request is substantial or multi-step work, "
+                          "invoke the capability-scout skill once before starting, then proceed. "
+                          "Skip it for quick answers."),
+}}))

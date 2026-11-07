@@ -1,0 +1,6 @@
+{
+  "name": "capability-scout",
+  "version": "0.1.0",
+  "description": "Checks which skills, plugins and MCP servers actually work here, picks the best for the task, and flags worthwhile missing capabilities without installing anything.",
+  "author": {"name": "Capability Scout project"}
+}

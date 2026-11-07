@@ -1,0 +1,5 @@
+S=<SESSION_TEMP_FOLDER>/scratchpad; cd $S && (python3 -I run_matrix.py $S/plugin $S/fixture $S/runs-r2-default --conds B,D,E --jobs 3 > $S/runs-r2-default.log 2>&1; python3 -I run_matrix.py $S/plugin $S/fixture $S/runs-r2-default --only P8 --conds A --jobs 1 >> $S/runs-r2-default.log 2>&1) & (SCOUT_TEST_MODEL=opus python3 -I run_matrix.py $S/plugin $S/fixture $S/runs-r2-opus --only P1,P2,P3,P4,P6,P8 --conds B,D,E --jobs 3 > $S/runs-r2-opus.log 2>&1) & wait
+
+#### RESULT (is_error=False)
+Command running in background with ID: b9w1z2tsx. Output is being written to: <SESSION_TEMP_FOLDER>/tasks/b9w1z2tsx.output. You will be notified when it completes. To check interim output, use Read on that file path.
+Session cwd remains /home/claude; directory changes made by the backgrounded command do not apply to subsequent commands.
