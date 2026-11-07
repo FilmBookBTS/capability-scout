@@ -1,0 +1,261 @@
+{
+ "task_set_version": "ts-2",
+ "fixture": "tests/fixture",
+ "note": "Written for 0.4.1 and committed before any classifier change for 0.4.1. No prompt is copied from ts-1. Near-miss (NM) substantive prompts check that the fix does not silence real work that mentions a tool, a skill or units. Do not edit a task after a run uses it; add a new task set version instead.",
+ "substantive": [
+  {
+   "id": "S01-sql-audit",
+   "kind": "ordinary",
+   "prompt": "Audit app.py for SQL injection and other input-handling flaws, and rank them by severity."
+  },
+  {
+   "id": "S02-parse-bug",
+   "kind": "ordinary",
+   "prompt": "Track down why parse_amount in app.py returns the wrong value for '$5.5' and suggest a fix."
+  },
+  {
+   "id": "S03-pytest-plan",
+   "kind": "ordinary",
+   "prompt": "Write pytest tests for the /refund endpoint in app.py, covering bad and edge-case amounts. Show them in your reply."
+  },
+  {
+   "id": "S04-changelog-blog",
+   "kind": "ordinary",
+   "prompt": "Turn CHANGELOG.md into a short blog post announcing version 2.0.0."
+  },
+  {
+   "id": "S05-incident-timeline",
+   "kind": "ordinary",
+   "prompt": "Summarize the checkout outage in outage-notes.txt as a timeline with lessons learned and follow-up actions."
+  },
+  {
+   "id": "S06-exec-email",
+   "kind": "ordinary",
+   "prompt": "Draft an email to the CEO explaining the Oct 16 checkout outage and what we are doing to prevent another one."
+  },
+  {
+   "id": "S07-a11y-audit",
+   "kind": "ordinary",
+   "prompt": "Check landing.html against WCAG 2.2 AA and list each problem with a fix."
+  },
+  {
+   "id": "S08-hero-rewrite",
+   "kind": "ordinary",
+   "prompt": "Rewrite the hero headline and paragraph in landing.html so they are plain and specific. Show the new copy."
+  },
+  {
+   "id": "S09-deploy-checklist",
+   "kind": "ordinary",
+   "prompt": "Create a deployment checklist for shipping app.py to production safely."
+  },
+  {
+   "id": "S10-threat-model",
+   "kind": "ordinary",
+   "prompt": "Build a threat model for the HTTP endpoints in app.py and say which risk to fix first."
+  },
+  {
+   "id": "S11-jira-tickets",
+   "kind": "ordinary",
+   "prompt": "Open Jira tickets for each security problem in app.py, one ticket per problem."
+  },
+  {
+   "id": "S12-slack-post",
+   "kind": "ordinary",
+   "prompt": "Post a summary of the outage in outage-notes.txt to our #incidents Slack channel."
+  },
+  {
+   "id": "S13-datadog",
+   "kind": "ordinary",
+   "prompt": "Look into our Datadog metrics for the DB connection pool during last week's checkout outage."
+  },
+  {
+   "id": "S14-pricing-research",
+   "kind": "ordinary",
+   "prompt": "Research what three popular project-planning tools charge per seat today, with sources, for the product in landing.html."
+  },
+  {
+   "id": "S15-migrate-postgres",
+   "kind": "ordinary",
+   "prompt": "Plan a migration of app.py from SQLite to PostgreSQL, step by step, with the risks of each step."
+  },
+  {
+   "id": "S16-docstrings",
+   "kind": "ordinary",
+   "prompt": "Document every function and endpoint in app.py with docstrings. Show the updated code in your reply."
+  },
+  {
+   "id": "NM01-tool-then-fix",
+   "kind": "near-miss: names a tool, multi-step",
+   "prompt": "Use Grep to find every SQL query in app.py, then explain how to parameterize each one and add tests for them."
+  },
+  {
+   "id": "NM02-skill-and-more",
+   "kind": "near-miss: skill-like wording, multi-step",
+   "prompt": "Run a security review of app.py and then write a prioritized remediation plan with effort estimates."
+  },
+  {
+   "id": "NM03-read-and-rewrite",
+   "kind": "near-miss: names Read, multi-step",
+   "prompt": "Read para.txt and rewrite it for a sixth-grade reading level, then explain each change you made."
+  },
+  {
+   "id": "NM04-convert-code",
+   "kind": "near-miss: 'convert' on code",
+   "prompt": "Convert app.py from Flask to FastAPI and explain what changes for each endpoint."
+  },
+  {
+   "id": "NM05-units-in-code",
+   "kind": "near-miss: mentions units",
+   "prompt": "Add unit conversion from dollars to cents with rounding rules to parse_amount in app.py, with tests."
+  },
+  {
+   "id": "NM06-which-skill",
+   "kind": "near-miss: asks about tools for a concrete job",
+   "prompt": "Which skill or tool should I use to profile the slow /orders endpoint in app.py, and how would you go about it?"
+  },
+  {
+   "id": "NM07-mention-search",
+   "kind": "near-miss: names a capability, real research",
+   "prompt": "Search the web for known vulnerabilities in old Flask versions and tell me whether app.py is affected."
+  },
+  {
+   "id": "NM08-review-pr-style",
+   "kind": "near-miss: 'code review' as a phrase",
+   "prompt": "Do a code review of app.py like a senior engineer would, with line-by-line comments and a summary verdict."
+  }
+ ],
+ "non_substantive": [
+  {
+   "id": "T01-hello",
+   "kind": "greeting",
+   "prompt": "Hello there"
+  },
+  {
+   "id": "T02-morning",
+   "kind": "greeting",
+   "prompt": "hey, how's it going?"
+  },
+  {
+   "id": "T03-thanks",
+   "kind": "greeting",
+   "prompt": "Perfect, thank you!"
+  },
+  {
+   "id": "T04-mult",
+   "kind": "arithmetic",
+   "prompt": "What's 48 times 12?"
+  },
+  {
+   "id": "T05-tip",
+   "kind": "arithmetic",
+   "prompt": "What is a 20% tip on $85?"
+  },
+  {
+   "id": "T06-convert-temp",
+   "kind": "arithmetic",
+   "prompt": "Convert 100 degrees Fahrenheit to Celsius."
+  },
+  {
+   "id": "T07-convert-weight",
+   "kind": "arithmetic",
+   "prompt": "Convert 3 pounds to grams."
+  },
+  {
+   "id": "T08-sqrt",
+   "kind": "arithmetic",
+   "prompt": "Square root of 144?"
+  },
+  {
+   "id": "T09-fact-river",
+   "kind": "single-fact",
+   "prompt": "What is the longest river in Africa?"
+  },
+  {
+   "id": "T10-fact-author",
+   "kind": "single-fact",
+   "prompt": "Who wrote Pride and Prejudice?"
+  },
+  {
+   "id": "T11-fact-define",
+   "kind": "single-fact",
+   "prompt": "Define the word 'idempotent' in one sentence."
+  },
+  {
+   "id": "T12-fact-date",
+   "kind": "single-fact",
+   "prompt": "When did the Berlin Wall fall?"
+  },
+  {
+   "id": "O01-simplify",
+   "kind": "names-other-tool",
+   "prompt": "Run the simplify skill on app.py.",
+   "detail": "skill"
+  },
+  {
+   "id": "O02-security-skill",
+   "kind": "names-other-tool",
+   "prompt": "Use the security-review skill on app.py.",
+   "detail": "skill"
+  },
+  {
+   "id": "O03-invoke-skill",
+   "kind": "names-other-tool",
+   "prompt": "Invoke the code-review skill for app.py.",
+   "detail": "skill"
+  },
+  {
+   "id": "O04-slash",
+   "kind": "names-other-tool",
+   "prompt": "/code-review app.py",
+   "detail": "slash command"
+  },
+  {
+   "id": "O05-pdf-skill",
+   "kind": "names-other-tool",
+   "prompt": "Use the pdf skill to check whether there is a PDF in this folder.",
+   "detail": "skill"
+  },
+  {
+   "id": "O06-glob",
+   "kind": "names-other-tool",
+   "prompt": "Use the Glob tool to list every .txt file here.",
+   "detail": "tool"
+  },
+  {
+   "id": "O07-grep",
+   "kind": "names-other-tool",
+   "prompt": "Use Grep to find lines in app.py that mention subprocess.",
+   "detail": "tool"
+  },
+  {
+   "id": "O08-read",
+   "kind": "names-other-tool",
+   "prompt": "Use the Read tool to open CHANGELOG.md.",
+   "detail": "tool"
+  },
+  {
+   "id": "O09-bash-ls",
+   "kind": "names-other-tool",
+   "prompt": "Use the Bash tool to run ls in this folder.",
+   "detail": "tool"
+  },
+  {
+   "id": "O10-with-grep",
+   "kind": "names-other-tool",
+   "prompt": "With the Grep tool, search app.py for the word route.",
+   "detail": "tool"
+  },
+  {
+   "id": "O11-read-show",
+   "kind": "names-other-tool",
+   "prompt": "Use Read to show me outage-notes.txt.",
+   "detail": "tool"
+  },
+  {
+   "id": "O12-please-skill",
+   "kind": "names-other-tool",
+   "prompt": "Please use the simplify skill to tidy parse_amount in app.py.",
+   "detail": "skill"
+  }
+ ]
+}
