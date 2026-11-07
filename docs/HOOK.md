@@ -34,7 +34,7 @@ The hook never changes your message. It can add text that Claude sees as extra c
 4. A message that asks to install, download, enable or connect something (added on its own or after one of the above):
    > Capability Scout approval check: this message asks to install, download, enable or connect something. It approves only an item you already proposed by exact name, with its source, purpose, the access it gets and what installing it changes, and that the user has now confirmed. A generic or "whichever you recommend" instruction, an item you never proposed, or a different kind of item from the one you recommended (for example a plugin when you recommended a connector) is not approval: propose the specific item in that form and stop. The host's permission prompt, answered by the user, is still the final check.
 
-The decision is a word-based heuristic. It can be wrong in both directions. For example, "Convert 5 miles to kilometers." is treated as work (recorded in `tests/offline/test_default_on.py`).
+The decision is a word-based heuristic. It can be wrong in both directions. Since 0.4.1 it also stays quiet on unit conversions ("Convert 5 miles to kilometers.") and on short, single-step requests that name the skill, tool or slash command to use ("Use the code-review skill on app.py."). Before 0.4.1 both were treated as work.
 
 ## What it stores, and where
 

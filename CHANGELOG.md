@@ -2,6 +2,13 @@
 
 Versions of the Claude Code plugin. Dates are UTC. Earlier versions were not published; their dates come from the project's verification reports.
 
+## 0.4.1 - unreleased
+
+- The hook no longer treats a unit conversion ("Convert 5 miles to kilometers.") as work.
+- The hook no longer treats a short, single-step request that names the skill, tool or slash command to use ("Use the code-review skill on app.py.", "Use Grep to find ...", "/simplify utils.py") as work, since the user has already picked the capability. Longer or multi-step requests that mention a tool still count.
+- These were the only prompts the 0.4.0 hook fired on among the non-substantive prompts of its live test, and all 16 of its false triggers were on them.
+- Tested offline so far. The live test on a new task set (ts-2) is planned in [docs/ANALYSIS_PLAN_0.4.1.md](docs/ANALYSIS_PLAN_0.4.1.md) and has not run.
+
 ## 0.4.0 - 2026-11-05
 
 - **Changed default: the activation hook is now on.** Before 0.4.0 it did nothing unless `CAPABILITY_SCOUT_HOOK` was set to `on`. Now it runs unless `CAPABILITY_SCOUT_HOOK` is `off` or `0`. To turn it off, add `"env": {"CAPABILITY_SCOUT_HOOK": "off"}` to your Claude Code `settings.json`, or set the variable before starting Claude Code. See [docs/HOOK.md](docs/HOOK.md).

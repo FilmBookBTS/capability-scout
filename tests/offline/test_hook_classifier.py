@@ -54,6 +54,16 @@ SHOULD_FIRE = [
     "Pull up last week's incident reports.",
     "Can you list the open tickets in Linear?",
     "Could you get the crash reports for the iOS app?",
+    # 0.4.1: real work that mentions a tool, a skill, units or "convert" still counts. Written for
+    # 0.4.1; none of these is a ts-2 prompt, which stays held out for the live test.
+    "Use the Grep tool to find every TODO in the repo, then turn each one into a ticket.",
+    "Use Read on CHANGELOG.md and write release notes for customers.",
+    "Run the linter on app.py and fix every warning it reports.",
+    "Convert the build pipeline from Jenkins to GitHub Actions.",
+    "Convert this CSV export to JSON and add a test for it.",
+    "Add unit conversion for kilograms to pounds in the shipping service.",
+    "Use the code-review skill on app.py; then fix whatever it finds and open a PR.",
+    "Review app.py with Grep and Read, and explain each security problem you find.",
 ]
 SHOULD_NOT_FIRE = [
     "What is 17 times 23?",
@@ -85,6 +95,19 @@ SHOULD_NOT_FIRE = [
     "Show the rest.",
     "How do I get started?",
     "What does list comprehension mean?",
+    # 0.4.1: unit conversions and short requests that name the capability to use. The first five
+    # are the ts-1 prompts the 0.4.0 hook fired on (false triggers in the 0.4.0 live test).
+    "Convert 5 miles to kilometers.",
+    "Use the code-review skill to review app.py.",
+    "Use the Grep tool to find every line in app.py that contains SELECT.",
+    "Use the Read tool to show me para.txt.",
+    "Use the simplify skill on app.py.",
+    "Convert 2.5 liters to cups.",
+    "convert 30 C to F",
+    "Use the frontend-design skill on index.html.",
+    "Use Glob to list the Python files.",
+    "/simplify utils.py",
+    "Could you use the Bash tool to print the working directory?",
 ]
 
 # Requests to obtain something get the approval reminder; other prompts don't.

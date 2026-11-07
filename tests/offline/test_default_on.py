@@ -77,10 +77,10 @@ try:
         rc, msg = run(p, f"q{i}", data="quiet")
         check(rc == 0 and msg == "", f"default on, non-substantive stays quiet: {p!r}")
     check(state_files("quiet") == [], "quiet prompts create no state file")
-    # Known limitation, recorded rather than hidden: a short imperative with a concrete object
-    # ("convert ... miles") is classified as work. 0.4.0 keeps the existing classifier unchanged.
+    # 0.4.0 treated "Convert 5 miles to kilometers." as work (a known false trigger in ts-1).
+    # 0.4.1 treats a unit conversion as arithmetic.
     rc, msg = run("Convert 5 miles to kilometers.", "known1", data="known")
-    check("capability-scout" in msg, "KNOWN false trigger still fires (classifier unchanged): 'Convert 5 miles to kilometers.'")
+    check(rc == 0 and msg == "", "0.4.1: unit conversion stays quiet: 'Convert 5 miles to kilometers.'")
     # State storage under the default.
     rc, msg = run(SUBSTANTIVE, "st", data="store")
     files = state_files("store")

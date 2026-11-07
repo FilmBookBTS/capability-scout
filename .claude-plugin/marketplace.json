@@ -7,7 +7,7 @@
       "name": "capability-scout",
       "source": "./plugins/capability-scout",
       "description": "Checks which skills, plugins and MCP servers actually work in the current session, picks the best one for each part of the task, and flags a missing or better one without installing anything.",
-      "version": "0.4.0",
+      "version": "0.4.1",
       "author": {"name": "Polyperchon LLC"},
       "license": "MIT",
       "homepage": "https://github.com/FilmBookBTS/capability-scout"

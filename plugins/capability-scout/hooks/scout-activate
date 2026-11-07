@@ -17,6 +17,9 @@ PostToolUse on Skill (argument "confirm"): records an assessment as confirmed
 only when Claude Code reports that the capability-scout skill was actually
 invoked. That shows the skill ran, not that its advice was good.
 
+A conversion of a number between units, and a short single-step request that names the skill, tool
+or slash command to use ("Use the code-review skill on app.py."), are not treated as work (v0.4.1).
+
 Only the user's own request counts: pasted material (commands, code, quotes, tables, long
 documents) and prohibitions ("don't install anything") trigger neither message. Approving or
 installing what the current task's assessment proposed continues that task (v0.3.3).
@@ -106,6 +109,27 @@ DIRECT = re.compile(r"\b(can|could|would|will) you\b|\bi(?: want|'d like| would 
 PLEASE = re.compile(r"\bplease\b", re.I)
 QUESTION = re.compile(r"^\s*(what|how|why|who|when|where|which|is|are|can|could|does|do|should|would)\b", re.I)
 WORD = re.compile(r"[a-z][a-z0-9_.-]{2,}")
+# 0.4.1: a simple unit conversion ("Convert 5 miles to kilometers.") is arithmetic, not work.
+CONVERSION = re.compile(
+    r"^\s*convert\s+-?[\d.,]+\s*(?:°\s*)?[a-z]+(?:\s+[a-z]+)?\s+(?:to|into|in)\s+(?:°\s*)?[a-z]+(?:\s+[a-z]+)?\s*[.?!]?\s*$",
+    re.I)
+# 0.4.1: a short request that names the skill, tool or slash command to use has already chosen its
+# capability, so there is nothing to assess ("Use the code-review skill on app.py.", "Use Grep to
+# find ...", "/code-review app.py"). Longer or multi-step requests that mention a tool still count.
+NAMED_CAPABILITY = re.compile(
+    r"^\s*(?:please\s+)?(?:(?:use|run|invoke|call|try|apply|launch|with)\s+(?:the\s+)?[`\"']?[\w:./-]+[`\"']?\s+"
+    r"(?:skill|tool|slash command|command|plugin|agent|subagent)\b"
+    r"|(?:use|with)\s+(?:the\s+)?(?:Read|Grep|Glob|Bash|WebSearch|WebFetch|LS)\b"
+    r"|/[a-z][\w:-]*(?:\s|$))",
+    re.I)
+MULTI_STEP = re.compile(r"\bthen\b|;|[.!?]\s+\S|,\s*and\b|\band\s+(?:also\s+)?(?:explain|write|add|fix|tell|"
+                        r"summari[sz]e|plan|create|recommend|propose|rewrite|draft|open|send|post)\b", re.I)
+NAMED_MAX_WORDS = 20
+
+
+def names_capability(p):
+    """A short, single-step request that says which skill, tool or slash command to use."""
+    return bool(NAMED_CAPABILITY.match(p)) and len(p.split()) < NAMED_MAX_WORDS and not MULTI_STEP.search(p.strip())
 
 
 def enabled():
@@ -168,7 +192,7 @@ def keywords(text):
 def is_substantive(prompt):
     """Cheap heuristic: an action on something concrete, or a long request."""
     p = POLITE.sub("", prompt.strip())  # "Could you fix the failing tests?" is an instruction
-    if not p or TRIVIAL.search(p):
+    if not p or TRIVIAL.search(p) or CONVERSION.match(p) or names_capability(p):
         return False
     words = p.split()
     artifact = bool(ARTIFACT.search(p))
