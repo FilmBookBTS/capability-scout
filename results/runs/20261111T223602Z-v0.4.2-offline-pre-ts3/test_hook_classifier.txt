@@ -1,0 +1,2 @@
+111/111 passed
+Old 8-word rule would have missed 21/47 should-fire prompts

@@ -1,0 +1,21 @@
+Part 1, task set ts-3; columns: 0.4.1 hook (021486f), current hook; 1 = work
+W01-cve-requests       0 1
+W02-web-flask-config   1 1
+W03-search-pricing     1 1
+W04-search-wcag        0 1
+W05-find-online        1 1
+W06-search-release     1 1
+W07-lookup-postmortem  1 1
+W08-search-deps        1 1
+B01-two-counters       0 0
+B02-bg-wordcount       1 1
+B03-bg-list            1 1
+C01-hey                0 0
+C02-convert            0 0
+C03-fact               0 0
+C04-named-grep         0 0
+C05-named-skill        0 0
+C06-slash              0 0
+
+Part 2, regression on ts-1 and ts-2
+89/89 passed
