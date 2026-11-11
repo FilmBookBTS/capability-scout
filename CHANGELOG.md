@@ -2,6 +2,12 @@
 
 Versions of the Claude Code plugin. Dates are UTC. Earlier versions were not published; their dates come from the project's verification reports.
 
+## 0.4.2 - unreleased
+
+- The hook ignores messages that Claude Code delivers on its own through the prompt hook, such as a background agent's result (`<task-notification>`). Before, it could ask for an assessment on one (seen once in the 0.4.1 test, with Claude Code 2.1.322).
+- Requests that start with "Search", "Look up" or "Browse" now count as work, so "Search the web for ... and tell me whether app.py is affected" starts an assessment.
+- Tested offline so far. The live test on a new task set (ts-3) is planned in [docs/ANALYSIS_PLAN_0.4.2.md](docs/ANALYSIS_PLAN_0.4.2.md) and has not run.
+
 ## 0.4.1 - 2026-11-11
 
 - The hook no longer treats a unit conversion ("Convert 5 miles to kilometers.") as work.

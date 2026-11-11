@@ -19,6 +19,8 @@ invoked. That shows the skill ran, not that its advice was good.
 
 A conversion of a number between units, and a short single-step request that names the skill, tool
 or slash command to use ("Use the code-review skill on app.py."), are not treated as work (v0.4.1).
+Messages Claude Code delivers on its own, such as a background agent's result in a
+<task-notification> block, are ignored; requests to search or look things up count as work (v0.4.2).
 
 Only the user's own request counts: pasted material (commands, code, quotes, tables, long
 documents) and prohibitions ("don't install anything") trigger neither message. Approving or
@@ -48,7 +50,7 @@ ACTION = re.compile(
     r"scan|harden|secure|document|convert|generate|research|compare|evaluate|monitor|"
     r"clean ?up|restructure|translate|edit|polish|check|download|run|execute|launch|send|email|"
     r"merge|push|commit|delete|remove|provision|spin up|find|look (?:at|into|through)|figure out|"
-    r"work out|track down|go through|clone|get|list|show|pull up)\b",
+    r"work out|track down|go through|clone|get|list|show|pull up|search|look up|browse)\b",
     re.I)
 ARTIFACT = re.compile(
     r"(\b[\w./-]+\.(py|js|ts|tsx|jsx|go|rs|java|rb|php|cs|cpp|c|h|sql|ya?ml|json|toml|md|"
@@ -125,6 +127,18 @@ NAMED_CAPABILITY = re.compile(
 MULTI_STEP = re.compile(r"\bthen\b|;|[.!?]\s+\S|,\s*and\b|\band\s+(?:also\s+)?(?:explain|write|add|fix|tell|"
                         r"summari[sz]e|plan|create|recommend|propose|rewrite|draft|open|send|post)\b", re.I)
 NAMED_MAX_WORDS = 20
+
+
+# 0.4.2: messages Claude Code itself delivers through UserPromptSubmit, such as a background agent's
+# result (<task-notification>), are not the user's request. Only text outside these blocks counts.
+HARNESS_BLOCK = re.compile(
+    r"<(task-notification|system-reminder|local-command-stdout|local-command-stderr)\b[^>]*>.*?(?:</\1\s*>|\Z)",
+    re.S | re.I)
+
+
+def user_text(prompt):
+    """The prompt without blocks that Claude Code adds on its own (background-agent results and the like)."""
+    return HARNESS_BLOCK.sub("\n", prompt or "")
 
 
 def names_capability(p):
@@ -250,7 +264,7 @@ def approval_check(prompt):
 
     Questions about how to install, prohibitions ("don't install anything") and pasted
     material don't count."""
-    return APPROVAL_MSG if asks_to_obtain(prompt) else None
+    return APPROVAL_MSG if asks_to_obtain(user_text(prompt)) else None
 
 
 def asks_to_obtain(prompt):
@@ -269,6 +283,7 @@ def decide(prompt, state):
     state = {"task": {"kw": [...], "requests": n, "confirmed": bool} or None,
              "requested_total": n, "confirmed_total": n, "last_kw": [...]}
     """
+    prompt = user_text(prompt)
     if not is_request(prompt):
         return None, state
     text = instruction_text(prompt)

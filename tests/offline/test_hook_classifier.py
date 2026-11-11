@@ -64,6 +64,11 @@ SHOULD_FIRE = [
     "Add unit conversion for kilograms to pounds in the shipping service.",
     "Use the code-review skill on app.py; then fix whatever it finds and open a PR.",
     "Review app.py with Grep and Read, and explain each security problem you find.",
+    # 0.4.2: requests to search or look things up count as work. None of these is a ts-3 prompt.
+    "Search the web for the best Python linters and recommend one for this repo.",
+    "Search for breaking changes in Django 5 and list what our app needs to change.",
+    "Look up the latest Django release and check our requirements.",
+    "Browse the docs for pytest fixtures and suggest how to restructure our tests.",
 ]
 SHOULD_NOT_FIRE = [
     "What is 17 times 23?",
