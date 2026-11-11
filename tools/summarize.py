@@ -439,6 +439,50 @@ def kofn(rs, col):
     return f"{sum(r[col] == 'true' for r in rs)} of {len(rs)}"
 
 
+def ts2_block(rows):
+    """README table for the 0.4.1 live test (task set ts-2, arms B and C)."""
+    kinds = task_kinds().get("ts-2", {})
+    live = [r for r in rows if r["task_set_version"] == "ts-2" and "invalid:" not in r["notes"]
+            and batch_of(r) not in SEPARATE_BATCHES]
+    if not live:
+        return []
+
+    def pick(arm, model, sel, col):
+        return [r for r in live if r["arm"] == arm and r["model_id"].startswith(model)
+                and r[col] in ("true", "false") and (r["false_trigger"] == "") == (sel is None)
+                and (sel is None or sel(kinds.get(r["task_id"])))]
+    models = [("claude-sonnet", "Sonnet (`claude-sonnet-5-5`)"), ("claude-opus", "Opus (`claude-opus-5-5`)")]
+    allrows = [r for r in rows if r["task_set_version"] == "ts-2" and batch_of(r) not in SEPARATE_BATCHES]
+    L = [f"**Live test, version 0.4.1:** {len(live):,} sessions, Claude Code "
+         f"{', '.join(sorted({r['claude_code_version'] for r in live}))}, "
+         f"{min(r['date_utc'][:10] for r in live)}, with each model requested by name. New task set ts-2: "
+         "24 substantive tasks (8 of them near-misses that mention a tool, a skill or units) and 24 non-substantive "
+         f"prompts, each run 3 times per setup. Invalid sessions: {len(allrows) - len(live)}.", "",
+         "| Sessions where the skill ran | " + " | ".join(lab for _, lab in models) + " |", "|---|---|---|"]
+    spec = [
+        ("Substantive, plugin as published (hook on)", "C-published-default", None, LIVE_A),
+        ("Near-miss substantive tasks, hook on", "C-published-default", "NM", LIVE_A),
+        ("Substantive, hook off", "B-skill-hook-off", None, LIVE_A),
+        ("Trivial prompts (greetings, arithmetic, facts), hook on", "C-published-default",
+         lambda k: k in TRIVIAL_KINDS, LIVE_F),
+        ("Prompts naming another skill or tool, hook on", "C-published-default", lambda k: k in NAMED_KINDS, LIVE_F),
+        ("All non-substantive prompts, hook on", "C-published-default", lambda k: True, LIVE_F),
+    ]
+    for label, arm, sel, link in spec:
+        cells = []
+        for m, _ in models:
+            if sel == "NM":
+                rs = [r for r in pick(arm, m, None, "activated") if r["task_id"].startswith("NM")]
+            else:
+                rs = pick(arm, m, sel if link == LIVE_F else None, "activated" if link == LIVE_A else "false_trigger")
+            col = "activated" if link == LIVE_A else "false_trigger"
+            k = sum(r[col] == "true" for r in rs)
+            cells.append(f"[{k} of {len(rs)}]({link}) ({pct(k / len(rs)) if rs else 'n/a'})")
+        L.append(f"| {label} | " + " | ".join(cells) + " |")
+    return L + ["", "*Source: rows with task set ts-2 in results/ledger.csv. Plan and pass criteria, set before the run: "
+                "[docs/ANALYSIS_PLAN_0.4.1.md](docs/ANALYSIS_PLAN_0.4.1.md).*", ""]
+
+
 def readme_block(rows, spec, bars):
     kinds = task_kinds().get("ts-1", {})
     live = [r for r in rows if r["task_set_version"] == "ts-1" and "invalid:" not in r["notes"]]
@@ -452,7 +496,7 @@ def readme_block(rows, spec, bars):
                 and r["false_trigger"] in ("true", "false") and sel(kinds.get(r["task_id"]))]
     models = [("claude-sonnet", "Default model"), ("claude-opus", "Opus")]
     ids = sorted({short_model(r["model_id"]) for r in live})
-    L = [START, "",
+    L = [START, ""] + ts2_block(rows) + [
          f"**Live test, version 0.4.0:** {len(live):,} sessions, Claude Code "
          f"{', '.join(sorted({r['claude_code_version'] for r in live}))}, "
          f"{min(r['date_utc'][:10] for r in live)} to {max(r['date_utc'][:10] for r in live)}. "

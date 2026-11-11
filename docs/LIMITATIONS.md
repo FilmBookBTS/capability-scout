@@ -4,16 +4,18 @@ Plain statements of what the tests do and do not show, and what Capability Scout
 
 ## What the tests show
 
-- **One setting.** All live sessions ran in one Linux cloud container, with Claude Code 2.1.318,
-  in November 2026. Each session had an empty configuration folder. No connector's tools were
+- **One setting.** All live sessions ran in one Linux cloud container, with Claude Code 2.1.318
+  (0.4.0, task set `ts-1`) or 2.1.322 (0.4.1, task set `ts-2`), in November 2026. Each session had an empty configuration folder. No connector's tools were
   loaded, and the only skills were those built into Claude Code plus four plugins that loaded in
   every setup on that machine. Claude Code's `ListConnectors` tool could still list the
   connectors of the signed-in account, and some replies mention that list. Most people's setups
   have more skills and working connectors. Results may differ there.
-- **Two models.** The default model of that installation (`claude-sonnet-5-5`) and Opus
-  (`claude-opus-5-5`). Other models, and later versions of these, were not tested.
-- **One task set, written by the author.** Task set `ts-1` has 30 substantive tasks and 12
-  non-substantive prompts, all in English, all single messages. Each ran 3 times per arm and
+- **Two models.** Sonnet (`claude-sonnet-5-5`) and Opus (`claude-opus-5-5`). For 0.4.0, Sonnet
+  was the installation's default model; for 0.4.1 both were requested by name, because Claude
+  Code 2.1.322's default model served Opus. Other models, and later versions of these, were not tested.
+- **Two task sets, written by the author.** Task set `ts-1` has 30 substantive tasks and 12
+  non-substantive prompts; `ts-2` has 24 and 24, and was written by the same person who wrote the
+  0.4.1 fix, before the fix. They are all in English, all single messages. Each ran 3 times per arm and
   model. Repeated runs of the same task are not independent, so the 95% intervals are narrower
   than they should be.
 - **Activation, not quality.** The live test measures whether the skill ran, and whether it ran
@@ -33,8 +35,15 @@ Plain statements of what the tests do and do not show, and what Capability Scout
   most of the time; with Opus it was only requests that name another skill or tool. Both missed
   the plan's limit of 10%. See
   [`results/RESULTS.md`](../results/RESULTS.md#false-triggers-on-non-substantive-prompts). The
-  word rules were not changed for 0.4.0; a fix would go into a later version and be tested on new
-  prompts.
+  word rules were not changed for 0.4.0. Version 0.4.1 changed them and was tested on new prompts
+  (`ts-2`): 0 of 72 non-substantive sessions on each model. Word rules can still be wrong both
+  ways.
+- **Near-miss tasks passed at exactly the limit.** In the 0.4.1 test, 21 of 24 near-miss sessions
+  ran the skill on each model, the minimum the plan allowed. All misses were "Search the web for
+  ...": the hook does not treat a request that starts with "Search" as work.
+- **Background-agent messages.** In Claude Code 2.1.322, a message from a background agent also
+  passes through the hook as if it were a new prompt, and the hook can ask for an assessment on
+  it. This happened once in the 0.4.1 test; the skill did not run.
 - **Without the hook, the skill often does not run.** With the hook off, the skill ran in 35 of
   90 substantive sessions on each model.
 - The hook runs only in Claude Code. claude.ai chat ignores plugin hooks.

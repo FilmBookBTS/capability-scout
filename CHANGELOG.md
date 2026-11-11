@@ -2,7 +2,7 @@
 
 Versions of the Claude Code plugin. Dates are UTC. Earlier versions were not published; their dates come from the project's verification reports.
 
-## 0.4.1 - unreleased
+## 0.4.1 - 2026-11-11
 
 - The hook no longer treats a unit conversion ("Convert 5 miles to kilometers.") as work.
 - The hook no longer treats a short, single-step request that names the skill, tool or slash command to use ("Use the code-review skill on app.py.", "Use Grep to find ...", "/simplify utils.py") as work, since the user has already picked the capability. Longer or multi-step requests that mention a tool still count.
