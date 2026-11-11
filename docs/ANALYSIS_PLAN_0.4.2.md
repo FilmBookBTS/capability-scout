@@ -67,4 +67,4 @@ Estimate $13.41. The hard budget is set by the project owner before the run star
 
 ## Changes to this plan
 
-None yet.
+- 2026-11-11, before the run: the project owner set the hard budget at $25.
