@@ -439,6 +439,41 @@ def kofn(rs, col):
     return f"{sum(r[col] == 'true' for r in rs)} of {len(rs)}"
 
 
+def ts3_block(rows):
+    """README table for the 0.4.2 retest (task set ts-3, arm C only)."""
+    kinds = task_kinds().get("ts-3", {})
+    live = [r for r in rows if r["task_set_version"] == "ts-3" and "invalid:" not in r["notes"]
+            and batch_of(r) not in SEPARATE_BATCHES]
+    if not live:
+        return []
+    allrows = [r for r in rows if r["task_set_version"] == "ts-3" and batch_of(r) not in SEPARATE_BATCHES]
+    models = [("claude-sonnet", "Sonnet (`claude-sonnet-5-5`)"), ("claude-opus", "Opus (`claude-opus-5-5`)")]
+    L = [f"**Retest, version 0.4.2:** {len(live):,} sessions, Claude Code "
+         f"{', '.join(sorted({r['claude_code_version'] for r in live}))}, "
+         f"{min(r['date_utc'][:10] for r in live)}, plugin as published (hook on), each model requested by name. "
+         "Task set ts-3 covers only the two cases 0.4.2 changed, plus controls; each prompt ran 3 times per model. "
+         f"Invalid sessions: {len(allrows) - len(live)}.", "",
+         "| Sessions where the skill ran | " + " | ".join(lab for _, lab in models) + " |", "|---|---|---|"]
+    spec = [
+        ("Web-research tasks (\"Search ...\", \"Look up ...\")", lambda k: k == "substantive", "activated", LIVE_A),
+        ("Controls: trivial prompts and prompts naming another tool", lambda k: k in TRIVIAL_KINDS | NAMED_KINDS,
+         "false_trigger", LIVE_F),
+        ("Requests to start a background agent (their own text)", lambda k: k == "background-agent",
+         "false_trigger", LIVE_F),
+    ]
+    for label, sel, col, link in spec:
+        cells = []
+        for m, _ in models:
+            rs = [r for r in live if r["model_id"].startswith(m) and sel(kinds.get(r["task_id"])) and r[col] in ("true", "false")]
+            k = sum(r[col] == "true" for r in rs)
+            cells.append(f"[{k} of {len(rs)}]({link}) ({pct(k / len(rs)) if rs else 'n/a'})")
+        L.append(f"| {label} | " + " | ".join(cells) + " |")
+    return L + ["", "*Source: rows with task set ts-3 in results/ledger.csv. Plan and pass criteria, set before the run: "
+                "[docs/ANALYSIS_PLAN_0.4.2.md](docs/ANALYSIS_PLAN_0.4.2.md). Messages from background agents are counted "
+                "from the session transcripts, not the ledger: "
+                "[hook-events.txt](results/runs/20261111T223611Z-v0.4.2-ts3/hook-events.txt).*", ""]
+
+
 def ts2_block(rows):
     """README table for the 0.4.1 live test (task set ts-2, arms B and C)."""
     kinds = task_kinds().get("ts-2", {})
@@ -496,7 +531,7 @@ def readme_block(rows, spec, bars):
                 and r["false_trigger"] in ("true", "false") and sel(kinds.get(r["task_id"]))]
     models = [("claude-sonnet", "Default model"), ("claude-opus", "Opus")]
     ids = sorted({short_model(r["model_id"]) for r in live})
-    L = [START, ""] + ts2_block(rows) + [
+    L = [START, ""] + ts3_block(rows) + ts2_block(rows) + [
          f"**Live test, version 0.4.0:** {len(live):,} sessions, Claude Code "
          f"{', '.join(sorted({r['claude_code_version'] for r in live}))}, "
          f"{min(r['date_utc'][:10] for r in live)} to {max(r['date_utc'][:10] for r in live)}. "

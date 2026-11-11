@@ -2,11 +2,11 @@
 
 Versions of the Claude Code plugin. Dates are UTC. Earlier versions were not published; their dates come from the project's verification reports.
 
-## 0.4.2 - unreleased
+## 0.4.2 - 2026-11-11
 
 - The hook ignores messages that Claude Code delivers on its own through the prompt hook, such as a background agent's result (`<task-notification>`). Before, it could ask for an assessment on one (seen once in the 0.4.1 test, with Claude Code 2.1.322).
 - Requests that start with "Search", "Look up" or "Browse" now count as work, so "Search the web for ... and tell me whether app.py is affected" starts an assessment.
-- Tested offline so far. The live test on a new task set (ts-3) is planned in [docs/ANALYSIS_PLAN_0.4.2.md](docs/ANALYSIS_PLAN_0.4.2.md) and has not run.
+- Retested live on 2026-11-11 on a new task set, ts-3, for these two cases only (102 sessions, Claude Code 2.1.322, Sonnet 5.5 and Opus 5.5 requested by name, hook on). Web-research tasks: the skill ran in 24 of 24 sessions on each model. Messages from background agents: none of 24 got a reminder. Controls: 0 of 18 false triggers on each model. All four criteria set before the run were met. Short requests to start a background agent are still treated as work (6 of 9 sessions on each model). See [docs/ANALYSIS_PLAN_0.4.2.md](docs/ANALYSIS_PLAN_0.4.2.md).
 
 ## 0.4.1 - 2026-11-11
 

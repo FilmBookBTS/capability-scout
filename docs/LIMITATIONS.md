@@ -5,7 +5,7 @@ Plain statements of what the tests do and do not show, and what Capability Scout
 ## What the tests show
 
 - **One setting.** All live sessions ran in one Linux cloud container, with Claude Code 2.1.318
-  (0.4.0, task set `ts-1`) or 2.1.322 (0.4.1, task set `ts-2`), in November 2026. Each session had an empty configuration folder. No connector's tools were
+  (0.4.0, task set `ts-1`) or 2.1.322 (0.4.1 and 0.4.2, task sets `ts-2` and `ts-3`), in November 2026. Each session had an empty configuration folder. No connector's tools were
   loaded, and the only skills were those built into Claude Code plus four plugins that loaded in
   every setup on that machine. Claude Code's `ListConnectors` tool could still list the
   connectors of the signed-in account, and some replies mention that list. Most people's setups
@@ -40,10 +40,16 @@ Plain statements of what the tests do and do not show, and what Capability Scout
   ways.
 - **Near-miss tasks passed at exactly the limit.** In the 0.4.1 test, 21 of 24 near-miss sessions
   ran the skill on each model, the minimum the plan allowed. All misses were "Search the web for
-  ...": the hook does not treat a request that starts with "Search" as work.
+  ...": the 0.4.1 hook did not treat a request that starts with "Search" as work. Version 0.4.2
+  does; it was retested on 8 new web-research tasks (24 of 24 on each model), not on all of `ts-2`.
 - **Background-agent messages.** In Claude Code 2.1.322, a message from a background agent also
-  passes through the hook as if it were a new prompt, and the hook can ask for an assessment on
-  it. This happened once in the 0.4.1 test; the skill did not run.
+  passes through the hook as if it were a new prompt. The 0.4.1 hook asked for an assessment on
+  one in its test. Version 0.4.2 ignores them (0 of 24 in its retest). It relies on Claude Code
+  wrapping them in `<task-notification>` or `<system-reminder>` blocks; a later Claude Code that
+  changes this could bring the problem back.
+- **Requests to start a background agent.** The hook treats a short request such as "Launch a
+  background agent to count the words in para.txt" as work. In the 0.4.2 retest the skill then
+  ran in 6 of 9 such sessions on each model.
 - **Without the hook, the skill often does not run.** With the hook off, the skill ran in 35 of
   90 substantive sessions on each model.
 - The hook runs only in Claude Code. claude.ai chat ignores plugin hooks.
