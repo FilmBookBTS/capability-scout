@@ -66,6 +66,12 @@ Legacy rounds are kept apart because the skill text changed between rounds.
 | 20261106T000532Z-ts1-stage3b-opus-ABC-resume | - | current | plugin | 0.4.0 | claude-opus-5-5 | C-published-default | 53/53 | 100% | 93% to 100% | 53/53 |
 | 20261106T002608Z-ts1-stage4-opus-T | - | current | chat-text-in-code | chat edition SKILL.md | claude-opus-5-5 | T-chat-text-in-code | 36/48 | 75% | 61% to 85% | 36/48 |
 | 20261106T003345Z-ts1-stage4b-opus-T-resume | - | current | chat-text-in-code | chat edition SKILL.md | claude-opus-5-5 | T-chat-text-in-code | 27/42 | 64% | 49% to 77% | 27/42 |
+| 20261111T190136Z-v0.4.1-ts2-s1-default | - | current | plugin | 0.4.1 | claude-opus-5-5 | C-published-default | 4/4 | 100% | 51% to 100% | 4/4 |
+| 20261111T190136Z-v0.4.1-ts2-s1-default | - | current | plugin | 0.4.1 | claude-opus-5-5 | B-skill-hook-off | 1/2 | 50% | 9% to 91% | 1/2 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | - | current | plugin | 0.4.1 | claude-sonnet-5-5 | B-skill-hook-off | 13/72 | 18% | 11% to 28% | 13/72 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | - | current | plugin | 0.4.1 | claude-sonnet-5-5 | C-published-default | 69/72 | 96% | 88% to 99% | 69/72 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | - | current | plugin | 0.4.1 | claude-opus-5-5 | B-skill-hook-off | 21/72 | 29% | 20% to 41% | 20/72 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | - | current | plugin | 0.4.1 | claude-opus-5-5 | C-published-default | 69/72 | 96% | 88% to 99% | 69/72 |
 
 ## False triggers on non-substantive prompts
 
@@ -93,6 +99,12 @@ A false trigger is a session on a non-substantive prompt (greeting, arithmetic, 
 | 20261106T000532Z-ts1-stage3b-opus-ABC-resume | current | plugin | none (no plugin) | claude-opus-5-5 | A-no-plugin | 0/22 | 0% | 0% to 15% |
 | 20261106T002608Z-ts1-stage4-opus-T | current | chat-text-in-code | chat edition SKILL.md | claude-opus-5-5 | T-chat-text-in-code | 0/19 | 0% | 0% to 17% |
 | 20261106T003345Z-ts1-stage4b-opus-T-resume | current | chat-text-in-code | chat edition SKILL.md | claude-opus-5-5 | T-chat-text-in-code | 0/17 | 0% | 0% to 18% |
+| 20261111T190136Z-v0.4.1-ts2-s1-default | current | plugin | 0.4.1 | claude-opus-5-5 | C-published-default | 0/7 | 0% | 0% to 35% |
+| 20261111T190136Z-v0.4.1-ts2-s1-default | current | plugin | 0.4.1 | claude-opus-5-5 | B-skill-hook-off | 0/4 | 0% | 0% to 49% |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | current | plugin | 0.4.1 | claude-sonnet-5-5 | B-skill-hook-off | 0/72 | 0% | 0% to 5% |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | current | plugin | 0.4.1 | claude-sonnet-5-5 | C-published-default | 0/72 | 0% | 0% to 5% |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | current | plugin | 0.4.1 | claude-opus-5-5 | B-skill-hook-off | 1/72 | 1% | 0% to 7% |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | current | plugin | 0.4.1 | claude-opus-5-5 | C-published-default | 0/72 | 0% | 0% to 5% |
 
 ## Per-task activation (batches run with the current harness)
 
@@ -429,6 +441,108 @@ A false trigger is a session on a non-substantive prompt (greeting, arithmetic, 
 | 20261106T003345Z-ts1-stage4b-opus-T-resume | claude-opus-5-5 | T-chat-text-in-code | S21-notion-docs | 2/2 |
 | 20261106T003345Z-ts1-stage4b-opus-T-resume | claude-opus-5-5 | T-chat-text-in-code | S19-analytics | 1/1 |
 | 20261106T003345Z-ts1-stage4b-opus-T-resume | claude-opus-5-5 | T-chat-text-in-code | P7-testing | 0/1 |
+| 20261111T190136Z-v0.4.1-ts2-s1-default | claude-opus-5-5 | C-published-default | S10-threat-model | 1/1 |
+| 20261111T190136Z-v0.4.1-ts2-s1-default | claude-opus-5-5 | B-skill-hook-off | NM05-units-in-code | 0/1 |
+| 20261111T190136Z-v0.4.1-ts2-s1-default | claude-opus-5-5 | C-published-default | S06-exec-email | 1/1 |
+| 20261111T190136Z-v0.4.1-ts2-s1-default | claude-opus-5-5 | C-published-default | S07-a11y-audit | 1/1 |
+| 20261111T190136Z-v0.4.1-ts2-s1-default | claude-opus-5-5 | C-published-default | S04-changelog-blog | 1/1 |
+| 20261111T190136Z-v0.4.1-ts2-s1-default | claude-opus-5-5 | B-skill-hook-off | S11-jira-tickets | 1/1 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | S04-changelog-blog | 0/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | S06-exec-email | 0/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | S16-docstrings | 0/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | NM04-convert-code | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | S05-incident-timeline | 0/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | NM04-convert-code | 0/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | S07-a11y-audit | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | S04-changelog-blog | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | S15-migrate-postgres | 0/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | S05-incident-timeline | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | NM03-read-and-rewrite | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | NM03-read-and-rewrite | 0/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | NM02-skill-and-more | 2/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | S06-exec-email | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | NM08-review-pr-style | 2/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | S10-threat-model | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | NM06-which-skill | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | NM06-which-skill | 0/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | NM07-mention-search | 0/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | S02-parse-bug | 0/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | S02-parse-bug | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | S09-deploy-checklist | 0/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | S03-pytest-plan | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | S01-sql-audit | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | NM08-review-pr-style | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | S03-pytest-plan | 0/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | NM05-units-in-code | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | S13-datadog | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | NM01-tool-then-fix | 0/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | NM01-tool-then-fix | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | S10-threat-model | 0/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | NM07-mention-search | 0/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | S14-pricing-research | 0/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | NM05-units-in-code | 0/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | S12-slack-post | 2/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | S13-datadog | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | S14-pricing-research | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | S07-a11y-audit | 0/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | S15-migrate-postgres | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | S09-deploy-checklist | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | S11-jira-tickets | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | S12-slack-post | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | S08-hero-rewrite | 0/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | S08-hero-rewrite | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | S11-jira-tickets | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | NM02-skill-and-more | 3/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | B-skill-hook-off | S01-sql-audit | 1/3 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | claude-sonnet-5-5 | C-published-default | S16-docstrings | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | S06-exec-email | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | S09-deploy-checklist | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | S01-sql-audit | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | S06-exec-email | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | S11-jira-tickets | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | S16-docstrings | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | NM03-read-and-rewrite | 0/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | S05-incident-timeline | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | NM05-units-in-code | 0/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | NM08-review-pr-style | 1/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | S10-threat-model | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | S10-threat-model | 0/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | NM02-skill-and-more | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | S12-slack-post | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | S11-jira-tickets | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | S07-a11y-audit | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | S16-docstrings | 0/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | S02-parse-bug | 0/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | NM01-tool-then-fix | 0/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | NM04-convert-code | 0/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | S07-a11y-audit | 1/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | S09-deploy-checklist | 0/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | S08-hero-rewrite | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | NM01-tool-then-fix | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | NM05-units-in-code | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | NM02-skill-and-more | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | S13-datadog | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | S13-datadog | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | NM06-which-skill | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | S01-sql-audit | 0/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | NM03-read-and-rewrite | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | S05-incident-timeline | 0/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | NM07-mention-search | 0/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | S03-pytest-plan | 0/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | S15-migrate-postgres | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | S03-pytest-plan | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | NM04-convert-code | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | S08-hero-rewrite | 0/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | S14-pricing-research | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | S12-slack-post | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | NM08-review-pr-style | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | NM06-which-skill | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | S02-parse-bug | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | S04-changelog-blog | 0/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | C-published-default | S04-changelog-blog | 3/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | NM07-mention-search | 1/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | S15-migrate-postgres | 0/3 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | claude-opus-5-5 | B-skill-hook-off | S14-pricing-research | 0/3 |
 
 ## Sessions without a single activation value, and offline test runs
 
@@ -467,6 +581,13 @@ A false trigger is a session on a non-substantive prompt (greeting, arithmetic, 
 | 20261106T005028Z-v0.4.0-offline-prepush:004 | 0.4.0 | test_state_and_storage | offline | offline suite, not a model session; result 59/59 passed |
 | 20261106T005028Z-v0.4.0-offline-prepush:005 | 0.4.0 | test_guards | offline | offline suite, not a model session; result 10/10 passed |
 | 20261106T005028Z-v0.4.0-offline-prepush:006 | 0.4.0 | test_live_scoring | offline | offline suite, not a model session; result 29/29 passed |
+| 20261111T190107Z-v0.4.1-offline-pre-ts2:001 | 0.4.1 | test_default_on | offline | offline suite, not a model session; result 37/37 passed |
+| 20261111T190107Z-v0.4.1-offline-pre-ts2:002 | 0.4.1 | test_hook_classifier | offline | offline suite, not a model session; result 107/107 passed |
+| 20261111T190107Z-v0.4.1-offline-pre-ts2:003 | 0.4.1 | test_pasted_and_followups | offline | offline suite, not a model session; result 28/28 passed |
+| 20261111T190107Z-v0.4.1-offline-pre-ts2:004 | 0.4.1 | test_state_and_storage | offline | offline suite, not a model session; result 59/59 passed |
+| 20261111T190107Z-v0.4.1-offline-pre-ts2:005 | 0.4.1 | test_guards | offline | offline suite, not a model session; result 10/10 passed |
+| 20261111T190107Z-v0.4.1-offline-pre-ts2:006 | 0.4.1 | test_live_scoring | offline | offline suite, not a model session; result 29/29 passed |
+| 20261111T190107Z-v0.4.1-offline-pre-ts2:007 | 0.4.1 | test_precheck_ts2 | offline | offline suite, not a model session; result 48/48 passed (prompts evaluated; this suite reports and does not judge) |
 
 ## Live test with the current harness
 
@@ -484,6 +605,10 @@ Definitions, arms and pass criteria: [`docs/ANALYSIS_PLAN.md`](../docs/ANALYSIS_
 | ts-1 | plugin | claude-sonnet-5-5 | A-no-plugin | 0/90 | 0% | 0% to 4% | 0/90 | none activated |
 | ts-1 | plugin | claude-sonnet-5-5 | B-skill-hook-off | 35/90 | 39% | 29% to 49% | 35/90 | 35/35 |
 | ts-1 | plugin | claude-sonnet-5-5 | C-published-default | 90/90 | 100% | 96% to 100% | 90/90 | 90/90 |
+| ts-2 | plugin | claude-opus-5-5 | B-skill-hook-off | 21/72 | 29% | 20% to 41% | 20/72 | 20/21 |
+| ts-2 | plugin | claude-opus-5-5 | C-published-default | 69/72 | 96% | 88% to 99% | 69/72 | 69/69 |
+| ts-2 | plugin | claude-sonnet-5-5 | B-skill-hook-off | 13/72 | 18% | 11% to 28% | 13/72 | 13/13 |
+| ts-2 | plugin | claude-sonnet-5-5 | C-published-default | 69/72 | 96% | 88% to 99% | 69/72 | 69/69 |
 
 ### False triggers on non-substantive prompts
 
@@ -515,6 +640,18 @@ Plainly trivial: greetings, arithmetic and single facts. Names another tool: the
 | ts-1 | plugin | claude-sonnet-5-5 | C-published-default | plainly trivial (8 prompts) | 3/24 | 12% | 4% to 31% |
 | ts-1 | plugin | claude-sonnet-5-5 | C-published-default | names another tool (4 prompts) | 8/12 | 67% | 39% to 86% |
 | ts-1 | plugin | claude-sonnet-5-5 | C-published-default | pooled (12 prompts) | 11/36 | 31% | 18% to 47% |
+| ts-2 | plugin | claude-opus-5-5 | B-skill-hook-off | plainly trivial (12 prompts) | 0/36 | 0% | 0% to 10% |
+| ts-2 | plugin | claude-opus-5-5 | B-skill-hook-off | names another tool (12 prompts) | 1/36 | 3% | 0% to 14% |
+| ts-2 | plugin | claude-opus-5-5 | B-skill-hook-off | pooled (24 prompts) | 1/72 | 1% | 0% to 7% |
+| ts-2 | plugin | claude-opus-5-5 | C-published-default | plainly trivial (12 prompts) | 0/36 | 0% | 0% to 10% |
+| ts-2 | plugin | claude-opus-5-5 | C-published-default | names another tool (12 prompts) | 0/36 | 0% | 0% to 10% |
+| ts-2 | plugin | claude-opus-5-5 | C-published-default | pooled (24 prompts) | 0/72 | 0% | 0% to 5% |
+| ts-2 | plugin | claude-sonnet-5-5 | B-skill-hook-off | plainly trivial (12 prompts) | 0/36 | 0% | 0% to 10% |
+| ts-2 | plugin | claude-sonnet-5-5 | B-skill-hook-off | names another tool (12 prompts) | 0/36 | 0% | 0% to 10% |
+| ts-2 | plugin | claude-sonnet-5-5 | B-skill-hook-off | pooled (24 prompts) | 0/72 | 0% | 0% to 5% |
+| ts-2 | plugin | claude-sonnet-5-5 | C-published-default | plainly trivial (12 prompts) | 0/36 | 0% | 0% to 10% |
+| ts-2 | plugin | claude-sonnet-5-5 | C-published-default | names another tool (12 prompts) | 0/36 | 0% | 0% to 10% |
+| ts-2 | plugin | claude-sonnet-5-5 | C-published-default | pooled (24 prompts) | 0/72 | 0% | 0% to 5% |
 
 ### False triggers by prompt
 
@@ -616,6 +753,102 @@ Plainly trivial: greetings, arithmetic and single facts. Names another tool: the
 | ts-1 | claude-sonnet-5-5 | T-chat-text-in-code | N11-named-tool | names-other-tool | 0/3 |
 | ts-1 | claude-sonnet-5-5 | T-chat-text-in-code | N12-named-tool | names-other-tool | 0/3 |
 | ts-1 | claude-sonnet-5-5 | T-chat-text-in-code | P6-trivial | arithmetic | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | O01-simplify | names-other-tool | 1/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | O02-security-skill | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | O03-invoke-skill | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | O04-slash | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | O05-pdf-skill | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | O06-glob | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | O07-grep | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | O08-read | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | O09-bash-ls | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | O10-with-grep | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | O11-read-show | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | O12-please-skill | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | T01-hello | greeting | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | T02-morning | greeting | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | T03-thanks | greeting | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | T04-mult | arithmetic | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | T05-tip | arithmetic | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | T06-convert-temp | arithmetic | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | T07-convert-weight | arithmetic | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | T08-sqrt | arithmetic | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | T09-fact-river | single-fact | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | T10-fact-author | single-fact | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | T11-fact-define | single-fact | 0/3 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | T12-fact-date | single-fact | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | O01-simplify | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | O02-security-skill | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | O03-invoke-skill | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | O04-slash | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | O05-pdf-skill | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | O06-glob | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | O07-grep | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | O08-read | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | O09-bash-ls | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | O10-with-grep | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | O11-read-show | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | O12-please-skill | names-other-tool | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | T01-hello | greeting | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | T02-morning | greeting | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | T03-thanks | greeting | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | T04-mult | arithmetic | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | T05-tip | arithmetic | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | T06-convert-temp | arithmetic | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | T07-convert-weight | arithmetic | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | T08-sqrt | arithmetic | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | T09-fact-river | single-fact | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | T10-fact-author | single-fact | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | T11-fact-define | single-fact | 0/3 |
+| ts-2 | claude-opus-5-5 | C-published-default | T12-fact-date | single-fact | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | O01-simplify | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | O02-security-skill | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | O03-invoke-skill | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | O04-slash | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | O05-pdf-skill | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | O06-glob | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | O07-grep | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | O08-read | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | O09-bash-ls | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | O10-with-grep | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | O11-read-show | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | O12-please-skill | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | T01-hello | greeting | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | T02-morning | greeting | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | T03-thanks | greeting | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | T04-mult | arithmetic | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | T05-tip | arithmetic | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | T06-convert-temp | arithmetic | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | T07-convert-weight | arithmetic | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | T08-sqrt | arithmetic | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | T09-fact-river | single-fact | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | T10-fact-author | single-fact | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | T11-fact-define | single-fact | 0/3 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | T12-fact-date | single-fact | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | O01-simplify | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | O02-security-skill | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | O03-invoke-skill | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | O04-slash | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | O05-pdf-skill | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | O06-glob | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | O07-grep | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | O08-read | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | O09-bash-ls | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | O10-with-grep | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | O11-read-show | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | O12-please-skill | names-other-tool | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | T01-hello | greeting | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | T02-morning | greeting | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | T03-thanks | greeting | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | T04-mult | arithmetic | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | T05-tip | arithmetic | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | T06-convert-temp | arithmetic | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | T07-convert-weight | arithmetic | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | T08-sqrt | arithmetic | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | T09-fact-river | single-fact | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | T10-fact-author | single-fact | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | T11-fact-define | single-fact | 0/3 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | T12-fact-date | single-fact | 0/3 |
 
 ### Invalid sessions
 
@@ -635,6 +868,10 @@ Cost as reported by Claude Code for each valid session, in US dollars.
 | ts-1 | claude-sonnet-5-5 | B-skill-hook-off | 90 | 0.065 | 126 | 0.056 | 7.05 |
 | ts-1 | claude-sonnet-5-5 | C-published-default | 90 | 0.073 | 126 | 0.064 | 8.11 |
 | ts-1 | claude-sonnet-5-5 | T-chat-text-in-code | 90 | 0.072 | 126 | 0.062 | 7.77 |
+| ts-2 | claude-opus-5-5 | B-skill-hook-off | 72 | 0.156 | 144 | 0.120 | 17.29 |
+| ts-2 | claude-opus-5-5 | C-published-default | 72 | 0.178 | 144 | 0.136 | 19.61 |
+| ts-2 | claude-sonnet-5-5 | B-skill-hook-off | 72 | 0.060 | 144 | 0.050 | 7.22 |
+| ts-2 | claude-sonnet-5-5 | C-published-default | 72 | 0.071 | 144 | 0.052 | 7.51 |
 
 ### Completeness and cost by batch
 
@@ -646,8 +883,16 @@ Cost as reported by Claude Code for each valid session, in US dollars.
 | 20261106T000532Z-ts1-stage3b-opus-ABC-resume | complete; finishes 20261105T234614Z-ts1-stage3-opus-ABC | 201 | 201 | 0 | 25.17 | 0.1252 |
 | 20261106T002608Z-ts1-stage4-opus-T | interrupted; finished by 20261106T003345Z-ts1-stage4b-opus-T-resume | 126 | 67 | 0 | 12.26 | 0.1830 |
 | 20261106T003345Z-ts1-stage4b-opus-T-resume | complete; finishes 20261106T002608Z-ts1-stage4-opus-T | 59 | 59 | 0 | 8.93 | 0.1514 |
+| 20261111T212240Z-v0.4.1-ts2-s1-sonnet | complete | 288 | 288 | 0 | 14.73 | 0.0512 |
+| 20261111T214242Z-v0.4.1-ts2-s2-opus | complete | 288 | 288 | 0 | 36.91 | 0.1281 |
 
 Every planned session in these batches has a ledger row.
+
+### Batches left out of the rates
+
+| Batch | Task set | Model served | Rows | Invalid | Cost (USD) | Why left out |
+|---|---|---|---|---|---|---|
+| 20261111T190136Z-v0.4.1-ts2-s1-default | ts-2 | claude-opus-5-5 | 18 | 1 | 3.01 | stopped after 18 sessions: `--model` was not given and Claude Code 2.1.322's default model served Opus, not Sonnet as for 0.4.0; the models were then requested by name (docs/ANALYSIS_PLAN_0.4.1.md, Changes) |
 
 ## Annotations to imported rows
 

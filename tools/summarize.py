@@ -162,7 +162,30 @@ def manifests():
     return out
 
 
+# Live batches reported on their own and left out of every rate, with the reason (see the plan named).
+SEPARATE_BATCHES = {
+    "20261111T190136Z-v0.4.1-ts2-s1-default": "stopped after 18 sessions: `--model` was not given and Claude Code "
+    "2.1.322's default model served Opus, not Sonnet as for 0.4.0; the models were then requested by name "
+    "(docs/ANALYSIS_PLAN_0.4.1.md, Changes)",
+}
+
+
+def separate_section(rows):
+    sep = [r for r in rows if batch_of(r) in SEPARATE_BATCHES]
+    if not sep:
+        return []
+    L = ["### Batches left out of the rates", "",
+         "| Batch | Task set | Model served | Rows | Invalid | Cost (USD) | Why left out |", "|---|---|---|---|---|---|---|"]
+    for bt, rs in group(sep, batch_of).items():
+        L.append(f"| {bt} | {rs[0]['task_set_version']} | {', '.join(sorted({r['model_id'] for r in rs}))} | {len(rs)} | "
+                 f"{sum('invalid:' in r['notes'] for r in rs)} | {sum(float(r['cost_usd'] or 0) for r in rs):.2f} | "
+                 f"{SEPARATE_BATCHES[bt]} |")
+    return L + [""]
+
+
 def live_section(rows):
+    sep_lines = separate_section(rows)
+    rows = [r for r in rows if batch_of(r) not in SEPARATE_BATCHES]
     live = [r for r in rows if r["task_set_version"].startswith("ts-")]
     if not live:
         return []
@@ -268,7 +291,7 @@ def live_section(rows):
               "| Batch | Model | Arm | Task | Recorded |", "|---|---|---|---|---|"] + missing_cells + [""]
     else:
         L += ["Every planned session in these batches has a ledger row.", ""]
-    return L
+    return L + sep_lines
 
 
 def chart_alt(spec, bars):

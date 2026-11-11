@@ -7,7 +7,7 @@ Versions of the Claude Code plugin. Dates are UTC. Earlier versions were not pub
 - The hook no longer treats a unit conversion ("Convert 5 miles to kilometers.") as work.
 - The hook no longer treats a short, single-step request that names the skill, tool or slash command to use ("Use the code-review skill on app.py.", "Use Grep to find ...", "/simplify utils.py") as work, since the user has already picked the capability. Longer or multi-step requests that mention a tool still count.
 - These were the only prompts the 0.4.0 hook fired on among the non-substantive prompts of its live test, and all 16 of its false triggers were on them.
-- Tested offline so far. The live test on a new task set (ts-2) is planned in [docs/ANALYSIS_PLAN_0.4.1.md](docs/ANALYSIS_PLAN_0.4.1.md) and has not run.
+- Tested live on 2026-11-11 on a new task set, ts-2 (576 sessions, Claude Code 2.1.322, Sonnet 5.5 and Opus 5.5 requested by name). With the hook on, the skill ran in 69 of 72 substantive sessions on each model and on 0 of 72 non-substantive prompts on each model. All six pass criteria set before the run were met on both models. See [docs/ANALYSIS_PLAN_0.4.1.md](docs/ANALYSIS_PLAN_0.4.1.md) and [results/RESULTS.md](results/RESULTS.md).
 
 ## 0.4.0 - 2026-11-05
 

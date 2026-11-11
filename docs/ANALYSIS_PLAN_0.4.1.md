@@ -106,3 +106,9 @@ When it is reached, no new session starts and the report lists every incomplete 
   below. With the project owner's approval, the models are now requested by name: stage 1
   `--model claude-sonnet-5-5`, stage 2 `--model claude-opus-5-5`. The hard budget was raised to
   $100 across all ts-2 runs, including the $3.01 already spent. Nothing else changed.
+- 2026-11-11, observed after the run, no scoring rule changed: in one Opus arm C session
+  (`O12-please-skill`, run `20261111T214242Z-v0.4.1-ts2-s2-opus`, seq 149) the hook fired, but not on
+  the user's prompt. The `simplify` skill started background reviewers, and Claude Code 2.1.322 passed
+  a later message in that session through `UserPromptSubmit` as well; the hook treated it as work.
+  The model did not run Capability Scout, so it is not a false trigger. It is recorded here as a
+  candidate for a later version, to be tested on a new task set.
