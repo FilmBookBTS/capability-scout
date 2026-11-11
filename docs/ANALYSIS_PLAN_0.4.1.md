@@ -99,3 +99,10 @@ When it is reached, no new session starts and the report lists every incomplete 
 - `run_live.py plan` estimates $101.49 for this run, from the phase-1 means x 1.4. The 0.4.0 run
   used the same method, estimated $205.42 and cost $99.59 in the ledger, so the ts-1-based $50.04
   above is the better guide.
+- 2026-11-11, after 18 sessions of stage 1: Claude Code was 2.1.322 on the test machine (0.4.0 ran
+  on 2.1.318), and its default model now served `claude-opus-5-5`, where for 0.4.0 it served
+  `claude-sonnet-5-5`. The run was stopped. Its 18 rows (17 valid, 1 invalid because it was stopped
+  mid-session; $3.01) stay in the ledger as their own batch and are not pooled with the runs
+  below. With the project owner's approval, the models are now requested by name: stage 1
+  `--model claude-sonnet-5-5`, stage 2 `--model claude-opus-5-5`. The hard budget was raised to
+  $100 across all ts-2 runs, including the $3.01 already spent. Nothing else changed.
