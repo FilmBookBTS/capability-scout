@@ -68,3 +68,9 @@ Estimate $13.41. The hard budget is set by the project owner before the run star
 ## Changes to this plan
 
 - 2026-11-11, before the run: the project owner set the hard budget at $25.
+- 2026-11-11, after the run, no scoring rule changed: the pooled false-trigger line in
+  `results/RESULTS.md` for ts-3 includes the 3 background-agent prompts. Two of them,
+  `B02-bg-wordcount` and `B03-bg-list`, were treated as work by the hook on their own text (as the
+  0.4.1 hook also did, disclosed above), and the skill then ran in all 6 sessions of each on each
+  model. They were not part of a criterion. The counts behind criterion 2 are in
+  `results/runs/20261111T223611Z-v0.4.2-ts3/hook-events.txt`.
