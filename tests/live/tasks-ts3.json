@@ -1,0 +1,94 @@
+{
+ "task_set_version": "ts-3",
+ "fixture": "tests/fixture",
+ "note": "Written for 0.4.2 and committed before any classifier change for 0.4.2. Targets the two 0.4.1 findings: requests to search or look things up on the web (none of them is the ts-2 prompt NM07), and messages from background agents. B prompts are not work themselves; they make Claude start background agents, whose results reach the hook as extra prompts. C prompts are controls. Do not edit a task after a run uses it.",
+ "substantive": [
+  {
+   "id": "W01-cve-requests",
+   "kind": "web-research",
+   "prompt": "Search online for recent security advisories for the requests library and tell me which versions are safe to use."
+  },
+  {
+   "id": "W02-web-flask-config",
+   "kind": "web-research",
+   "prompt": "Look up current guidance on secure Flask session cookies and check whether app.py follows it."
+  },
+  {
+   "id": "W03-search-pricing",
+   "kind": "web-research",
+   "prompt": "Search the web for the current per-seat prices of two error-tracking services and compare them for a five-person team."
+  },
+  {
+   "id": "W04-search-wcag",
+   "kind": "web-research",
+   "prompt": "Search for the latest WCAG contrast rules and tell me whether the colors in landing.html meet them."
+  },
+  {
+   "id": "W05-find-online",
+   "kind": "web-research",
+   "prompt": "Find online documentation on parameterized queries in sqlite3 and show how /orders in app.py should change."
+  },
+  {
+   "id": "W06-search-release",
+   "kind": "web-research",
+   "prompt": "Search the internet for how other projects write 2.0.0 release announcements, then draft one from CHANGELOG.md."
+  },
+  {
+   "id": "W07-lookup-postmortem",
+   "kind": "web-research",
+   "prompt": "Look up a well-regarded postmortem template on the web and use it to restructure outage-notes.txt."
+  },
+  {
+   "id": "W08-search-deps",
+   "kind": "web-research",
+   "prompt": "Search for known issues with Flask debug mode in production and explain the risk for app.py."
+  }
+ ],
+ "non_substantive": [
+  {
+   "id": "B01-two-counters",
+   "kind": "background-agent",
+   "prompt": "Start two background agents: one counts the lines in app.py, the other counts the lines in para.txt. Give me both numbers."
+  },
+  {
+   "id": "B02-bg-wordcount",
+   "kind": "background-agent",
+   "prompt": "Launch a background agent to count the words in para.txt and tell me the number when it finishes."
+  },
+  {
+   "id": "B03-bg-list",
+   "kind": "background-agent",
+   "prompt": "Have a background agent list the files in this folder and report back."
+  },
+  {
+   "id": "C01-hey",
+   "kind": "greeting",
+   "prompt": "hey there, quick hello"
+  },
+  {
+   "id": "C02-convert",
+   "kind": "arithmetic",
+   "prompt": "Convert 12 inches to centimeters."
+  },
+  {
+   "id": "C03-fact",
+   "kind": "single-fact",
+   "prompt": "What is the boiling point of water in Fahrenheit?"
+  },
+  {
+   "id": "C04-named-grep",
+   "kind": "names-other-tool",
+   "prompt": "Use Grep to search app.py for the word import."
+  },
+  {
+   "id": "C05-named-skill",
+   "kind": "names-other-tool",
+   "prompt": "Run the code-review skill on landing.html."
+  },
+  {
+   "id": "C06-slash",
+   "kind": "names-other-tool",
+   "prompt": "/simplify para.txt"
+  }
+ ]
+}
