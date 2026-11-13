@@ -1,0 +1,26 @@
+Part 1, task set ts-5; columns: 0.4.3 hook (15351c2), current hook; 1 = work
+S01-check-fix          1 1
+S02-check-a11y         1 1
+S03-check-errors       1 1
+S04-find-input         1 1
+S05-show-split         1 1
+S06-check-memo         1 1
+S07-agent-race         1 1
+S08-list-secrets       1 1
+L01-imports-os         1 0
+L02-size               1 0
+L03-newline            1 0
+L04-last-line          1 0
+L05-file-size          1 0
+L06-mentions           1 0
+L07-imports            1 0
+L08-third-line         1 0
+L09-def-line           1 0
+L10-agent-check        1 0
+K11-greeting           0 0
+K12-fact               0 0
+K13-arith              0 0
+K14-named              0 0
+
+Part 2, regression on ts-1 to ts-4
+125/125 passed
