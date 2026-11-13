@@ -51,4 +51,8 @@ As estimated for ts-7 (same sizes, ts-6 means): $20.81. Hard budget $30. Spent o
 
 ## Changes to this plan
 
-None yet.
+- 2026-11-13, after this plan was committed, before the run: offline, the 0.4.6 hook gives the
+  directive reminder to 11 of the 12 real tasks and the conditional one to `T12`; the conditional
+  one to quick look-ups `L01`, `L02` and `L06`; and no reminder to the other 13 look-ups or to any
+  control. Offline regression (`test_precheck_ts6.py` and the other suites): none. The hook is not
+  changed because of this. Hard budget: $30.
