@@ -66,3 +66,8 @@ Estimate $17.16. The hard budget is set by the project owner before the run star
   at most 2 of the 6 sessions of each model on those two prompts.
 - 2026-11-13, before the run: the project owner set the hard budget at $30. Claude Code on the test
   machine is now 2.1.323 (0.4.1 and 0.4.2 ran on 2.1.322). Models are still requested by name.
+- 2026-11-13, after the run, no scoring rule changed: run `20261113T002849Z-v0.4.3-ts4`, 120 sessions, 0 invalid,
+  $17.70. The background agent reported back in all 48 sessions of the D and E prompts on each
+  model, so the agent part of every such prompt was exercised. Per-session hook counts are in
+  `results/runs/20261113T002849Z-v0.4.3-ts4/hook-events.txt`.
+
