@@ -66,3 +66,7 @@ Estimate $17.29. Hard budget $30, as approved by the project owner for 0.4.4 tes
   back"). The two repeats and the 4 controls are quiet. The hook is not changed because of this.
   Criterion 1 allows 4 of 36, so it can pass only if the skill runs in at most 4 of the 9 sessions
   of each model on those three prompts. Hard budget: $30.
+- 2026-11-13, after the run, no scoring rule changed: run `20261113T020327Z-v0.4.4-ts6-heldout`, 168 sessions, 0 invalid,
+  $17.87. Per-session hook counts are in `results/runs/20261113T020327Z-v0.4.4-ts6-heldout/hook-events.txt`. For context, not a
+  criterion: offline, the 0.4.3 hook (15351c2) treats the same three quick look-ups as work (Q06, Q10,
+  Q11), plus the two repeats; on the held-out look-ups, 0.4.4 differs from 0.4.3 on none.

@@ -78,6 +78,8 @@ Legacy rounds are kept apart because the skill text changed between rounds.
 | 20261113T002849Z-v0.4.3-ts4 | - | current | plugin | 0.4.3 | claude-opus-5-5 | C-published-default | 24/24 | 100% | 86% to 100% | 24/24 |
 | 20261113T012646Z-v0.4.4-ts5 | - | current | plugin | 0.4.4 | claude-sonnet-5-5 | C-published-default | 24/24 | 100% | 86% to 100% | 24/24 |
 | 20261113T012646Z-v0.4.4-ts5 | - | current | plugin | 0.4.4 | claude-opus-5-5 | C-published-default | 24/24 | 100% | 86% to 100% | 24/24 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | - | current | plugin | 0.4.4 | claude-opus-5-5 | C-published-default | 30/30 | 100% | 89% to 100% | 30/30 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | - | current | plugin | 0.4.4 | claude-sonnet-5-5 | C-published-default | 30/30 | 100% | 89% to 100% | 30/30 |
 
 ## False triggers on non-substantive prompts
 
@@ -117,6 +119,8 @@ A false trigger is a session on a non-substantive prompt (greeting, arithmetic, 
 | 20261113T002849Z-v0.4.3-ts4 | current | plugin | 0.4.3 | claude-opus-5-5 | C-published-default | 6/36 | 17% | 8% to 32% |
 | 20261113T012646Z-v0.4.4-ts5 | current | plugin | 0.4.4 | claude-opus-5-5 | C-published-default | 0/42 | 0% | 0% to 8% |
 | 20261113T012646Z-v0.4.4-ts5 | current | plugin | 0.4.4 | claude-sonnet-5-5 | C-published-default | 0/42 | 0% | 0% to 8% |
+| 20261113T020327Z-v0.4.4-ts6-heldout | current | plugin | 0.4.4 | claude-opus-5-5 | C-published-default | 7/54 | 13% | 6% to 24% |
+| 20261113T020327Z-v0.4.4-ts6-heldout | current | plugin | 0.4.4 | claude-sonnet-5-5 | C-published-default | 9/54 | 17% | 9% to 29% |
 
 ## Per-task activation (batches run with the current harness)
 
@@ -603,6 +607,26 @@ A false trigger is a session on a non-substantive prompt (greeting, arithmetic, 
 | 20261113T012646Z-v0.4.4-ts5 | claude-sonnet-5-5 | C-published-default | S07-agent-race | 3/3 |
 | 20261113T012646Z-v0.4.4-ts5 | claude-opus-5-5 | C-published-default | S08-list-secrets | 3/3 |
 | 20261113T012646Z-v0.4.4-ts5 | claude-opus-5-5 | C-published-default | S03-check-errors | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-opus-5-5 | C-published-default | W02 | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-opus-5-5 | C-published-default | W08 | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-opus-5-5 | C-published-default | W01 | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-sonnet-5-5 | C-published-default | W07 | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-sonnet-5-5 | C-published-default | W05 | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-sonnet-5-5 | C-published-default | W10 | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-opus-5-5 | C-published-default | W05 | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-opus-5-5 | C-published-default | W06 | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-opus-5-5 | C-published-default | W09 | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-opus-5-5 | C-published-default | W10 | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-sonnet-5-5 | C-published-default | W06 | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-sonnet-5-5 | C-published-default | W09 | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-opus-5-5 | C-published-default | W03 | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-sonnet-5-5 | C-published-default | W03 | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-sonnet-5-5 | C-published-default | W08 | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-sonnet-5-5 | C-published-default | W01 | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-sonnet-5-5 | C-published-default | W04 | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-sonnet-5-5 | C-published-default | W02 | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-opus-5-5 | C-published-default | W04 | 3/3 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | claude-opus-5-5 | C-published-default | W07 | 3/3 |
 
 ## Sessions without a single activation value, and offline test runs
 
@@ -705,6 +729,8 @@ Definitions, arms and pass criteria: [`docs/ANALYSIS_PLAN.md`](../docs/ANALYSIS_
 | ts-4 | plugin | claude-sonnet-5-5 | C-published-default | 24/24 | 100% | 86% to 100% | 24/24 | 24/24 |
 | ts-5 | plugin | claude-opus-5-5 | C-published-default | 24/24 | 100% | 86% to 100% | 24/24 | 24/24 |
 | ts-5 | plugin | claude-sonnet-5-5 | C-published-default | 24/24 | 100% | 86% to 100% | 24/24 | 24/24 |
+| ts-6 | plugin | claude-opus-5-5 | C-published-default | 30/30 | 100% | 89% to 100% | 30/30 | 30/30 |
+| ts-6 | plugin | claude-sonnet-5-5 | C-published-default | 30/30 | 100% | 89% to 100% | 30/30 | 30/30 |
 
 ### False triggers on non-substantive prompts
 
@@ -766,6 +792,12 @@ Plainly trivial: greetings, arithmetic and single facts. Names another tool: the
 | ts-5 | plugin | claude-sonnet-5-5 | C-published-default | plainly trivial (3 prompts) | 0/9 | 0% | 0% to 30% |
 | ts-5 | plugin | claude-sonnet-5-5 | C-published-default | names another tool (1 prompts) | 0/3 | 0% | 0% to 56% |
 | ts-5 | plugin | claude-sonnet-5-5 | C-published-default | pooled (14 prompts) | 0/42 | 0% | 0% to 8% |
+| ts-6 | plugin | claude-opus-5-5 | C-published-default | plainly trivial (3 prompts) | 0/9 | 0% | 0% to 30% |
+| ts-6 | plugin | claude-opus-5-5 | C-published-default | names another tool (1 prompts) | 0/3 | 0% | 0% to 56% |
+| ts-6 | plugin | claude-opus-5-5 | C-published-default | pooled (18 prompts) | 7/54 | 13% | 6% to 24% |
+| ts-6 | plugin | claude-sonnet-5-5 | C-published-default | plainly trivial (3 prompts) | 0/9 | 0% | 0% to 30% |
+| ts-6 | plugin | claude-sonnet-5-5 | C-published-default | names another tool (1 prompts) | 0/3 | 0% | 0% to 56% |
+| ts-6 | plugin | claude-sonnet-5-5 | C-published-default | pooled (18 prompts) | 9/54 | 17% | 9% to 29% |
 
 ### False triggers by prompt
 
@@ -1033,6 +1065,42 @@ Plainly trivial: greetings, arithmetic and single facts. Names another tool: the
 | ts-5 | claude-sonnet-5-5 | C-published-default | L08-third-line | file-lookup | 0/3 |
 | ts-5 | claude-sonnet-5-5 | C-published-default | L09-def-line | file-lookup | 0/3 |
 | ts-5 | claude-sonnet-5-5 | C-published-default | L10-agent-check | file-lookup | 0/3 |
+| ts-6 | claude-opus-5-5 | C-published-default | Q01 | held-out-lookup | 0/3 |
+| ts-6 | claude-opus-5-5 | C-published-default | Q02 | held-out-lookup | 0/3 |
+| ts-6 | claude-opus-5-5 | C-published-default | Q03 | held-out-lookup | 0/3 |
+| ts-6 | claude-opus-5-5 | C-published-default | Q04 | held-out-lookup | 0/3 |
+| ts-6 | claude-opus-5-5 | C-published-default | Q05 | held-out-lookup | 0/3 |
+| ts-6 | claude-opus-5-5 | C-published-default | Q06 | held-out-lookup | 2/3 |
+| ts-6 | claude-opus-5-5 | C-published-default | Q07 | held-out-lookup | 0/3 |
+| ts-6 | claude-opus-5-5 | C-published-default | Q08 | held-out-lookup | 0/3 |
+| ts-6 | claude-opus-5-5 | C-published-default | Q09 | held-out-lookup | 0/3 |
+| ts-6 | claude-opus-5-5 | C-published-default | Q10 | held-out-lookup | 2/3 |
+| ts-6 | claude-opus-5-5 | C-published-default | Q11 | held-out-lookup | 3/3 |
+| ts-6 | claude-opus-5-5 | C-published-default | Q12 | held-out-lookup | 0/3 |
+| ts-6 | claude-opus-5-5 | C-published-default | R01-ts4-D05 | repeat-ts4-small-job | 0/3 |
+| ts-6 | claude-opus-5-5 | C-published-default | R02-ts4-D07 | repeat-ts4-small-job | 0/3 |
+| ts-6 | claude-opus-5-5 | C-published-default | X01 | greeting | 0/3 |
+| ts-6 | claude-opus-5-5 | C-published-default | X02 | single-fact | 0/3 |
+| ts-6 | claude-opus-5-5 | C-published-default | X03 | arithmetic | 0/3 |
+| ts-6 | claude-opus-5-5 | C-published-default | X04 | names-other-tool | 0/3 |
+| ts-6 | claude-sonnet-5-5 | C-published-default | Q01 | held-out-lookup | 0/3 |
+| ts-6 | claude-sonnet-5-5 | C-published-default | Q02 | held-out-lookup | 0/3 |
+| ts-6 | claude-sonnet-5-5 | C-published-default | Q03 | held-out-lookup | 0/3 |
+| ts-6 | claude-sonnet-5-5 | C-published-default | Q04 | held-out-lookup | 0/3 |
+| ts-6 | claude-sonnet-5-5 | C-published-default | Q05 | held-out-lookup | 0/3 |
+| ts-6 | claude-sonnet-5-5 | C-published-default | Q06 | held-out-lookup | 3/3 |
+| ts-6 | claude-sonnet-5-5 | C-published-default | Q07 | held-out-lookup | 0/3 |
+| ts-6 | claude-sonnet-5-5 | C-published-default | Q08 | held-out-lookup | 0/3 |
+| ts-6 | claude-sonnet-5-5 | C-published-default | Q09 | held-out-lookup | 0/3 |
+| ts-6 | claude-sonnet-5-5 | C-published-default | Q10 | held-out-lookup | 3/3 |
+| ts-6 | claude-sonnet-5-5 | C-published-default | Q11 | held-out-lookup | 3/3 |
+| ts-6 | claude-sonnet-5-5 | C-published-default | Q12 | held-out-lookup | 0/3 |
+| ts-6 | claude-sonnet-5-5 | C-published-default | R01-ts4-D05 | repeat-ts4-small-job | 0/3 |
+| ts-6 | claude-sonnet-5-5 | C-published-default | R02-ts4-D07 | repeat-ts4-small-job | 0/3 |
+| ts-6 | claude-sonnet-5-5 | C-published-default | X01 | greeting | 0/3 |
+| ts-6 | claude-sonnet-5-5 | C-published-default | X02 | single-fact | 0/3 |
+| ts-6 | claude-sonnet-5-5 | C-published-default | X03 | arithmetic | 0/3 |
+| ts-6 | claude-sonnet-5-5 | C-published-default | X04 | names-other-tool | 0/3 |
 
 ### Invalid sessions
 
@@ -1062,6 +1130,8 @@ Cost as reported by Claude Code for each valid session, in US dollars.
 | ts-4 | claude-sonnet-5-5 | C-published-default | 24 | 0.141 | 60 | 0.090 | 5.41 |
 | ts-5 | claude-opus-5-5 | C-published-default | 24 | 0.186 | 66 | 0.117 | 7.75 |
 | ts-5 | claude-sonnet-5-5 | C-published-default | 24 | 0.082 | 66 | 0.054 | 3.58 |
+| ts-6 | claude-opus-5-5 | C-published-default | 30 | 0.256 | 84 | 0.150 | 12.63 |
+| ts-6 | claude-sonnet-5-5 | C-published-default | 30 | 0.097 | 84 | 0.062 | 5.24 |
 
 ### Completeness and cost by batch
 
@@ -1078,6 +1148,7 @@ Cost as reported by Claude Code for each valid session, in US dollars.
 | 20261111T223611Z-v0.4.2-ts3 | complete | 102 | 102 | 0 | 10.25 | 0.1005 |
 | 20261113T002849Z-v0.4.3-ts4 | complete | 120 | 120 | 0 | 17.70 | 0.1475 |
 | 20261113T012646Z-v0.4.4-ts5 | complete | 132 | 132 | 0 | 11.32 | 0.0858 |
+| 20261113T020327Z-v0.4.4-ts6-heldout | complete | 168 | 168 | 0 | 17.87 | 0.1063 |
 
 Every planned session in these batches has a ledger row.
 
