@@ -64,3 +64,5 @@ Estimate $17.16. The hard budget is set by the project owner before the run star
   not the agent wrapper. The hook is not changed because of this. No ts-1 to ts-3 regression
   (104 of 104). Criterion 1 allows 2 of 24 false triggers, so it can pass only if the skill runs in
   at most 2 of the 6 sessions of each model on those two prompts.
+- 2026-11-13, before the run: the project owner set the hard budget at $30. Claude Code on the test
+  machine is now 2.1.323 (0.4.1 and 0.4.2 ran on 2.1.322). Models are still requested by name.
