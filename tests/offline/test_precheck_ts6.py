@@ -65,6 +65,19 @@ def main():
                 if old.is_request(x["prompt"]):
                     continue
                 checks.append((not new.is_request(x["prompt"]), f"{t['task_set_version']} {x['id']} not work"))
+        if hasattr(new, "tier"):
+            print("\nPart 3 (reports, does not judge): prompts that get the conditional reminder ('maybe') or,")
+            print("if not substantive, any reminder; ts-1 to ts-7")
+            for name in ("tasks.json", "tasks-ts2.json", "tasks-ts3.json", "tasks-ts4.json", "tasks-ts5.json",
+                         "tasks-ts6.json", "tasks-ts7.json"):
+                if not os.path.exists(os.path.join(REPO, "tests", "live", name)):
+                    continue
+                t = tasks(name)
+                for group in ("substantive", "non_substantive"):
+                    for x in t[group]:
+                        level = new.tier(x["prompt"])
+                        if level == "maybe" or (group == "non_substantive" and level):
+                            print(f"  {t['task_set_version']} {x['id']}: {level}")
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
     for ok, label in checks:

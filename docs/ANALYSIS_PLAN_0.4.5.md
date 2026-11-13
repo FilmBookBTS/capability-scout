@@ -56,4 +56,9 @@ checking in, each live run within a $30 cap, stopping at about $100 of total spe
 
 ## Changes to this plan
 
-None yet.
+- 2026-11-13, after this plan was committed, before any live session: offline, the 1c1345d hook
+  treats as work 3 of the 16 quick look-ups (`G07`, `G13`, `G16`), so criterion 1 could pass only if
+  the skill ran in at most 5 of the 9 sessions of each model on them; on ts-6 it ran in 7 and 9 of 9
+  on such prompts. It also misses one real task (`H05`). The live run was not made, to save the
+  budget for a version with a chance to pass. ts-7 has been looked at and is now a development set,
+  not a held-out one. The next version is tested on a new held-out set, ts-8, under its own plan.

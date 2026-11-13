@@ -24,6 +24,7 @@ Messages Claude Code delivers on its own, such as a background agent's result in
 A request to hand a job to a background agent or subagent is judged by the job itself (v0.4.3).
 A short look-up on one named file ("Show the size of CHANGELOG.md.") is not treated as work (v0.4.4),
 including one that ends by asking for the answer ("... and tell me its src") (v0.4.5).
+A request that only retrieves something gets a conditional reminder that lets Claude skip a quick look-up (v0.4.5).
 
 Only the user's own request counts: pasted material (commands, code, quotes, tables, long
 documents) and prohibitions ("don't install anything") trigger neither message. Approving or
@@ -197,6 +198,7 @@ QUALITY = re.compile(r"\b(vulnerab\w*|inject\w*|secur\w*|safe\w*|unsafe|leak\w*|
                      r"follows?|meets?|best practices?|standards?|problems?|issues?|risks?|improve\w*|better|"
                      r"should|why|needs?|recommend\w*|suggest\w*|priorit\w*|fix\w*|explain\w*|cause[sd]?|bugs?)\b", re.I)
 LOOKUP_MAX_WORDS = 14
+NOUN_AFTER = re.compile(r"^\s+(?:is|are|was|were|has|have)\b", re.I)
 DETERMINER_BEFORE = re.compile(r"\b(?:the|a|an|this|that|its|their|our|my|your)\s+$", re.I)
 
 
@@ -217,7 +219,54 @@ def file_lookup(p):
     tail = rest[verb:]
     # An action word right after "the", "a" and the like is a noun ("the deploy version").
     return all(RETRIEVAL.match(m.group(0)) or DETERMINER_BEFORE.search(tail[:m.start()])
-               for m in ACTION.finditer(tail))
+               or NOUN_AFTER.match(tail[m.end():]) for m in ACTION.finditer(tail))
+
+
+# 0.4.5: how sure the hook is. A request counts as clear work when it is long, has several steps,
+# asks for a judgement, or uses a verb that produces something (fix, write, review ...). A request
+# that only retrieves ("check", "show", "find", "grab" ...) gets a conditional reminder instead, and
+# Claude decides whether it is a quick look-up. So does a request that names a file or hands a job to
+# an agent but that the word rules don't count as work.
+WEAK_VERB = re.compile(r"(?:check|show|get|list|find|count|print|run|pull up|look at|look into|look through|"
+                       r"go through)$", re.I)
+
+
+def core_text(p):
+    """The request without a polite opener or an agent wrapper."""
+    p = POLITE.sub("", p.strip())
+    m = DELEGATE.match(p)
+    return p[m.end():] if m else p
+
+
+def clear_work(p):
+    c = core_text(p)
+    if len(c.split()) >= 25 or MULTI_STEP.search(ANSWER_CLAUSE.sub("", c).strip()) or QUALITY.search(c):
+        return True
+    for m in ACTION.finditer(c):
+        if WEAK_VERB.match(m.group(0)) or DETERMINER_BEFORE.search(c[:m.start()]) or NOUN_AFTER.match(c[m.end():]):
+            continue
+        return True
+    return False
+
+
+def maybe_work(p):
+    """Not counted as work, but names a file or hands a job to an agent: let Claude judge."""
+    p = p.strip()
+    if not p or TRIVIAL.search(p) or CONVERSION.match(p) or names_capability(p):
+        return False
+    c = core_text(p)
+    if file_lookup(c) or file_lookup(base_verbs(c)):
+        return False
+    return bool(FILE_NAME.search(p) or DELEGATE.match(POLITE.sub("", p))) and clear_work(p)
+
+
+def tier(prompt):
+    """'clear', 'maybe' or None, for the user's own text."""
+    if is_request(prompt):
+        if is_long(prompt):
+            return "clear"
+        return "clear" if clear_work(instruction_text(prompt)) else "maybe"
+    return "maybe" if maybe_work(instruction_text(prompt)) else None
 
 
 def names_capability(p):
@@ -331,6 +380,10 @@ NEW_TASK_MSG = ("Capability Scout: this looks like a different task from the one
                 "Before any other tool call, invoke the capability-scout skill again for this task "
                 "(reuse the earlier inventory; redo selection and the marketplace check), show the plan, "
                 "invoke any specialist skill it picks, then do it.")
+MAYBE_MSG = ("Capability Scout: if this request is substantive work (a review, fix, rewrite, write-up, plan, "
+             "research, a multi-step task, or anything that needs a connector or outside service), invoke the "
+             "capability-scout skill once before any other tool call and show its short capability plan. If it is "
+             "a quick look-up or a single fact, skip the skill and just answer.")
 RETRY_MSG = ("Capability Scout: the capability assessment requested for this task has not run yet. "
              "Before any other tool call, invoke the capability-scout skill once, show its short "
              "capability plan, then continue.")
@@ -370,7 +423,8 @@ def decide(prompt, state):
              "requested_total": n, "confirmed_total": n, "last_kw": [...]}
     """
     prompt = user_text(prompt)
-    if not is_request(prompt):
+    level = tier(prompt)
+    if level is None:
         return None, state
     text = instruction_text(prompt)
     kw = keywords(text)
@@ -384,14 +438,17 @@ def decide(prompt, state):
         # Same task: fold the follow-up's words in so a conversation can drift without re-firing.
         task = dict(task, kw=sorted(set(task.get("kw", [])) | kw)[:120])
         state["task"] = task
-        if task.get("confirmed") or task.get("requests", 0) >= MAX_REQUESTS:
-            return None, state  # assessed, or retries used up: don't nag
+        if task.get("confirmed") or task.get("requests", 0) >= MAX_REQUESTS or level == "maybe":
+            return None, state  # assessed, retries used up, or Claude was left to judge: don't nag
         task = dict(task, requests=task.get("requests", 0) + 1)
         msg = RETRY_MSG
     else:
         # "Reuse the earlier inventory" is only true if an earlier assessment actually ran.
         msg = NEW_TASK_MSG if state.get("confirmed_total") else FIRST_MSG
         task = {"kw": sorted(kw)[:60], "requests": 1, "confirmed": False}
+        if level == "maybe":
+            msg = MAYBE_MSG
+            task["requests"] = MAX_REQUESTS  # Claude may rightly skip it: no retry reminder
     state["task"] = task
     state["requested_total"] = state.get("requested_total", 0) + 1
     return msg, state
