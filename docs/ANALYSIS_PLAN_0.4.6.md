@@ -56,3 +56,10 @@ As estimated for ts-7 (same sizes, ts-6 means): $20.81. Hard budget $30. Spent o
   one to quick look-ups `L01`, `L02` and `L06`; and no reminder to the other 13 look-ups or to any
   control. Offline regression (`test_precheck_ts6.py` and the other suites): none. The hook is not
   changed because of this. Hard budget: $30.
+- 2026-11-13, after the run, no scoring rule changed: run `20261113T031603Z-v0.4.6-ts10-heldout`, 192 sessions, 0 invalid,
+  $19.23. Per model (Sonnet, Opus): quick look-ups 0 and 0 of 48 (pass); real tasks 35 and 36 of 36
+  (pass; the one miss is Sonnet on `T12`, which had the conditional reminder); controls 0 and 0 of
+  12 (pass); later `UserPromptSubmit` events 0 with a reminder (pass, `hook-events.txt` in the run
+  folder); offline regression none (pass). 0.4.6 passes. Caveat: the control `C14` ("run
+  /security-review on this") is the kind of prompt 0.4.6 was changed for, so the controls
+  criterion is a weaker held-out test than the other two.
