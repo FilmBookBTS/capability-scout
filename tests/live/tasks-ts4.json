@@ -1,0 +1,109 @@
+{
+ "task_set_version": "ts-4",
+ "fixture": "tests/fixture",
+ "note": "Written for 0.4.3 and committed before any hook change for 0.4.3. None of the prompts was run through any hook before this commit. D prompts ask Claude to hand a small job to a background agent or subagent; E prompts hand real work to one; K prompts are controls. Do not edit a task after a run uses it.",
+ "substantive": [
+  {
+   "id": "E01-audit",
+   "kind": "delegated-work",
+   "prompt": "Launch a background agent to audit app.py for injection flaws and draft a fix for each one."
+  },
+  {
+   "id": "E02-tests",
+   "kind": "delegated-work",
+   "prompt": "Have a subagent write pytest tests for parse_amount in app.py and explain how to run them."
+  },
+  {
+   "id": "E03-two-agents",
+   "kind": "delegated-work",
+   "prompt": "Start two background agents: one reviews landing.html for accessibility problems, the other rewrites its hero copy."
+  },
+  {
+   "id": "E04-research",
+   "kind": "delegated-work",
+   "prompt": "Use a background agent to research current Flask security best practices and compare app.py against them."
+  },
+  {
+   "id": "E05-postmortem",
+   "kind": "delegated-work",
+   "prompt": "Spin up an agent to draft a postmortem from outage-notes.txt."
+  },
+  {
+   "id": "E06-migration",
+   "kind": "delegated-work",
+   "prompt": "Get a subagent to plan the migration of app.py from SQLite to PostgreSQL, with the risks of each step."
+  },
+  {
+   "id": "E07-release-notes",
+   "kind": "delegated-work",
+   "prompt": "Ask a background agent to turn CHANGELOG.md into customer-facing release notes."
+  },
+  {
+   "id": "E08-refactor",
+   "kind": "delegated-work",
+   "prompt": "Kick off a background agent that refactors the database access in app.py into one module and explains each change."
+  }
+ ],
+ "non_substantive": [
+  {
+   "id": "D01-lines",
+   "kind": "delegated-small-job",
+   "prompt": "Spin up a background agent to tell me how many lines are in landing.html."
+  },
+  {
+   "id": "D02-first-line",
+   "kind": "delegated-small-job",
+   "prompt": "Ask a background agent to print the first line of CHANGELOG.md."
+  },
+  {
+   "id": "D03-count-funcs",
+   "kind": "delegated-small-job",
+   "prompt": "Start a subagent that counts how many functions app.py defines, and tell me the count."
+  },
+  {
+   "id": "D04-list-txt",
+   "kind": "delegated-small-job",
+   "prompt": "Send an agent off in the background to list the .txt files here."
+  },
+  {
+   "id": "D05-size",
+   "kind": "delegated-small-job",
+   "prompt": "Run a background task that shows the size of para.txt."
+  },
+  {
+   "id": "D06-outage-date",
+   "kind": "delegated-small-job",
+   "prompt": "Get a background agent to read outage-notes.txt and tell me the date of the outage."
+  },
+  {
+   "id": "D07-title-tag",
+   "kind": "delegated-small-job",
+   "prompt": "Kick off an agent to check whether landing.html has a title tag."
+  },
+  {
+   "id": "D08-count-routes",
+   "kind": "delegated-small-job",
+   "prompt": "Have a subagent count the routes in app.py."
+  },
+  {
+   "id": "K01-greeting",
+   "kind": "greeting",
+   "prompt": "Morning! Hope you're well."
+  },
+  {
+   "id": "K02-fact",
+   "kind": "single-fact",
+   "prompt": "How many continents are there?"
+  },
+  {
+   "id": "K03-arith",
+   "kind": "arithmetic",
+   "prompt": "What's 7 squared?"
+  },
+  {
+   "id": "K04-named",
+   "kind": "names-other-tool",
+   "prompt": "Use the simplify skill on landing.html."
+  }
+ ]
+}
