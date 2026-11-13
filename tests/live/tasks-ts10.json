@@ -1,0 +1,169 @@
+{
+ "task_set_version": "ts-10",
+ "fixture": "tests/fixture",
+ "note": "Held-out set for 0.4.6. Written by a separate agent, given only a description of the fixture files and of the three groups, after the 0.4.6 hook was committed (8120752); it never saw the hook, its rules or earlier task sets. Used verbatim. The agent returned 13 work prompts; one non-agent work prompt ('Could you review landing.html for semantic HTML and SEO problems and fix the heading hierarchy?') was dropped as the agent itself suggested, before any prompt was run through a hook. Do not edit a task after a run uses it.",
+ "substantive": [
+  {
+   "id": "T01",
+   "kind": "held-out-work",
+   "prompt": "check app.py for security issues and fix whatever you find, esp the SQL query and the subprocess call"
+  },
+  {
+   "id": "T02",
+   "kind": "held-out-work",
+   "prompt": "Look at landing.html and do a full accessibility pass: fix the contrast, the missing alt text, the clickable div and the unlabeled email input."
+  },
+  {
+   "id": "T03",
+   "kind": "held-out-work",
+   "prompt": "go through outage-notes.txt and write a proper blameless postmortem with root cause, impact, timeline and action items"
+  },
+  {
+   "id": "T04",
+   "kind": "held-out-work",
+   "prompt": "can you write pytest tests for parse_amount in app.py, covering edge cases like negative numbers, commas, missing $ and junk input"
+  },
+  {
+   "id": "T05",
+   "kind": "held-out-work",
+   "prompt": "pls rewrite para.txt so it sounds like an actual human wrote it, cut all the buzzwords"
+  },
+  {
+   "id": "T06",
+   "kind": "held-out-work",
+   "prompt": "What would it take to make app.py production ready? give me a prioritized plan"
+  },
+  {
+   "id": "T07",
+   "kind": "held-out-work",
+   "prompt": "tell me everything wrong with the /export endpoint and refactor it so it doesnt shell out"
+  },
+  {
+   "id": "T08",
+   "kind": "held-out-work",
+   "prompt": "read CHANGELOG.md and turn it into release notes for 2.0.0 that customers can actually understand"
+  },
+  {
+   "id": "T09",
+   "kind": "held-out-work",
+   "prompt": "How should we prevent another outage like the one in outage-notes.txt? analyze the timeline and recommend concrete changes to deploys, alerting and the retry logic"
+  },
+  {
+   "id": "T10",
+   "kind": "held-out-work",
+   "prompt": "hand this off to a background agent: audit app.py end to end, fix the injection + hardcoded key + debug/host settings, and report back with a diff"
+  },
+  {
+   "id": "T11",
+   "kind": "held-out-work",
+   "prompt": "Spin up a subagent to draft a customer-facing incident summary from outage-notes.txt, and have another one go through landing.html and rewrite it with proper buttons and labels"
+  },
+  {
+   "id": "T12",
+   "kind": "held-out-work",
+   "prompt": "get a background agent to look into para.txt and CHANGELOG.md and produce a short launch announcement for 2.0 based on them"
+  }
+ ],
+ "non_substantive": [
+  {
+   "id": "L01",
+   "kind": "held-out-lookup",
+   "prompt": "what port does app.py run on?"
+  },
+  {
+   "id": "L02",
+   "kind": "held-out-lookup",
+   "prompt": "Is debug mode turned on in app.py"
+  },
+  {
+   "id": "L03",
+   "kind": "held-out-lookup",
+   "prompt": "whats the hardcoded API_KEY value in app.py"
+  },
+  {
+   "id": "L04",
+   "kind": "held-out-lookup",
+   "prompt": "How many entries are in CHANGELOG.md?"
+  },
+  {
+   "id": "L05",
+   "kind": "held-out-lookup",
+   "prompt": "changelog version number?"
+  },
+  {
+   "id": "L06",
+   "kind": "held-out-lookup",
+   "prompt": "When did the 4.18.0 deploy go out according to outage-notes.txt?"
+  },
+  {
+   "id": "L07",
+   "kind": "held-out-lookup",
+   "prompt": "peak error rate in the outage notes"
+  },
+  {
+   "id": "L08",
+   "kind": "held-out-lookup",
+   "prompt": "Can you tell me how many checkouts failed during the Oct 16 outage?"
+  },
+  {
+   "id": "L09",
+   "kind": "held-out-lookup",
+   "prompt": "which heading level does landing.html use for the hero title"
+  },
+  {
+   "id": "L10",
+   "kind": "held-out-lookup",
+   "prompt": "Does the img in landing.html have an alt attribute?"
+  },
+  {
+   "id": "L11",
+   "kind": "held-out-lookup",
+   "prompt": "how many sentences are in para.txt"
+  },
+  {
+   "id": "L12",
+   "kind": "held-out-lookup",
+   "prompt": "Quick q: what's the name of the function that parses dollar amounts in app.py?"
+  },
+  {
+   "id": "L13",
+   "kind": "held-out-lookup",
+   "prompt": "spin up a subagent to tell me what time the rollback finished in outage-notes.txt"
+  },
+  {
+   "id": "L14",
+   "kind": "held-out-lookup",
+   "prompt": "Have a background agent check what the placeholder text on the email input in landing.html says."
+  },
+  {
+   "id": "L15",
+   "kind": "held-out-lookup",
+   "prompt": "can u send a subagent to grab the route names defined in app.py, just the list"
+  },
+  {
+   "id": "L16",
+   "kind": "held-out-lookup",
+   "prompt": "use a background agent to count the words in para.txt pls"
+  },
+  {
+   "id": "C11",
+   "kind": "greeting",
+   "prompt": "thanks, that's perfect!"
+  },
+  {
+   "id": "C12",
+   "kind": "single-fact",
+   "prompt": "what's the capital of Australia?"
+  },
+  {
+   "id": "C13",
+   "kind": "arithmetic",
+   "prompt": "whats 17 * 23"
+  },
+  {
+   "id": "C14",
+   "kind": "names-other-tool",
+   "prompt": "run /security-review on this"
+  }
+ ]
+}
