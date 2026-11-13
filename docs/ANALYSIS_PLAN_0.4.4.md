@@ -72,3 +72,4 @@ Estimate $18.87. The hard budget is set by the project owner before the run star
   0.4.4 rule were written in the same working session, both from the two ts-4 misses, so a clean offline result here is
   weak evidence. The live test measures what the models do with the hook's answer, and the offline
   classifier tests add 15 prompts that are not in ts-5.
+- 2026-11-13, before the run: the project owner set the hard budget at $30. Claude Code 2.1.323.
