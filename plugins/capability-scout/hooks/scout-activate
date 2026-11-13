@@ -22,7 +22,8 @@ or slash command to use ("Use the code-review skill on app.py."), are not treate
 Messages Claude Code delivers on its own, such as a background agent's result in a
 <task-notification> block, are ignored; requests to search or look things up count as work (v0.4.2).
 A request to hand a job to a background agent or subagent is judged by the job itself (v0.4.3).
-A short look-up on one named file ("Show the size of CHANGELOG.md.") is not treated as work (v0.4.4).
+A short look-up on one named file ("Show the size of CHANGELOG.md.") is not treated as work (v0.4.4),
+including one that ends by asking for the answer ("... and tell me its src") (v0.4.5).
 
 Only the user's own request counts: pasted material (commands, code, quotes, tables, long
 documents) and prohibitions ("don't install anything") trigger neither message. Approving or
@@ -176,31 +177,47 @@ def delegated(p):
 # 0.4.4: a quick look-up on one named file ("Check whether app.py imports os.", "Show the size of
 # CHANGELOG.md.") asks for a fact, not for work. It must be short, one step, name exactly one file
 # and nothing else the hook counts as an artifact, and not ask about every or all of something.
+QUESTION_WORD = r"(?:whether|if|that|which|what|where|when|who|how\s+(?:many|much|long|big))\b"
 LOOKUP_START = re.compile(
-    r"^\s*(?:(?:check|see|verify|confirm|find\s+out)\s+(?:whether|if|that)\b"
-    r"|(?:show|get|list|print|find|count|tell)\s+(?:me\s+)?(?:the|a|how)\b)",
+    r"^\s*(?:(?:check|see|verify|confirm|find\s+out|look\s+up)\s+" + QUESTION_WORD +
+    r"|(?:show|get|grab|list|print|find|count|tell|read|pull\s+up|look\s+up)\b)",
     re.I)
+# 0.4.5: an answer clause at the end ("... and tell me its src", "... and report back") asks only
+# for the result to be given, so it does not make the look-up a second step.
+ANSWER_CLAUSE = re.compile(
+    r"\s*(?:,\s*)?(?:and|then)\s+(?:tell\s+me|report\s+back|let\s+me\s+know|show\s+me|give\s+me|"
+    r"say|print|list)\b[^.?!;]*[.?!]?\s*$|\s+(?:and\s+)?report\s+back\b[.?!]?\s*$",
+    re.I)
+RETRIEVAL = re.compile(r"(?:check|show|get|list|find|look up|pull up|look at|look into|look through)$", re.I)
 FILE_NAME = re.compile(r"\b[\w./-]+\.[a-z]{1,5}\b", re.I)
-QUANTIFIER = re.compile(r"\b(every|all|each|any)\b", re.I)
+QUANTIFIER = re.compile(r"\b(every\w*|all|each|any|anything)\b", re.I)
 # "Check whether app.py is vulnerable to SQL injection" asks for a judgement, not a fact.
 QUALITY = re.compile(r"\b(vulnerab\w*|inject\w*|secur\w*|safe\w*|unsafe|leak\w*|exploit\w*|correct\w*|valid\w*|"
                      r"complian\w*|accessib\w*|perform\w*|slow\w*|race|deadlock\w*|thread-safe|broken|wrong|"
-                     r"follows?|meets?|best practices?|standards?)\b", re.I)
-LOOKUP_MAX_WORDS = 12
+                     r"follows?|meets?|best practices?|standards?|problems?|issues?|risks?|improve\w*|better|"
+                     r"should|why|needs?|recommend\w*|suggest\w*|priorit\w*|fix\w*|explain\w*|cause[sd]?|bugs?)\b", re.I)
+LOOKUP_MAX_WORDS = 14
+DETERMINER_BEFORE = re.compile(r"\b(?:the|a|an|this|that|its|their|our|my|your)\s+$", re.I)
 
 
 def file_lookup(p):
     """A short, one-step question about one named file, phrased as a request."""
     p = p.strip()
-    if not LOOKUP_START.match(p) or len(p.split()) > LOOKUP_MAX_WORDS or MULTI_STEP.search(p):
+    if QUALITY.search(p) or QUANTIFIER.search(p):
         return False
-    files = FILE_NAME.findall(p)
-    if len(files) != 1 or QUANTIFIER.search(p):
+    core = ANSWER_CLAUSE.sub("", p).strip()
+    if not LOOKUP_START.match(core) or len(core.split()) > LOOKUP_MAX_WORDS or MULTI_STEP.search(core):
         return False
-    rest = FILE_NAME.sub(" ", p)
+    if len(FILE_NAME.findall(core)) != 1:
+        return False
+    rest = FILE_NAME.sub(" ", core)
     verb = LOOKUP_START.match(rest).end()
-    return not (ARTIFACT.search(rest) or THE_ARTIFACT.search(rest) or QUALITY.search(rest)
-                or ACTION.search(rest[verb:]))
+    if ARTIFACT.search(rest):
+        return False
+    tail = rest[verb:]
+    # An action word right after "the", "a" and the like is a noun ("the deploy version").
+    return all(RETRIEVAL.match(m.group(0)) or DETERMINER_BEFORE.search(tail[:m.start()])
+               for m in ACTION.finditer(tail))
 
 
 def names_capability(p):
@@ -272,6 +289,8 @@ def is_substantive(prompt):
         return False
     job = delegated(p)
     if job is not None:
+        if file_lookup(p[DELEGATE.match(p).end():]):  # judged before verbs are normalized ("runs on")
+            return False
         return bool(job.strip()) and delegated(job) is None and is_substantive(job)
     if file_lookup(p):
         return False

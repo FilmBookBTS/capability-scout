@@ -85,6 +85,15 @@ SHOULD_FIRE = [
     "Show me how to fix the crash in server.js.",
     "Find the bug in utils.py.",
     "Check whether config.yaml is valid.",
+    # 0.4.5: an answer clause that asks for a judgement or a change still makes it work. None of
+    # these is a ts-6 prompt.
+    "list the routes in server.py and tell me which ones need auth",
+    "show me the login function in auth.py and tell me how to fix it",
+    "find the config loader in main.py and tell me why it's slow",
+    "check which endpoints in api.py lack rate limiting and add it",
+    "look up what version of requests setup.py pins and upgrade it",
+    "grab the error from build.log and report back with a fix",
+    "tell me what changed in CHANGES.md and draft release notes",
 ]
 SHOULD_NOT_FIRE = [
     "What is 17 times 23?",
@@ -145,6 +154,16 @@ SHOULD_NOT_FIRE = [
     "Check if requirements.txt pins flask.",
     "Tell me how many rows data.csv has.",
     "Have an agent check whether index.html sets a viewport.",
+    # 0.4.5: look-ups that end by asking for the answer, or start with which/what. None is a ts-6 prompt.
+    "find the main function in cli.py and tell me its line number",
+    "check which python version setup.py requires",
+    "grab the second paragraph of README.md and report back",
+    "pull up the header of index.html",
+    "read notes.txt and tell me the meeting date",
+    "have a subagent look up which license LICENSE.txt is and report back",
+    "list the functions in utils.py",
+    "count the words in essay.txt and let me know",
+    "spin up an agent to check which port server.py listens on",
 ]
 
 # Requests to obtain something get the approval reminder; other prompts don't.

@@ -2,11 +2,17 @@
 
 Versions of the Claude Code plugin. Dates are UTC. Earlier versions were not published; their dates come from the project's verification reports.
 
-## 0.4.4 - unreleased
+## 0.4.5 - unreleased
+
+- Quick look-ups are recognized more broadly: ones that start with "which", "what" or "how many" ("check which port app.py runs on"), ones that end by asking for the answer ("... and tell me its src", "... and report back"), and ones handed to an agent. An answer clause that asks for a judgement or a change ("... and tell me how to fix it") still counts as work.
+- Includes the 0.4.3 and 0.4.4 changes below.
+- Tested offline so far.
+
+## 0.4.4 - not released
 
 - A quick look-up on one named file ("Show the size of CHANGELOG.md.", "Check whether app.py imports os.") is not treated as work. It must be short, one step, and name one file and nothing else; a request that asks for a judgement ("Check whether app.py is secure") or about all of something still counts.
 - Includes the 0.4.3 changes below.
-- Tested offline so far. The live test on a new task set (ts-5) is planned in [docs/ANALYSIS_PLAN_0.4.4.md](docs/ANALYSIS_PLAN_0.4.4.md) and has not run.
+- Live tests: passed all criteria on ts-5 (132 sessions), but on the held-out set ts-6 (168 sessions), written separately from the rule, false triggers on quick look-ups were 9 of 36 sessions on Sonnet and 7 of 36 on Opus, against a limit of 4. Not released; see [docs/ANALYSIS_PLAN_0.4.4-HELDOUT.md](docs/ANALYSIS_PLAN_0.4.4-HELDOUT.md).
 
 ## 0.4.3 - not released
 
