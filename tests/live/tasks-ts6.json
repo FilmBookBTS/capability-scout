@@ -1,0 +1,149 @@
+{
+ "task_set_version": "ts-6",
+ "fixture": "tests/fixture",
+ "note": "Held-out set for 0.4.4. Q, W and X prompts were written by a separate agent that was given only a description of the fixture files and of the three groups, and never saw the hook, its rules or earlier task sets; they are used verbatim. R01 and R02 repeat ts-4 D05-size and D07-title-tag verbatim. Committed before any ts-6 prompt was run through any hook. Do not edit a task after a run uses it.",
+ "substantive": [
+  {
+   "id": "W01",
+   "kind": "held-out-work",
+   "prompt": "check app.py for security vulnerabilities and fix whatever you find"
+  },
+  {
+   "id": "W02",
+   "kind": "held-out-work",
+   "prompt": "look at landing.html and fix all the accessibility problems, make it WCAG AA compliant"
+  },
+  {
+   "id": "W03",
+   "kind": "held-out-work",
+   "prompt": "find every place in app.py where user input reaches the database or the shell and rewrite those parts safely"
+  },
+  {
+   "id": "W04",
+   "kind": "held-out-work",
+   "prompt": "tell me what went wrong in the oct 16 outage based on outage-notes.txt and write up a proper postmortem with action items"
+  },
+  {
+   "id": "W05",
+   "kind": "held-out-work",
+   "prompt": "list everything that should be done before we can actually release 2.0.0 — go through the changelog and the app code and give me a prioritized plan"
+  },
+  {
+   "id": "W06",
+   "kind": "held-out-work",
+   "prompt": "show me how you'd restructure app.py so it's testable, then write pytest tests for /refund and parse_amount covering the edge cases"
+  },
+  {
+   "id": "W07",
+   "kind": "held-out-work",
+   "prompt": "Check para.txt and rewrite it so it says something concrete without the buzzwords. Give me two versions, one short one long."
+  },
+  {
+   "id": "W08",
+   "kind": "held-out-work",
+   "prompt": "Could you clean up CHANGELOG.md so it follows keep-a-changelog format and add entries for the security fixes we need in app.py?"
+  },
+  {
+   "id": "W09",
+   "kind": "held-out-work",
+   "prompt": "kick off a background agent to do a full code review of app.py and come back with a ranked list of issues and suggested patches"
+  },
+  {
+   "id": "W10",
+   "kind": "held-out-work",
+   "prompt": "send a subagent to audit landing.html for accessibility and contrast issues and draft the corrected markup while I keep working on the outage notes"
+  }
+ ],
+ "non_substantive": [
+  {
+   "id": "Q01",
+   "kind": "held-out-lookup",
+   "prompt": "how many routes are defined in app.py?"
+  },
+  {
+   "id": "Q02",
+   "kind": "held-out-lookup",
+   "prompt": "Is there a hardcoded API key in app.py? just yes or no and the line number"
+  },
+  {
+   "id": "Q03",
+   "kind": "held-out-lookup",
+   "prompt": "what version is listed in CHANGELOG.md"
+  },
+  {
+   "id": "Q04",
+   "kind": "held-out-lookup",
+   "prompt": "tell me what time the rollback happened according to outage-notes.txt"
+  },
+  {
+   "id": "Q05",
+   "kind": "held-out-lookup",
+   "prompt": "show me the parse_amount function"
+  },
+  {
+   "id": "Q06",
+   "kind": "held-out-lookup",
+   "prompt": "find the img tag in landing.html and tell me its src"
+  },
+  {
+   "id": "Q07",
+   "kind": "held-out-lookup",
+   "prompt": "list the entries under 2.0.0 in the changelog"
+  },
+  {
+   "id": "Q08",
+   "kind": "held-out-lookup",
+   "prompt": "does landing.html have an h1 anywhere?"
+  },
+  {
+   "id": "Q09",
+   "kind": "held-out-lookup",
+   "prompt": "word count of para.txt?"
+  },
+  {
+   "id": "Q10",
+   "kind": "held-out-lookup",
+   "prompt": "can you spin up a background agent to check which port app.py runs on"
+  },
+  {
+   "id": "Q11",
+   "kind": "held-out-lookup",
+   "prompt": "have a subagent grab the deploy version number from outage-notes.txt and report back"
+  },
+  {
+   "id": "Q12",
+   "kind": "held-out-lookup",
+   "prompt": "Use a subagent to count how many lines are in CHANGELOG.md please"
+  },
+  {
+   "id": "R01-ts4-D05",
+   "kind": "repeat-ts4-small-job",
+   "prompt": "Run a background task that shows the size of para.txt."
+  },
+  {
+   "id": "R02-ts4-D07",
+   "kind": "repeat-ts4-small-job",
+   "prompt": "Kick off an agent to check whether landing.html has a title tag."
+  },
+  {
+   "id": "X01",
+   "kind": "greeting",
+   "prompt": "hey, good morning!"
+  },
+  {
+   "id": "X02",
+   "kind": "single-fact",
+   "prompt": "what's the capital of australia?"
+  },
+  {
+   "id": "X03",
+   "kind": "arithmetic",
+   "prompt": "what's 17 * 23"
+  },
+  {
+   "id": "X04",
+   "kind": "names-other-tool",
+   "prompt": "use the humanizer skill on para.txt"
+  }
+ ]
+}
