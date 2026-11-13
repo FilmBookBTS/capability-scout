@@ -1,0 +1,75 @@
+{
+  "run_id": "20261113T002832Z-v0.4.3-offline-pre-ts4",
+  "kind": "offline",
+  "started_utc": "2026-11-13T00:28:32+00:00",
+  "repo_commit": "b1e9c0580b8f10cc14505b99aee2d303cfc9cfd7",
+  "plugin_version": "0.4.3",
+  "skill_sha256": "7c356a735ef4b3578e9871b3f311549f2f0e15760fe726e3df83b11ff9d4c117",
+  "hook_sha256": "a50bf610399b84e73e521b70df2aeff62ff97888e7bb3675bf5d358ab2d740c8",
+  "claude_code_version": "2.1.323 (Claude Code)",
+  "python": "3.13.18",
+  "suites": [
+    {
+      "suite": "test_default_on",
+      "command": "python3 -I tests/offline/test_default_on.py plugins/capability-scout",
+      "returncode": 0,
+      "summary": "37/37 passed"
+    },
+    {
+      "suite": "test_hook_classifier",
+      "command": "python3 -I tests/offline/test_hook_classifier.py plugins/capability-scout",
+      "returncode": 0,
+      "summary": "122/122 passed"
+    },
+    {
+      "suite": "test_pasted_and_followups",
+      "command": "python3 -I tests/offline/test_pasted_and_followups.py plugins/capability-scout",
+      "returncode": 0,
+      "summary": "28/28 passed"
+    },
+    {
+      "suite": "test_state_and_storage",
+      "command": "python3 -I tests/offline/test_state_and_storage.py plugins/capability-scout",
+      "returncode": 0,
+      "summary": "59/59 passed"
+    },
+    {
+      "suite": "test_guards",
+      "command": "python3 -I tests/offline/test_guards.py plugins/capability-scout",
+      "returncode": 0,
+      "summary": "10/10 passed"
+    },
+    {
+      "suite": "test_live_scoring",
+      "command": "python3 -I tests/offline/test_live_scoring.py plugins/capability-scout",
+      "returncode": 0,
+      "summary": "29/29 passed"
+    },
+    {
+      "suite": "test_precheck_ts2",
+      "command": "python3 -I tests/offline/test_precheck_ts2.py plugins/capability-scout",
+      "returncode": 0,
+      "summary": "48/48 passed (prompts evaluated; this suite reports and does not judge)"
+    },
+    {
+      "suite": "test_harness_messages",
+      "command": "python3 -I tests/offline/test_harness_messages.py plugins/capability-scout",
+      "returncode": 0,
+      "summary": "9/9 passed"
+    },
+    {
+      "suite": "test_precheck_ts3",
+      "command": "python3 -I tests/offline/test_precheck_ts3.py plugins/capability-scout",
+      "returncode": 0,
+      "summary": "89/89 passed"
+    },
+    {
+      "suite": "test_precheck_ts4",
+      "command": "python3 -I tests/offline/test_precheck_ts4.py plugins/capability-scout",
+      "returncode": 0,
+      "summary": "104/104 passed"
+    }
+  ],
+  "analysis_plan": "not applicable (offline)",
+  "repeat": "git checkout b1e9c0580b8f10cc14505b99aee2d303cfc9cfd7 && python3 -I tools/run_offline.py v0.4.3-offline-pre-ts4"
+}
