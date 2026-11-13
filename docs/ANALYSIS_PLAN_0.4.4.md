@@ -65,4 +65,10 @@ Estimate $18.87. The hard budget is set by the project owner before the run star
 
 ## Changes to this plan
 
-None yet.
+- 2026-11-13, after the 0.4.4 hook was committed, before any live session: offline pre-check
+  (`tests/offline/test_precheck_ts5.py`). The 0.4.4 hook treats all 8 real tasks as work and none of
+  the 10 quick look-ups or 4 controls (the 0.4.3 hook: 8, 10 and 0). No ts-1 to ts-4 regression
+  (125 of 125); the ts-4 prompts `D05-size` and `D07-title-tag` are now quiet. Disclosure: the same
+  person wrote ts-5 and the 0.4.4 rule, from the two ts-4 misses, so a clean offline result here is
+  weak evidence. The live test measures what the models do with the hook's answer, and the offline
+  classifier tests add 15 prompts that are not in ts-5.

@@ -76,6 +76,15 @@ SHOULD_FIRE = [
     "Use agents to migrate the database schema to Postgres.",
     "Write the weekly report for the team.",
     "Report back when the deploy finishes and summarize the logs.",
+    # 0.4.4: a look-up verb on one file is still work when it asks for a judgement, names something
+    # else, or asks about all of something. None of these is a ts-5 prompt.
+    "Check whether utils.py is vulnerable to path traversal.",
+    "Check if index.html follows accessibility best practices.",
+    "Check whether utils.py has any unsafe calls.",
+    "List the failing tests in utils.py.",
+    "Show me how to fix the crash in server.js.",
+    "Find the bug in utils.py.",
+    "Check whether config.yaml is valid.",
 ]
 SHOULD_NOT_FIRE = [
     "What is 17 times 23?",
@@ -127,6 +136,15 @@ SHOULD_NOT_FIRE = [
     "List the files in this folder and report back.",
     "Start a background agent that prints today's date.",
     "Spin up a subagent to tell me how many TODOs are in utils.py.",
+    # 0.4.4: a quick look-up on one named file. None of these is a ts-5 prompt.
+    "Check whether utils.py imports re.",
+    "Show the size of data.csv.",
+    "Show me the first ten lines of server.log.",
+    "Get the line count of utils.py.",
+    "Find the line where main is defined in utils.py.",
+    "Check if requirements.txt pins flask.",
+    "Tell me how many rows data.csv has.",
+    "Have an agent check whether index.html sets a viewport.",
 ]
 
 # Requests to obtain something get the approval reminder; other prompts don't.

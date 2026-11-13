@@ -22,6 +22,7 @@ or slash command to use ("Use the code-review skill on app.py."), are not treate
 Messages Claude Code delivers on its own, such as a background agent's result in a
 <task-notification> block, are ignored; requests to search or look things up count as work (v0.4.2).
 A request to hand a job to a background agent or subagent is judged by the job itself (v0.4.3).
+A short look-up on one named file ("Show the size of CHANGELOG.md.") is not treated as work (v0.4.4).
 
 Only the user's own request counts: pasted material (commands, code, quotes, tables, long
 documents) and prohibitions ("don't install anything") trigger neither message. Approving or
@@ -172,6 +173,36 @@ def delegated(p):
     return base_verbs(p[m.end():])
 
 
+# 0.4.4: a quick look-up on one named file ("Check whether app.py imports os.", "Show the size of
+# CHANGELOG.md.") asks for a fact, not for work. It must be short, one step, name exactly one file
+# and nothing else the hook counts as an artifact, and not ask about every or all of something.
+LOOKUP_START = re.compile(
+    r"^\s*(?:(?:check|see|verify|confirm|find\s+out)\s+(?:whether|if|that)\b"
+    r"|(?:show|get|list|print|find|count|tell)\s+(?:me\s+)?(?:the|a|how)\b)",
+    re.I)
+FILE_NAME = re.compile(r"\b[\w./-]+\.[a-z]{1,5}\b", re.I)
+QUANTIFIER = re.compile(r"\b(every|all|each|any)\b", re.I)
+# "Check whether app.py is vulnerable to SQL injection" asks for a judgement, not a fact.
+QUALITY = re.compile(r"\b(vulnerab\w*|inject\w*|secur\w*|safe\w*|unsafe|leak\w*|exploit\w*|correct\w*|valid\w*|"
+                     r"complian\w*|accessib\w*|perform\w*|slow\w*|race|deadlock\w*|thread-safe|broken|wrong|"
+                     r"follows?|meets?|best practices?|standards?)\b", re.I)
+LOOKUP_MAX_WORDS = 12
+
+
+def file_lookup(p):
+    """A short, one-step question about one named file, phrased as a request."""
+    p = p.strip()
+    if not LOOKUP_START.match(p) or len(p.split()) > LOOKUP_MAX_WORDS or MULTI_STEP.search(p):
+        return False
+    files = FILE_NAME.findall(p)
+    if len(files) != 1 or QUANTIFIER.search(p):
+        return False
+    rest = FILE_NAME.sub(" ", p)
+    verb = LOOKUP_START.match(rest).end()
+    return not (ARTIFACT.search(rest) or THE_ARTIFACT.search(rest) or QUALITY.search(rest)
+                or ACTION.search(rest[verb:]))
+
+
 def names_capability(p):
     """A short, single-step request that says which skill, tool or slash command to use."""
     return bool(NAMED_CAPABILITY.match(p)) and len(p.split()) < NAMED_MAX_WORDS and not MULTI_STEP.search(p.strip())
@@ -242,6 +273,8 @@ def is_substantive(prompt):
     job = delegated(p)
     if job is not None:
         return bool(job.strip()) and delegated(job) is None and is_substantive(job)
+    if file_lookup(p):
+        return False
     words = p.split()
     artifact = bool(ARTIFACT.search(p))
     # A question ("How do I write a test in pytest?") is work only when it names something specific.

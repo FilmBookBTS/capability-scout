@@ -22,7 +22,7 @@ from ledger_schema import sha256_file  # noqa: E402
 
 REPO = guards.REPO
 PLUGIN = os.path.join(REPO, "plugins", "capability-scout")
-SUITES = ["test_default_on", "test_hook_classifier", "test_pasted_and_followups", "test_state_and_storage", "test_guards", "test_live_scoring", "test_precheck_ts2", "test_harness_messages", "test_precheck_ts3", "test_precheck_ts4"]
+SUITES = ["test_default_on", "test_hook_classifier", "test_pasted_and_followups", "test_state_and_storage", "test_guards", "test_live_scoring", "test_precheck_ts2", "test_harness_messages", "test_precheck_ts3", "test_precheck_ts4", "test_precheck_ts5"]
 
 
 def plugin_version():

@@ -2,11 +2,17 @@
 
 Versions of the Claude Code plugin. Dates are UTC. Earlier versions were not published; their dates come from the project's verification reports.
 
-## 0.4.3 - unreleased
+## 0.4.4 - unreleased
+
+- A quick look-up on one named file ("Show the size of CHANGELOG.md.", "Check whether app.py imports os.") is not treated as work. It must be short, one step, and name one file and nothing else; a request that asks for a judgement ("Check whether app.py is secure") or about all of something still counts.
+- Includes the 0.4.3 changes below.
+- Tested offline so far. The live test on a new task set (ts-5) is planned in [docs/ANALYSIS_PLAN_0.4.4.md](docs/ANALYSIS_PLAN_0.4.4.md) and has not run.
+
+## 0.4.3 - not released
 
 - A request to hand a job to a background agent or subagent ("Launch a background agent to count the words in para.txt ...") is judged by the job itself, as if the user had asked for it directly. Real work handed to an agent still counts.
 - "Report back" no longer counts as naming a report.
-- Tested offline so far. The live test on a new task set (ts-4) is planned in [docs/ANALYSIS_PLAN_0.4.3.md](docs/ANALYSIS_PLAN_0.4.3.md) and has not run.
+- Live test on a new task set (ts-4), 120 sessions: 4 of 5 criteria passed. False triggers on small jobs handed to an agent were 6 of 24 sessions per model, against a limit of 2, all from two quick file look-ups. Not released; fixed in 0.4.4. Details in [docs/ANALYSIS_PLAN_0.4.3.md](docs/ANALYSIS_PLAN_0.4.3.md).
 
 ## 0.4.2 - 2026-11-11
 
