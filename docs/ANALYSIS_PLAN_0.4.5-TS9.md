@@ -50,4 +50,9 @@ As estimated for ts-7 (same sizes, ts-6 means): $20.81. Hard budget $30. Spent o
 
 ## Changes to this plan
 
-None yet.
+- 2026-11-13, after this plan was committed, before the run: offline, the 11b9c74 hook gives every
+  real task the directive reminder. Among the quick look-ups, `U15` ("pls send a subagent to count
+  the words in para.txt") gets the directive reminder and `U01`, `U02` the conditional one. Among the
+  controls, `V04` ("run /code-review on my current changes") gets the directive reminder, so
+  criterion 3 (at most 1 of 12) can pass only if the skill runs in at most 1 of its 3 sessions per
+  model. The hook is not changed because of this. Hard budget: $30.
