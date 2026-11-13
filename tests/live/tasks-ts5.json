@@ -1,0 +1,119 @@
+{
+ "task_set_version": "ts-5",
+ "fixture": "tests/fixture",
+ "note": "Written for 0.4.4 and committed before any hook change for 0.4.4. None of the prompts was run through any hook before this commit. L prompts are quick look-ups on one named file (some handed to an agent); S prompts are real work that starts with the same verbs (check, show, find, list); K prompts are controls. Do not edit a task after a run uses it.",
+ "substantive": [
+  {
+   "id": "S01-check-fix",
+   "kind": "lookup-verb-work",
+   "prompt": "Check app.py for SQL injection and fix every instance you find."
+  },
+  {
+   "id": "S02-check-a11y",
+   "kind": "lookup-verb-work",
+   "prompt": "Check whether landing.html meets WCAG contrast and heading rules, and list each fix it needs."
+  },
+  {
+   "id": "S03-check-errors",
+   "kind": "lookup-verb-work",
+   "prompt": "Check the error handling in app.py and add tests for the cases it misses."
+  },
+  {
+   "id": "S04-find-input",
+   "kind": "lookup-verb-work",
+   "prompt": "Find every place app.py trusts user input and explain the risk of each one."
+  },
+  {
+   "id": "S05-show-split",
+   "kind": "lookup-verb-work",
+   "prompt": "Show the size of each function in app.py and suggest which ones to split up and how."
+  },
+  {
+   "id": "S06-check-memo",
+   "kind": "lookup-verb-work",
+   "prompt": "Check whether outage-notes.txt supports the root cause stated in CHANGELOG.md, and write a short memo on what doesn't match."
+  },
+  {
+   "id": "S07-agent-race",
+   "kind": "lookup-verb-work",
+   "prompt": "Have a background agent check app.py for race conditions and propose fixes."
+  },
+  {
+   "id": "S08-list-secrets",
+   "kind": "lookup-verb-work",
+   "prompt": "List every hardcoded secret in app.py and rewrite the code to read them from environment variables."
+  }
+ ],
+ "non_substantive": [
+  {
+   "id": "L01-imports-os",
+   "kind": "file-lookup",
+   "prompt": "Check whether app.py imports os."
+  },
+  {
+   "id": "L02-size",
+   "kind": "file-lookup",
+   "prompt": "Show the size of CHANGELOG.md."
+  },
+  {
+   "id": "L03-newline",
+   "kind": "file-lookup",
+   "prompt": "Check if para.txt ends with a newline."
+  },
+  {
+   "id": "L04-last-line",
+   "kind": "file-lookup",
+   "prompt": "Show me the last line of outage-notes.txt."
+  },
+  {
+   "id": "L05-file-size",
+   "kind": "file-lookup",
+   "prompt": "Get the file size of landing.html."
+  },
+  {
+   "id": "L06-mentions",
+   "kind": "file-lookup",
+   "prompt": "Check that CHANGELOG.md mentions version 1.2."
+  },
+  {
+   "id": "L07-imports",
+   "kind": "file-lookup",
+   "prompt": "List the imports in app.py."
+  },
+  {
+   "id": "L08-third-line",
+   "kind": "file-lookup",
+   "prompt": "Show the third line of para.txt."
+  },
+  {
+   "id": "L09-def-line",
+   "kind": "file-lookup",
+   "prompt": "Find the line number where parse_amount is defined in app.py."
+  },
+  {
+   "id": "L10-agent-check",
+   "kind": "file-lookup",
+   "prompt": "Have a subagent check whether app.py uses f-strings."
+  },
+  {
+   "id": "K11-greeting",
+   "kind": "greeting",
+   "prompt": "Evening! Long day, but good."
+  },
+  {
+   "id": "K12-fact",
+   "kind": "single-fact",
+   "prompt": "What is the boiling point of water in Celsius?"
+  },
+  {
+   "id": "K13-arith",
+   "kind": "arithmetic",
+   "prompt": "What's 144 divided by 12?"
+  },
+  {
+   "id": "K14-named",
+   "kind": "names-other-tool",
+   "prompt": "Run the code-review skill on app.py."
+  }
+ ]
+}
