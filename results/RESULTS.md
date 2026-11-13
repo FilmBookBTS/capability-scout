@@ -801,6 +801,19 @@ A false trigger is a session on a non-substantive prompt (greeting, arithmetic, 
 | 20261113T031533Z-v0.4.6-offline-pre-ts10:011 | 0.4.6 | test_precheck_ts5 | offline | offline suite, not a model session; result 125/125 passed |
 | 20261113T031533Z-v0.4.6-offline-pre-ts10:012 | 0.4.6 | test_precheck_ts6 | offline | offline suite, not a model session; result 149/149 passed |
 | 20261113T031533Z-v0.4.6-offline-pre-ts10:013 | 0.4.6 | test_hook_tiers | offline | offline suite, not a model session; result 27/27 passed |
+| 20261113T042022Z-v0.4.6-offline-prepush:001 | 0.4.6 | test_default_on | offline | offline suite, not a model session; result 37/37 passed |
+| 20261113T042022Z-v0.4.6-offline-prepush:002 | 0.4.6 | test_hook_classifier | offline | offline suite, not a model session; result 153/153 passed |
+| 20261113T042022Z-v0.4.6-offline-prepush:003 | 0.4.6 | test_pasted_and_followups | offline | offline suite, not a model session; result 28/28 passed |
+| 20261113T042022Z-v0.4.6-offline-prepush:004 | 0.4.6 | test_state_and_storage | offline | offline suite, not a model session; result 59/59 passed |
+| 20261113T042022Z-v0.4.6-offline-prepush:005 | 0.4.6 | test_guards | offline | offline suite, not a model session; result 10/10 passed |
+| 20261113T042022Z-v0.4.6-offline-prepush:006 | 0.4.6 | test_live_scoring | offline | offline suite, not a model session; result 29/29 passed |
+| 20261113T042022Z-v0.4.6-offline-prepush:007 | 0.4.6 | test_precheck_ts2 | offline | offline suite, not a model session; result 48/48 passed (prompts evaluated; this suite reports and does not judge) |
+| 20261113T042022Z-v0.4.6-offline-prepush:008 | 0.4.6 | test_harness_messages | offline | offline suite, not a model session; result 9/9 passed |
+| 20261113T042022Z-v0.4.6-offline-prepush:009 | 0.4.6 | test_precheck_ts3 | offline | offline suite, not a model session; result 89/89 passed |
+| 20261113T042022Z-v0.4.6-offline-prepush:010 | 0.4.6 | test_precheck_ts4 | offline | offline suite, not a model session; result 104/104 passed |
+| 20261113T042022Z-v0.4.6-offline-prepush:011 | 0.4.6 | test_precheck_ts5 | offline | offline suite, not a model session; result 125/125 passed |
+| 20261113T042022Z-v0.4.6-offline-prepush:012 | 0.4.6 | test_precheck_ts6 | offline | offline suite, not a model session; result 149/149 passed |
+| 20261113T042022Z-v0.4.6-offline-prepush:013 | 0.4.6 | test_hook_tiers | offline | offline suite, not a model session; result 27/27 passed |
 
 ## Live test with the current harness
 
