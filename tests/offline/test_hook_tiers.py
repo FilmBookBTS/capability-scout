@@ -36,6 +36,11 @@ CASES = [
     ("pull up notes.md and turn it into a status update for execs", "clear"),
     ("Morning! Hope you're well.", None),
     ("Explain what a hook is in one sentence.", None),
+    # 0.4.6: a slash command after a verb names its tool; "pls" is a polite opener. Not ts-9 prompts.
+    ("run /simplify on utils.py", None),
+    ("try /review-pr 42", None),
+    ("pls have an agent count the lines in notes.txt", None),
+    ("plz write tests for utils.py", "clear"),
 ]
 
 

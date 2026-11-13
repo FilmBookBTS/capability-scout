@@ -2,12 +2,18 @@
 
 Versions of the Claude Code plugin. Dates are UTC. Earlier versions were not published; their dates come from the project's verification reports.
 
-## 0.4.5 - unreleased
+## 0.4.6 - unreleased
+
+- A request to run a slash command with a verb in front ("run /code-review on my current changes") is recognized as naming its tool, like "/code-review" alone.
+- "pls" and "please" at the start are treated as a polite opener, as "Could you" already was.
+- Includes the 0.4.3 to 0.4.5 changes below.
+
+## 0.4.5 - not released
 
 - Quick look-ups are recognized more broadly: ones that start with "which", "what" or "how many" ("check which port app.py runs on"), ones that end by asking for the answer ("... and tell me its src", "... and report back"), and ones handed to an agent. An answer clause that asks for a judgement or a change ("... and tell me how to fix it") still counts as work.
 - Two levels of reminder. Clear work (long, several steps, or a request that is not a question and asks for a judgement or for something to be made, such as fix, write or review) gets the directive reminder as before. A question, or a request that only retrieves something ("Get the error logs from the staging server"), gets a conditional reminder when the word rules count it as work: run the skill if this is substantive work, skip it for a quick look-up. So does a request to make something that the word rules miss ("grab notes.txt and turn it into a postmortem"). No retry reminder follows a conditional one.
 - Includes the 0.4.3 and 0.4.4 changes below.
-- Tested offline so far.
+- Live test on the held-out set ts-9 (192 sessions): quick look-ups 3 and 2 of 48 (limit 5), real tasks 36 of 36 on both models, but controls 3 of 12 on both (limit 1), all from "run /code-review on my current changes". Not released; see [docs/ANALYSIS_PLAN_0.4.5-TS9.md](docs/ANALYSIS_PLAN_0.4.5-TS9.md).
 
 ## 0.4.4 - not released
 

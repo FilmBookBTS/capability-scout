@@ -25,6 +25,7 @@ A request to hand a job to a background agent or subagent is judged by the job i
 A short look-up on one named file ("Show the size of CHANGELOG.md.") is not treated as work (v0.4.4),
 including one that ends by asking for the answer ("... and tell me its src") (v0.4.5).
 A request that only retrieves something gets a conditional reminder that lets Claude skip a quick look-up (v0.4.5).
+"run /code-review ..." names its tool like "/code-review" does; "pls" counts as a polite opener (v0.4.6).
 
 Only the user's own request counts: pasted material (commands, code, quotes, tables, long
 documents) and prohibitions ("don't install anything") trigger neither message. Approving or
@@ -108,7 +109,8 @@ FOLLOWUP = re.compile(
     r"i approve|approved?|approval|proposed|the (plan|proposal|recommendation|assessment)|"
     r"(as|from) (above|before|earlier)|that (one|item|command)|those (items|commands))\b",
     re.I)
-POLITE = re.compile(r"^\s*(can|could|would|will)\s+(?:you|u)\s+(please\s+|pls\s+)?", re.I)
+POLITE = re.compile(r"^\s*(can|could|would|will)\s+(?:you|u)\s+(please\s+|pls\s+|plz\s+)?", re.I)
+PLEASE_LEAD = re.compile(r"^\s*(?:please|pls|plz)[,\s]+", re.I)
 BOLD_LINE = re.compile(r"^\s*(?:[-*]\s+)?\*\*[^*]+\*\*[\s.:]*$")
 LEAD = re.compile(r"^(?:[-*\d.)\s]+|\*\*|please\s+|now\s+|then\s+|also\s+|next,?\s+)+", re.I)
 DIRECT = re.compile(r"\b(can|could|would|will) you\b|\bi(?: want|'d like| would like| need) you to\b|\blet'?s\b", re.I)
@@ -126,7 +128,7 @@ NAMED_CAPABILITY = re.compile(
     r"^\s*(?:please\s+)?(?:(?:use|run|invoke|call|try|apply|launch|with)\s+(?:the\s+)?[`\"']?[\w:./-]+[`\"']?\s+"
     r"(?:skill|tool|slash command|command|plugin|agent|subagent)\b"
     r"|(?:use|with)\s+(?:the\s+)?(?:Read|Grep|Glob|Bash|WebSearch|WebFetch|LS)\b"
-    r"|/[a-z][\w:-]*(?:\s|$))",
+    r"|(?:(?:run|use|try|invoke|call|do)\s+)?/[a-z][\w:-]*(?:\s|$))",
     re.I)
 MULTI_STEP = re.compile(r"\bthen\b|;|[.!?]\s+\S|,\s*and\b|\band\s+(?:also\s+)?(?:explain|write|add|fix|tell|"
                         r"summari[sz]e|plan|create|recommend|propose|rewrite|draft|open|send|post)\b", re.I)
@@ -149,7 +151,7 @@ def user_text(prompt):
 # wrapper ("Launch a background agent to ...", "Have a subagent ...") is removed and the rest is
 # judged as if the user had asked for it directly.
 DELEGATE = re.compile(
-    r"^\s*(?:please\s+)?(?:launch|start|spin\s+(?:up|off)|kick\s+off|fire\s+off|run|use|have|get|ask|send|spawn|"
+    r"^\s*(?:(?:please|pls|plz)\s+)?(?:launch|start|spin\s+(?:up|off)|kick\s+off|fire\s+off|run|use|have|get|ask|send|spawn|"
     r"create|set\s+up|dispatch)\s+(?:up\s+)?(?:a|an|one|two|three|four|several|some|\d+)?\s*"
     r"(?:(?:background|separate|parallel|new)\s+)*(?:sub-?agents?|agents?|(?<=background )tasks?)\b"
     r"(?:\s+off)?(?:\s+in\s+the\s+background)?\s*(?:to\b|that\b|which\b|who\b|:|,|-)?\s*",
@@ -233,7 +235,7 @@ WEAK_VERB = re.compile(r"(?:check|show|get|list|find|count|print|run|execute|lau
 
 def core_text(p):
     """The request without a polite opener or an agent wrapper."""
-    p = POLITE.sub("", p.strip())
+    p = PLEASE_LEAD.sub("", POLITE.sub("", p.strip()))
     m = DELEGATE.match(p)
     return p[m.end():] if m else p
 
