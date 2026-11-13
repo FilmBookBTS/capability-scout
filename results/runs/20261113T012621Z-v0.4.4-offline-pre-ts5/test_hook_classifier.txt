@@ -1,0 +1,2 @@
+137/137 passed
+Old 8-word rule would have missed 27/60 should-fire prompts
