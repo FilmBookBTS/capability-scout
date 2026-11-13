@@ -73,3 +73,5 @@ Estimate $18.87. The hard budget is set by the project owner before the run star
   weak evidence. The live test measures what the models do with the hook's answer, and the offline
   classifier tests add 15 prompts that are not in ts-5.
 - 2026-11-13, before the run: the project owner set the hard budget at $30. Claude Code 2.1.323.
+- 2026-11-13, after the run, no scoring rule changed: run `20261113T012646Z-v0.4.4-ts5`, 132 sessions, 0 invalid,
+  $11.32. Per-session hook counts are in `results/runs/20261113T012646Z-v0.4.4-ts5/hook-events.txt`.
