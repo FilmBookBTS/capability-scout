@@ -56,3 +56,14 @@ As estimated for ts-7 (same sizes, ts-6 means): $20.81. Hard budget $30. Spent o
   controls, `V04` ("run /code-review on my current changes") gets the directive reminder, so
   criterion 3 (at most 1 of 12) can pass only if the skill runs in at most 1 of its 3 sessions per
   model. The hook is not changed because of this. Hard budget: $30.
+- 2026-11-13, during the run: the test machine restarted after 142 of 192 sessions
+  (`20261113T025524Z-v0.4.5-ts9-heldout`, $13.94). The remaining 50 were run by
+  `20261113T030800Z-v0.4.5-ts9-heldout-resume` (same seed and schedule, budget $16.06 so the total
+  stays within $30; $6.16). Sessions in progress at the restart have no row and were run again by
+  the resume. Total: 192 sessions, 0 invalid, $20.10.
+- 2026-11-13, after the run, no scoring rule changed. Results per model (Sonnet, Opus): quick
+  look-ups 3 and 2 of 48 (pass), all from `U15`; the conditional reminder on `U01` and `U02` led to
+  no activation; real tasks 36 and 36 of 36 (pass); controls 3 and 3 of 12 (miss), all from `V04`
+  ("run /code-review on my current changes"), which the hook does not recognize as naming a slash
+  command because a verb comes first; later `UserPromptSubmit` events 0 with a reminder (pass);
+  offline regression none (pass). 0.4.5 does not pass.

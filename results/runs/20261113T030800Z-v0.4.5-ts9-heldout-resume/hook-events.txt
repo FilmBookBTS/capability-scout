@@ -1,0 +1,54 @@
+0141 J11                    claude-sonnet-5-5  prompt-events=2 later-with-reminder=0 notifications=1
+0144 J11                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=1
+0145 J06                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0146 J09                    claude-sonnet-5-5  prompt-events=1 later-with-reminder=0 notifications=0
+0147 J07                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0148 U09                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0149 U05                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0150 V04                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=1
+0151 U14                    claude-sonnet-5-5  prompt-events=2 later-with-reminder=0 notifications=1
+0152 V02                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0153 U13                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=1
+0154 J10                    claude-opus-5-5    prompt-events=2 later-with-reminder=0 notifications=1
+0155 J08                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0156 J09                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0157 U08                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0158 J06                    claude-sonnet-5-5  prompt-events=1 later-with-reminder=0 notifications=0
+0159 U08                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0160 V04                    claude-sonnet-5-5  prompt-events=1 later-with-reminder=0 notifications=1
+0161 V01                    claude-sonnet-5-5  prompt-events=1 later-with-reminder=0 notifications=0
+0162 U13                    claude-sonnet-5-5  prompt-events=1 later-with-reminder=0 notifications=1
+0163 J10                    claude-opus-5-5    prompt-events=2 later-with-reminder=0 notifications=1
+0164 J02                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0165 J11                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=1
+0166 U12                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0167 U04                    claude-sonnet-5-5  prompt-events=1 later-with-reminder=0 notifications=0
+0168 U12                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0169 U07                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0170 V02                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0171 U13                    claude-sonnet-5-5  prompt-events=1 later-with-reminder=0 notifications=1
+0172 J11                    claude-sonnet-5-5  prompt-events=2 later-with-reminder=0 notifications=1
+0173 V02                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0174 U04                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0175 V03                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0176 U15                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=1
+0177 U10                    claude-sonnet-5-5  prompt-events=1 later-with-reminder=0 notifications=0
+0178 U11                    claude-sonnet-5-5  prompt-events=1 later-with-reminder=0 notifications=0
+0179 J01                    claude-sonnet-5-5  prompt-events=1 later-with-reminder=0 notifications=0
+0180 V02                    claude-sonnet-5-5  prompt-events=1 later-with-reminder=0 notifications=0
+0181 J09                    claude-sonnet-5-5  prompt-events=1 later-with-reminder=0 notifications=0
+0182 V04                    claude-sonnet-5-5  prompt-events=1 later-with-reminder=0 notifications=1
+0183 J01                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0184 U13                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=1
+0185 U02                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0186 U16                    claude-opus-5-5    prompt-events=2 later-with-reminder=0 notifications=1
+0187 U10                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+0188 U03                    claude-sonnet-5-5  prompt-events=1 later-with-reminder=0 notifications=0
+0189 U06                    claude-sonnet-5-5  prompt-events=1 later-with-reminder=0 notifications=0
+0190 U16                    claude-sonnet-5-5  prompt-events=2 later-with-reminder=0 notifications=1
+0191 J10                    claude-sonnet-5-5  prompt-events=2 later-with-reminder=0 notifications=1
+0192 J09                    claude-opus-5-5    prompt-events=1 later-with-reminder=0 notifications=0
+
+claude-sonnet-5-5: 20 sessions; 5 later UserPromptSubmit events, 0 with a reminder; background-agent prompts: 0 of 0 sessions had a background agent report back
+
+claude-opus-5-5: 30 sessions; 3 later UserPromptSubmit events, 0 with a reminder; background-agent prompts: 0 of 0 sessions had a background agent report back

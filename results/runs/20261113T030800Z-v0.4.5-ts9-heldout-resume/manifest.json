@@ -1,0 +1,433 @@
+{
+  "run_id": "20261113T030800Z-v0.4.5-ts9-heldout-resume",
+  "kind": "live",
+  "status": "complete",
+  "started_utc": "2026-11-13T03:08:00+00:00",
+  "repo_commit": "00b8d278fc42b7fb589654aa3bd60fa37b486f20",
+  "plugin_commit": "11b9c7426ffd0abbce16c7ce3d5d4ccb82fc0520",
+  "plugin_version": "0.4.5",
+  "task_set_version": "ts-9",
+  "plugin_skill_sha256": "7c356a735ef4b3578e9871b3f311549f2f0e15760fe726e3df83b11ff9d4c117",
+  "hook_sha256": "6764cc38df69cedf60a09cf663e2b8433c8ad560be5fc64e6710a7a47125abf1",
+  "chat_skill_sha256": "fb02b60a858774ff06293dd3d4e058b58d3354fe07e90c916193bff36888f39e",
+  "tasks_sha256": "0fb267f228f60a91cd63287b6c28e31053e75fd8d2e7f1bf2ddf3abf0acdd007",
+  "analysis_plan_sha256": "93683d200ca1b74ac04d3ae6fd3f03acaee1f5447864db327d360e7765a38316",
+  "harness_sha256": "0834361e6feecd842c4b640ea5883f92fdf4dad315db4f55a0fd80339278f445",
+  "analysis_plan": "docs/ANALYSIS_PLAN_0.4.5-TS9.md",
+  "arms": {
+    "C": {
+      "label": "C-published-default",
+      "edition": "plugin",
+      "plugin": "plugin",
+      "hook": "unset"
+    }
+  },
+  "models_requested": [
+    "claude-sonnet-5-5",
+    "claude-opus-5-5"
+  ],
+  "reps": 3,
+  "seed": 20261116,
+  "jobs": 4,
+  "sessions_planned": 50,
+  "budget_usd": 16.06,
+  "estimate_flat_usd": 6.5,
+  "estimate_model_usd": 8.5,
+  "per_session_budget_usd": "1.50",
+  "max_turns": "25",
+  "timeout_s": 900,
+  "deny": [
+    "Bash(claude plugin install:*)",
+    "Bash(claude plugins install:*)",
+    "Bash(claude plugin i:*)",
+    "Bash(claude plugin enable:*)",
+    "Bash(claude plugin marketplace add:*)",
+    "Bash(claude mcp add:*)",
+    "Bash(claude mcp add-json:*)",
+    "Bash(npm install:*)",
+    "Bash(npm i:*)",
+    "Bash(pip install:*)",
+    "Bash(pip3 install:*)",
+    "Bash(python3 -m pip install:*)",
+    "Edit",
+    "Write",
+    "NotebookEdit",
+    "SuggestPluginInstall",
+    "SuggestConnectors",
+    "SuggestSkills",
+    "Bash(gh:*)",
+    "Bash(git push:*)",
+    "Bash(python3 -m venv:*)",
+    "Bash(python -m venv:*)",
+    "Bash(./venv/bin/pip:*)",
+    "Bash(uv pip:*)"
+  ],
+  "allow": [
+    "Read",
+    "Glob",
+    "Grep",
+    "Skill",
+    "Bash"
+  ],
+  "python": "3.13.18",
+  "host": "Linux 6.18.44-fc-v445",
+  "order": [
+    [
+      141,
+      "J11",
+      "C",
+      "claude-sonnet-5-5",
+      1
+    ],
+    [
+      144,
+      "J11",
+      "C",
+      "claude-opus-5-5",
+      1
+    ],
+    [
+      145,
+      "J06",
+      "C",
+      "claude-opus-5-5",
+      3
+    ],
+    [
+      146,
+      "J09",
+      "C",
+      "claude-sonnet-5-5",
+      2
+    ],
+    [
+      147,
+      "J07",
+      "C",
+      "claude-opus-5-5",
+      2
+    ],
+    [
+      148,
+      "U09",
+      "C",
+      "claude-opus-5-5",
+      2
+    ],
+    [
+      149,
+      "U05",
+      "C",
+      "claude-opus-5-5",
+      3
+    ],
+    [
+      150,
+      "V04",
+      "C",
+      "claude-opus-5-5",
+      2
+    ],
+    [
+      151,
+      "U14",
+      "C",
+      "claude-sonnet-5-5",
+      2
+    ],
+    [
+      152,
+      "V02",
+      "C",
+      "claude-opus-5-5",
+      2
+    ],
+    [
+      153,
+      "U13",
+      "C",
+      "claude-opus-5-5",
+      2
+    ],
+    [
+      154,
+      "J10",
+      "C",
+      "claude-opus-5-5",
+      2
+    ],
+    [
+      155,
+      "J08",
+      "C",
+      "claude-opus-5-5",
+      3
+    ],
+    [
+      156,
+      "J09",
+      "C",
+      "claude-opus-5-5",
+      2
+    ],
+    [
+      157,
+      "U08",
+      "C",
+      "claude-opus-5-5",
+      3
+    ],
+    [
+      158,
+      "J06",
+      "C",
+      "claude-sonnet-5-5",
+      2
+    ],
+    [
+      159,
+      "U08",
+      "C",
+      "claude-opus-5-5",
+      1
+    ],
+    [
+      160,
+      "V04",
+      "C",
+      "claude-sonnet-5-5",
+      3
+    ],
+    [
+      161,
+      "V01",
+      "C",
+      "claude-sonnet-5-5",
+      1
+    ],
+    [
+      162,
+      "U13",
+      "C",
+      "claude-sonnet-5-5",
+      3
+    ],
+    [
+      163,
+      "J10",
+      "C",
+      "claude-opus-5-5",
+      1
+    ],
+    [
+      164,
+      "J02",
+      "C",
+      "claude-opus-5-5",
+      1
+    ],
+    [
+      165,
+      "J11",
+      "C",
+      "claude-opus-5-5",
+      3
+    ],
+    [
+      166,
+      "U12",
+      "C",
+      "claude-opus-5-5",
+      2
+    ],
+    [
+      167,
+      "U04",
+      "C",
+      "claude-sonnet-5-5",
+      2
+    ],
+    [
+      168,
+      "U12",
+      "C",
+      "claude-opus-5-5",
+      3
+    ],
+    [
+      169,
+      "U07",
+      "C",
+      "claude-opus-5-5",
+      1
+    ],
+    [
+      170,
+      "V02",
+      "C",
+      "claude-opus-5-5",
+      1
+    ],
+    [
+      171,
+      "U13",
+      "C",
+      "claude-sonnet-5-5",
+      1
+    ],
+    [
+      172,
+      "J11",
+      "C",
+      "claude-sonnet-5-5",
+      3
+    ],
+    [
+      173,
+      "V02",
+      "C",
+      "claude-opus-5-5",
+      3
+    ],
+    [
+      174,
+      "U04",
+      "C",
+      "claude-opus-5-5",
+      1
+    ],
+    [
+      175,
+      "V03",
+      "C",
+      "claude-opus-5-5",
+      1
+    ],
+    [
+      176,
+      "U15",
+      "C",
+      "claude-opus-5-5",
+      2
+    ],
+    [
+      177,
+      "U10",
+      "C",
+      "claude-sonnet-5-5",
+      3
+    ],
+    [
+      178,
+      "U11",
+      "C",
+      "claude-sonnet-5-5",
+      2
+    ],
+    [
+      179,
+      "J01",
+      "C",
+      "claude-sonnet-5-5",
+      2
+    ],
+    [
+      180,
+      "V02",
+      "C",
+      "claude-sonnet-5-5",
+      3
+    ],
+    [
+      181,
+      "J09",
+      "C",
+      "claude-sonnet-5-5",
+      1
+    ],
+    [
+      182,
+      "V04",
+      "C",
+      "claude-sonnet-5-5",
+      1
+    ],
+    [
+      183,
+      "J01",
+      "C",
+      "claude-opus-5-5",
+      1
+    ],
+    [
+      184,
+      "U13",
+      "C",
+      "claude-opus-5-5",
+      1
+    ],
+    [
+      185,
+      "U02",
+      "C",
+      "claude-opus-5-5",
+      2
+    ],
+    [
+      186,
+      "U16",
+      "C",
+      "claude-opus-5-5",
+      1
+    ],
+    [
+      187,
+      "U10",
+      "C",
+      "claude-opus-5-5",
+      1
+    ],
+    [
+      188,
+      "U03",
+      "C",
+      "claude-sonnet-5-5",
+      3
+    ],
+    [
+      189,
+      "U06",
+      "C",
+      "claude-sonnet-5-5",
+      2
+    ],
+    [
+      190,
+      "U16",
+      "C",
+      "claude-sonnet-5-5",
+      1
+    ],
+    [
+      191,
+      "J10",
+      "C",
+      "claude-sonnet-5-5",
+      1
+    ],
+    [
+      192,
+      "J09",
+      "C",
+      "claude-opus-5-5",
+      3
+    ]
+  ],
+  "resumes": "20261113T025524Z-v0.4.5-ts9-heldout",
+  "sessions_recorded_before_resume": 142,
+  "repeat": "git checkout 00b8d278fc42b7fb589654aa3bd60fa37b486f20 && python3 -I tests/live/run_live.py run --label v0.4.5-ts9-heldout-resume --seed 20261116 --budget-usd 16.06 --models claude-sonnet-5-5,claude-opus-5-5 --arms C --reps 3 --tasks tasks-ts9.json --plan-doc docs/ANALYSIS_PLAN_0.4.5-TS9.md --resume 20261113T025524Z-v0.4.5-ts9-heldout",
+  "finished_utc": "2026-11-13T03:13:19+00:00",
+  "sessions_run": 50,
+  "sessions_skipped_budget": [],
+  "cost_usd_total": 6.1565
+}
