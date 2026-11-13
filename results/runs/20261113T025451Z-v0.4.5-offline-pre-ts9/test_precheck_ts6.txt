@@ -1,0 +1,42 @@
+Part 1, task set ts-6; columns: 0.4.4 hook (08ca5af), current hook; 1 = work
+W01                    1 1
+W02                    1 1
+W03                    1 1
+W04                    1 1
+W05                    1 1
+W06                    1 1
+W07                    1 1
+W08                    1 1
+W09                    1 1
+W10                    1 1
+Q01                    0 0
+Q02                    0 0
+Q03                    0 0
+Q04                    0 0
+Q05                    0 0
+Q06                    1 0
+Q07                    0 0
+Q08                    0 0
+Q09                    0 0
+Q10                    1 0
+Q11                    1 0
+Q12                    0 0
+R01-ts4-D05            0 0
+R02-ts4-D07            0 0
+X01                    0 0
+X02                    0 0
+X03                    0 0
+X04                    0 0
+
+Part 2, regression on ts-1 to ts-5
+
+Part 3 (reports, does not judge): prompts that get the conditional reminder ('maybe') or,
+if not substantive, any reminder; ts-1 to ts-7
+  ts-1 S17-calendar: maybe
+  ts-1 S19-analytics: maybe
+  ts-1 S30-which-tools: maybe
+  ts-2 S13-datadog: maybe
+  ts-7 H05: maybe
+  ts-7 G07: maybe
+  ts-7 G16: maybe
+149/149 passed

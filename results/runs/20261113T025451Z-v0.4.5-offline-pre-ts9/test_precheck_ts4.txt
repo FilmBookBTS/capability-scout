@@ -1,0 +1,24 @@
+Part 1, task set ts-4; columns: 0.4.2 hook (7b255f8), current hook; 1 = work
+E01-audit              1 1
+E02-tests              1 1
+E03-two-agents         0 1
+E04-research           1 1
+E05-postmortem         1 1
+E06-migration          1 1
+E07-release-notes      1 1
+E08-refactor           0 1
+D01-lines              1 0
+D02-first-line         0 0
+D03-count-funcs        0 0
+D04-list-txt           1 0
+D05-size               1 0
+D06-outage-date        1 0
+D07-title-tag          1 0
+D08-count-routes       0 0
+K01-greeting           0 0
+K02-fact               0 0
+K03-arith              0 0
+K04-named              0 0
+
+Part 2, regression on ts-1, ts-2 and ts-3
+104/104 passed

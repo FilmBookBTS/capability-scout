@@ -1,0 +1,55 @@
+task set ts-2; columns: 0.4.0 hook (211904d), current hook; 1 = treated as work
+S01-sql-audit          1 1
+S02-parse-bug          1 1
+S03-pytest-plan        1 1
+S04-changelog-blog     1 1
+S05-incident-timeline  1 1
+S06-exec-email         1 1
+S07-a11y-audit         1 1
+S08-hero-rewrite       1 1
+S09-deploy-checklist   1 1
+S10-threat-model       1 1
+S11-jira-tickets       1 1
+S12-slack-post         1 1
+S13-datadog            1 1
+S14-pricing-research   1 1
+S15-migrate-postgres   1 1
+S16-docstrings         1 1
+NM01-tool-then-fix     1 1
+NM02-skill-and-more    1 1
+NM03-read-and-rewrite  1 1
+NM04-convert-code      1 1
+NM05-units-in-code     1 1
+NM06-which-skill       1 1
+NM07-mention-search    0 1
+NM08-review-pr-style   1 1
+T01-hello              0 0
+T02-morning            0 0
+T03-thanks             0 0
+T04-mult               0 0
+T05-tip                0 0
+T06-convert-temp       1 0
+T07-convert-weight     1 0
+T08-sqrt               0 0
+T09-fact-river         0 0
+T10-fact-author        0 0
+T11-fact-define        0 0
+T12-fact-date          0 0
+O01-simplify           1 0
+O02-security-skill     1 0
+O03-invoke-skill       1 0
+O04-slash              1 0
+O05-pdf-skill          1 0
+O06-glob               1 0
+O07-grep               1 0
+O08-read               1 0
+O09-bash-ls            1 0
+O10-with-grep          0 0
+O11-read-show          1 0
+O12-please-skill       0 0
+
+substantive: 0.4.0 treats 16/16 as work; current hook 16/16
+near-miss: 0.4.0 treats 7/8 as work; current hook 8/8
+plainly trivial: 0.4.0 treats 2/12 as work; current hook 0/12
+names-other-tool: 0.4.0 treats 10/12 as work; current hook 0/12
+48/48 passed (prompts evaluated; this suite reports and does not judge)
