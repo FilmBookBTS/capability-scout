@@ -69,6 +69,13 @@ SHOULD_FIRE = [
     "Search for breaking changes in Django 5 and list what our app needs to change.",
     "Look up the latest Django release and check our requirements.",
     "Browse the docs for pytest fixtures and suggest how to restructure our tests.",
+    # 0.4.3: real work handed to an agent still counts. None of these is a ts-4 prompt.
+    "Launch a background agent to review the API for auth bugs and write fixes.",
+    "Have a subagent draft the quarterly report from data.csv.",
+    "Have two agents: one reviews utils.py for bugs, the other writes tests for it.",
+    "Use agents to migrate the database schema to Postgres.",
+    "Write the weekly report for the team.",
+    "Report back when the deploy finishes and summarize the logs.",
 ]
 SHOULD_NOT_FIRE = [
     "What is 17 times 23?",
@@ -113,6 +120,13 @@ SHOULD_NOT_FIRE = [
     "Use Glob to list the Python files.",
     "/simplify utils.py",
     "Could you use the Bash tool to print the working directory?",
+    # 0.4.3: a small job handed to an agent is judged as the job itself. The first two are the ts-3
+    # prompts the 0.4.2 hook treated as work.
+    "Launch a background agent to count the words in para.txt and tell me the number when it finishes.",
+    "Have a background agent list the files in this folder and report back.",
+    "List the files in this folder and report back.",
+    "Start a background agent that prints today's date.",
+    "Spin up a subagent to tell me how many TODOs are in utils.py.",
 ]
 
 # Requests to obtain something get the approval reminder; other prompts don't.

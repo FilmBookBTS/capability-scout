@@ -2,6 +2,12 @@
 
 Versions of the Claude Code plugin. Dates are UTC. Earlier versions were not published; their dates come from the project's verification reports.
 
+## 0.4.3 - unreleased
+
+- A request to hand a job to a background agent or subagent ("Launch a background agent to count the words in para.txt ...") is judged by the job itself, as if the user had asked for it directly. Real work handed to an agent still counts.
+- "Report back" no longer counts as naming a report.
+- Tested offline so far. The live test on a new task set (ts-4) is planned in [docs/ANALYSIS_PLAN_0.4.3.md](docs/ANALYSIS_PLAN_0.4.3.md) and has not run.
+
 ## 0.4.2 - 2026-11-11
 
 - The hook ignores messages that Claude Code delivers on its own through the prompt hook, such as a background agent's result (`<task-notification>`). Before, it could ask for an assessment on one (seen once in the 0.4.1 test, with Claude Code 2.1.322).

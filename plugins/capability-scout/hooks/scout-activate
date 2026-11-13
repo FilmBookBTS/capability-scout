@@ -21,6 +21,7 @@ A conversion of a number between units, and a short single-step request that nam
 or slash command to use ("Use the code-review skill on app.py."), are not treated as work (v0.4.1).
 Messages Claude Code delivers on its own, such as a background agent's result in a
 <task-notification> block, are ignored; requests to search or look things up count as work (v0.4.2).
+A request to hand a job to a background agent or subagent is judged by the job itself (v0.4.3).
 
 Only the user's own request counts: pasted material (commands, code, quotes, tables, long
 documents) and prohibitions ("don't install anything") trigger neither message. Approving or
@@ -56,7 +57,7 @@ ARTIFACT = re.compile(
     r"(\b[\w./-]+\.(py|js|ts|tsx|jsx|go|rs|java|rb|php|cs|cpp|c|h|sql|ya?ml|json|toml|md|"
     r"csv|xlsx|docx|pptx|pdf|html|css|sh|txt)\b|`[^`]+`|\b(repo|repository|codebase|branch|"
     r"pull request|pr|issues?|tickets?|pipeline|ci|endpoints?|api|database|schema|server|"
-    r"service|app|website|site|dashboard|spreadsheet|deck|report|tests?|bugs?|errors?|"
+    r"service|app|website|site|dashboard|spreadsheet|deck|report(?!\s+back)|tests?|bugs?|errors?|"
     r"crash|incidents?|outage|logs?|deployment|plugins?|connectors?|mcp|integration|dependencies|"
     r"docs?|copy|landing page|migration|channel|code)\b)",
     re.I)
@@ -141,6 +142,36 @@ def user_text(prompt):
     return HARNESS_BLOCK.sub("\n", prompt or "")
 
 
+# 0.4.3: handing a job to a background agent or subagent doesn't change what the job is. The
+# wrapper ("Launch a background agent to ...", "Have a subagent ...") is removed and the rest is
+# judged as if the user had asked for it directly.
+DELEGATE = re.compile(
+    r"^\s*(?:please\s+)?(?:launch|start|spin\s+(?:up|off)|kick\s+off|fire\s+off|run|use|have|get|ask|send|spawn|"
+    r"create|set\s+up|dispatch)\s+(?:up\s+)?(?:a|an|one|two|three|four|several|some|\d+)?\s*"
+    r"(?:(?:background|separate|parallel|new)\s+)*(?:sub-?agents?|agents?|(?<=background )tasks?)\b"
+    r"(?:\s+off)?(?:\s+in\s+the\s+background)?\s*(?:to\b|that\b|which\b|who\b|:|,|-)?\s*",
+    re.I)
+VERB_S = re.compile(r"\b([a-z]+?)(es|s)\b", re.I)
+
+
+def base_verbs(text):
+    """'one reviews X, the other rewrites Y' -> 'one review X, the other rewrite Y', for action verbs only."""
+    def fix(m):
+        for stem in (m.group(1) + ("e" if m.group(2) == "es" else ""), m.group(1)):
+            if ACTION.fullmatch(stem):
+                return stem
+        return m.group(0)
+    return VERB_S.sub(fix, text)
+
+
+def delegated(p):
+    """The job inside a request to hand work to an agent, or None if the prompt isn't one."""
+    m = DELEGATE.match(p)
+    if not m:
+        return None
+    return base_verbs(p[m.end():])
+
+
 def names_capability(p):
     """A short, single-step request that says which skill, tool or slash command to use."""
     return bool(NAMED_CAPABILITY.match(p)) and len(p.split()) < NAMED_MAX_WORDS and not MULTI_STEP.search(p.strip())
@@ -208,6 +239,9 @@ def is_substantive(prompt):
     p = POLITE.sub("", prompt.strip())  # "Could you fix the failing tests?" is an instruction
     if not p or TRIVIAL.search(p) or CONVERSION.match(p) or names_capability(p):
         return False
+    job = delegated(p)
+    if job is not None:
+        return bool(job.strip()) and delegated(job) is None and is_substantive(job)
     words = p.split()
     artifact = bool(ARTIFACT.search(p))
     # A question ("How do I write a test in pytest?") is work only when it names something specific.

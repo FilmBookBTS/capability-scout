@@ -34,6 +34,7 @@ Each suite can also run on its own, for example
 | `test_live_scoring.py` | the live harness's scoring and isolation rules, on made-up transcripts |
 | `test_harness_messages.py` | messages Claude Code adds on its own, such as a background agent's result, do not count as a request (0.4.2) |
 | `test_precheck_ts3.py` | reports which ts-3 prompts the hook treats as work, next to the 0.4.1 hook, and checks that ts-1 and ts-2 decisions did not regress (see [`ANALYSIS_PLAN_0.4.2.md`](ANALYSIS_PLAN_0.4.2.md)) |
+| `test_precheck_ts4.py` | reports which ts-4 prompts the hook treats as work, next to the 0.4.2 hook, and checks ts-1 to ts-3 for regressions (see [`ANALYSIS_PLAN_0.4.3.md`](ANALYSIS_PLAN_0.4.3.md)) |
 | `test_precheck_ts2.py` | reports which ts-2 prompts the hook treats as work, next to the 0.4.0 hook; it does not judge (see [`ANALYSIS_PLAN_0.4.1.md`](ANALYSIS_PLAN_0.4.1.md)) |
 
 **Check counts can differ by machine.** `test_live_scoring.py` has three checks that need

@@ -56,4 +56,11 @@ Estimate $17.16. The hard budget is set by the project owner before the run star
 
 ## Changes to this plan
 
-None yet.
+- 2026-11-13, after the 0.4.3 hook was committed, before any live session: offline pre-check
+  (`tests/offline/test_precheck_ts4.py`). The 0.4.3 hook treats all 8 real tasks handed to an agent
+  as work (0.4.2: 6 of 8), and 2 of the 8 small jobs handed to an agent (0.4.2: 5 of 8): `D05-size`
+  ("... shows the size of para.txt") and `D07-title-tag` ("... check whether landing.html has a title
+  tag"). Both would also count as work if typed directly, so they come from the general word rules,
+  not the agent wrapper. The hook is not changed because of this. No ts-1 to ts-3 regression
+  (104 of 104). Criterion 1 allows 2 of 24 false triggers, so it can pass only if the skill runs in
+  at most 2 of the 6 sessions of each model on those two prompts.
