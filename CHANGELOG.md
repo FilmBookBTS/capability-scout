@@ -2,11 +2,12 @@
 
 Versions of the Claude Code plugin. Dates are UTC. Earlier versions were not published; their dates come from the project's verification reports.
 
-## 0.4.6 - unreleased
+## 0.4.6 - 2026-11-13
 
 - A request to run a slash command with a verb in front ("run /code-review on my current changes") is recognized as naming its tool, like "/code-review" alone.
 - "pls" and "please" at the start are treated as a polite opener, as "Could you" already was.
-- Includes the 0.4.3 to 0.4.5 changes below.
+- Includes the 0.4.3 to 0.4.5 changes below, which were tested and not released.
+- Held-out live test (ts-10, 192 sessions, written by a separate agent after the hook was frozen): quick look-ups 0 of 48 on each model, real tasks 35 of 36 (Sonnet) and 36 of 36 (Opus), controls 0 of 12. All five criteria met. See [docs/ANALYSIS_PLAN_0.4.6.md](docs/ANALYSIS_PLAN_0.4.6.md).
 
 ## 0.4.5 - not released
 

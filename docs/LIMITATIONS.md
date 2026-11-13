@@ -5,17 +5,20 @@ Plain statements of what the tests do and do not show, and what Capability Scout
 ## What the tests show
 
 - **One setting.** All live sessions ran in one Linux cloud container, with Claude Code 2.1.318
-  (0.4.0, task set `ts-1`) or 2.1.322 (0.4.1 and 0.4.2, task sets `ts-2` and `ts-3`), in November 2026. Each session had an empty configuration folder. No connector's tools were
+  (0.4.0, task set `ts-1`), 2.1.322 (0.4.1 and 0.4.2, task sets `ts-2` and `ts-3`) or 2.1.323
+  (0.4.3 to 0.4.6, task sets `ts-4` to `ts-10`), in November 2026. Each session had an empty configuration folder. No connector's tools were
   loaded, and the only skills were those built into Claude Code plus four plugins that loaded in
   every setup on that machine. Claude Code's `ListConnectors` tool could still list the
   connectors of the signed-in account, and some replies mention that list. Most people's setups
   have more skills and working connectors. Results may differ there.
 - **Two models.** Sonnet (`claude-sonnet-5-5`) and Opus (`claude-opus-5-5`). For 0.4.0, Sonnet
-  was the installation's default model; for 0.4.1 both were requested by name, because Claude
+  was the installation's default model; from 0.4.1 on both were requested by name, because Claude
   Code 2.1.322's default model served Opus. Other models, and later versions of these, were not tested.
-- **Two task sets, written by the author.** Task set `ts-1` has 30 substantive tasks and 12
-  non-substantive prompts; `ts-2` has 24 and 24, and was written by the same person who wrote the
-  0.4.1 fix, before the fix. They are all in English, all single messages. Each ran 3 times per arm and
+- **Task sets.** Task set `ts-1` has 30 substantive tasks and 12 non-substantive prompts; `ts-2`
+  has 24 and 24, and was written by the same person who wrote the 0.4.1 fix, before the fix. `ts-3`
+  to `ts-5` were also written with their fixes. `ts-6` to `ts-10` were written by separate agents
+  that saw only a description of the fixture files, never the hook; `ts-7` and `ts-8` were checked
+  offline, not run live, and then used for development. All use the same five small files. They are all in English, all single messages. Each ran 3 times per arm and
   model. Repeated runs of the same task are not independent, so the 95% intervals are narrower
   than they should be.
 - **Activation, not quality.** The live test measures whether the skill ran, and whether it ran
@@ -47,9 +50,16 @@ Plain statements of what the tests do and do not show, and what Capability Scout
   one in its test. Version 0.4.2 ignores them (0 of 24 in its retest). It relies on Claude Code
   wrapping them in `<task-notification>` or `<system-reminder>` blocks; a later Claude Code that
   changes this could bring the problem back.
-- **Requests to start a background agent.** The hook treats a short request such as "Launch a
-  background agent to count the words in para.txt" as work. In the 0.4.2 retest the skill then
-  ran in 6 of 9 such sessions on each model.
+- **Requests to start a background agent.** Up to 0.4.2 the hook treated a short request such as
+  "Launch a background agent to count the words in para.txt" as work (the skill ran in 6 of 9 such
+  sessions on each model). Since 0.4.3 the job is judged by itself.
+- **Quick look-ups and the conditional reminder.** Word rules alone kept misclassifying some quick
+  look-ups on fresh prompts (0.4.4: 9 of 36 and 7 of 36 sessions on the held-out `ts-6`). Since
+  0.4.5, questions and requests that only retrieve something get a conditional reminder, and Claude
+  decides. In the 0.4.6 held-out test (`ts-10`): look-ups 0 of 48 on each model, real tasks 35 and
+  36 of 36, controls 0 of 12. The one missed real task had the conditional reminder, so a real task
+  phrased only as a question can be skipped. The controls included "run /security-review on this",
+  the kind of prompt 0.4.6 was changed for, so that result is weaker evidence.
 - **Without the hook, the skill often does not run.** With the hook off, the skill ran in 35 of
   90 substantive sessions on each model.
 - The hook runs only in Claude Code. claude.ai chat ignores plugin hooks.

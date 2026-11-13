@@ -439,6 +439,65 @@ def kofn(rs, col):
     return f"{sum(r[col] == 'true' for r in rs)} of {len(rs)}"
 
 
+def ts10_block(rows):
+    """README table for the 0.4.6 held-out test (task set ts-10), and the unreleased 0.4.3 to 0.4.5 tests."""
+    models = [("claude-sonnet", "Sonnet (`claude-sonnet-5-5`)"), ("claude-opus", "Opus (`claude-opus-5-5`)")]
+
+    def live_of(ts):
+        return [r for r in rows if r["task_set_version"] == ts and "invalid:" not in r["notes"]
+                and batch_of(r) not in SEPARATE_BATCHES and r["arm"] != "offline"]
+
+    def cell(rs, col, link):
+        rs = [r for r in rs if r[col] in ("true", "false")]
+        k = sum(r[col] == "true" for r in rs)
+        return f"[{k} of {len(rs)}]({link}) ({pct(k / len(rs)) if rs else 'n/a'})"
+
+    live = live_of("ts-10")
+    if not live:
+        return []
+    kinds = task_kinds().get("ts-10", {})
+    allrows = [r for r in rows if r["task_set_version"] == "ts-10" and batch_of(r) not in SEPARATE_BATCHES]
+    L = [f"**Held-out test, version 0.4.6:** {len(live):,} sessions, Claude Code "
+         f"{', '.join(sorted({r['claude_code_version'] for r in live}))}, {min(r['date_utc'][:10] for r in live)}, "
+         "plugin as published (hook on), each model requested by name. Task set ts-10 was written by a separate agent "
+         "after the hook was frozen, without seeing the hook: 16 quick look-ups on one file (4 handed to an agent), "
+         "12 real tasks (most starting with check, show, find, read, tell me and the like; 3 handed to an agent) and "
+         f"4 controls, each run 3 times per model. Invalid sessions: {len(allrows) - len(live)}.", "",
+         "| Sessions where the skill ran | " + " | ".join(lab for _, lab in models) + " |", "|---|---|---|"]
+    spec = [("Real tasks", lambda k: k == "substantive", "activated", LIVE_A),
+            ("Quick look-ups on one file", lambda k: k == "held-out-lookup", "false_trigger", LIVE_F),
+            ("Controls: thanks, a fact, arithmetic, a slash command", lambda k: k in TRIVIAL_KINDS | NAMED_KINDS,
+             "false_trigger", LIVE_F)]
+    for label, sel, col, link in spec:
+        L.append(f"| {label} | " + " | ".join(
+            cell([r for r in live if r["model_id"].startswith(m) and sel(kinds.get(r["task_id"]))], col, link)
+            for m, _ in models) + " |")
+    L += ["", "*Source: rows with task set ts-10 in results/ledger.csv. Plan and pass criteria, set before the run: "
+          "[docs/ANALYSIS_PLAN_0.4.6.md](docs/ANALYSIS_PLAN_0.4.6.md). Later messages in a session are counted from "
+          "the transcripts: [hook-events.txt](results/runs/20261113T031603Z-v0.4.6-ts10-heldout/hook-events.txt).*", ""]
+    hist = [("0.4.3", "ts-4", "small jobs handed to an agent", "delegated-small-job", "docs/ANALYSIS_PLAN_0.4.3.md"),
+            ("0.4.4", "ts-5", "quick look-ups, set written with the fix", "file-lookup", "docs/ANALYSIS_PLAN_0.4.4.md"),
+            ("0.4.4", "ts-6", "quick look-ups, held out", "held-out-lookup", "docs/ANALYSIS_PLAN_0.4.4-HELDOUT.md"),
+            ("0.4.5", "ts-9", "quick look-ups, held out", "held-out-lookup", "docs/ANALYSIS_PLAN_0.4.5-TS9.md")]
+    L += ["**Versions 0.4.3 to 0.4.5 were tested and not released**, because each missed at least one criterion set before one of its runs. "
+          "False triggers on the prompts each version targeted, and on its controls:", "",
+          "| Version | Task set | Targeted prompts | Sonnet | Opus | Controls, Sonnet | Controls, Opus | Plan |",
+          "|---|---|---|---|---|---|---|---|"]
+    for ver, ts, label, kind, plan in hist:
+        lv = live_of(ts)
+        if not lv:
+            continue
+        kd = task_kinds().get(ts, {})
+        row = [ver, ts, label]
+        row += [cell([r for r in lv if r["model_id"].startswith(m) and kd.get(r["task_id"]) == kind], "false_trigger", LIVE_F)
+                for m, _ in models]
+        row += [cell([r for r in lv if r["model_id"].startswith(m) and kd.get(r["task_id"]) in TRIVIAL_KINDS | NAMED_KINDS],
+                     "false_trigger", LIVE_F) for m, _ in models]
+        row.append(f"[plan]({plan})")
+        L.append("| " + " | ".join(row) + " |")
+    return L + [""]
+
+
 def ts3_block(rows):
     """README table for the 0.4.2 retest (task set ts-3, arm C only)."""
     kinds = task_kinds().get("ts-3", {})
@@ -531,7 +590,7 @@ def readme_block(rows, spec, bars):
                 and r["false_trigger"] in ("true", "false") and sel(kinds.get(r["task_id"]))]
     models = [("claude-sonnet", "Default model"), ("claude-opus", "Opus")]
     ids = sorted({short_model(r["model_id"]) for r in live})
-    L = [START, ""] + ts3_block(rows) + ts2_block(rows) + [
+    L = [START, ""] + ts10_block(rows) + ts3_block(rows) + ts2_block(rows) + [
          f"**Live test, version 0.4.0:** {len(live):,} sessions, Claude Code "
          f"{', '.join(sorted({r['claude_code_version'] for r in live}))}, "
          f"{min(r['date_utc'][:10] for r in live)} to {max(r['date_utc'][:10] for r in live)}. "
