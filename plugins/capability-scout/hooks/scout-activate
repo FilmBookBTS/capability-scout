@@ -108,7 +108,7 @@ FOLLOWUP = re.compile(
     r"i approve|approved?|approval|proposed|the (plan|proposal|recommendation|assessment)|"
     r"(as|from) (above|before|earlier)|that (one|item|command)|those (items|commands))\b",
     re.I)
-POLITE = re.compile(r"^\s*(can|could|would|will)\s+you\s+(please\s+)?", re.I)
+POLITE = re.compile(r"^\s*(can|could|would|will)\s+(?:you|u)\s+(please\s+|pls\s+)?", re.I)
 BOLD_LINE = re.compile(r"^\s*(?:[-*]\s+)?\*\*[^*]+\*\*[\s.:]*$")
 LEAD = re.compile(r"^(?:[-*\d.)\s]+|\*\*|please\s+|now\s+|then\s+|also\s+|next,?\s+)+", re.I)
 DIRECT = re.compile(r"\b(can|could|would|will) you\b|\bi(?: want|'d like| would like| need) you to\b|\blet'?s\b", re.I)
@@ -205,7 +205,7 @@ DETERMINER_BEFORE = re.compile(r"\b(?:the|a|an|this|that|its|their|our|my|your)\
 def file_lookup(p):
     """A short, one-step question about one named file, phrased as a request."""
     p = p.strip()
-    if QUALITY.search(p) or QUANTIFIER.search(p):
+    if QUALITY.search(p) or QUANTIFIER.search(p) or TURN_INTO.search(p):
         return False
     core = ANSWER_CLAUSE.sub("", p).strip()
     if not LOOKUP_START.match(core) or len(core.split()) > LOOKUP_MAX_WORDS or MULTI_STEP.search(core):
@@ -227,8 +227,8 @@ def file_lookup(p):
 # that only retrieves ("check", "show", "find", "grab" ...) gets a conditional reminder instead, and
 # Claude decides whether it is a quick look-up. So does a request that names a file or hands a job to
 # an agent but that the word rules don't count as work.
-WEAK_VERB = re.compile(r"(?:check|show|get|list|find|count|print|run|pull up|look at|look into|look through|"
-                       r"go through)$", re.I)
+WEAK_VERB = re.compile(r"(?:check|show|get|list|find|count|print|run|execute|launch|pull up|pull|look at|look into|"
+                       r"look through|go through|look up|search|browse|fetch|sync|import|export|download|clone)$", re.I)
 
 
 def core_text(p):
@@ -238,9 +238,28 @@ def core_text(p):
     return p[m.end():] if m else p
 
 
-def clear_work(p):
-    c = core_text(p)
-    if len(c.split()) >= 25 or MULTI_STEP.search(ANSWER_CLAUSE.sub("", c).strip()) or QUALITY.search(c):
+IMPERATIVE_DO = re.compile(r"^\s*do\s+(?:a|an|the|some|this|that|it|my|our|me)\b", re.I)
+
+
+def is_question(c):
+    return c.rstrip().endswith("?") or bool(QUESTION.match(c) and not IMPERATIVE_DO.match(c))
+
+
+TURN_INTO = re.compile(r"\bturn\s+(?:\w+\s+){0,3}?into\b", re.I)
+TAIL = re.compile(r"([.?!])\s+([^.?!]{1,60})[.?!]?\s*$")
+
+
+def without_tail(c):
+    """Drop a short trailing fragment that asks for nothing new ("... ? just the command")."""
+    m = TAIL.search(c)
+    if m and len(m.group(2).split()) <= 6 and not makes_something(m.group(2)):
+        return c[:m.start(2)].rstrip()
+    return c
+
+
+def makes_something(c):
+    """A verb that produces something (fix, write, review ...), used as a verb."""
+    if TURN_INTO.search(c):
         return True
     for m in ACTION.finditer(c):
         if WEAK_VERB.match(m.group(0)) or DETERMINER_BEFORE.search(c[:m.start()]) or NOUN_AFTER.match(c[m.end():]):
@@ -249,15 +268,25 @@ def clear_work(p):
     return False
 
 
+def clear_work(p):
+    """Long, several steps, or not a question and asks for a judgement or for something to be made."""
+    c = without_tail(core_text(p))
+    if len(c.split()) >= 25 or MULTI_STEP.search(ANSWER_CLAUSE.sub("", c).strip()):
+        return True
+    if is_question(c) and not POLITE.match(p.strip()):  # "Can you refactor app.py ...?" is a request
+        return False
+    return bool(QUALITY.search(c)) or makes_something(c)
+
+
 def maybe_work(p):
-    """Not counted as work, but names a file or hands a job to an agent: let Claude judge."""
+    """Not counted as work by the word rules, but asks for something to be made: let Claude judge."""
     p = p.strip()
-    if not p or TRIVIAL.search(p) or CONVERSION.match(p) or names_capability(p):
+    if not p or TRIVIAL.search(p) or CONVERSION.match(p) or names_capability(p) or len(p.split()) < 4:
         return False
     c = core_text(p)
-    if file_lookup(c) or file_lookup(base_verbs(c)):
+    if file_lookup(c) or file_lookup(base_verbs(c)) or (is_question(c) and not POLITE.match(p)):
         return False
-    return bool(FILE_NAME.search(p) or DELEGATE.match(POLITE.sub("", p))) and clear_work(p)
+    return makes_something(c)
 
 
 def tier(prompt):
@@ -265,7 +294,10 @@ def tier(prompt):
     if is_request(prompt):
         if is_long(prompt):
             return "clear"
-        return "clear" if clear_work(instruction_text(prompt)) else "maybe"
+        text = instruction_text(prompt)
+        if file_lookup(core_text(text)) or file_lookup(base_verbs(core_text(text))):
+            return None
+        return "clear" if clear_work(text) else "maybe"
     return "maybe" if maybe_work(instruction_text(prompt)) else None
 
 

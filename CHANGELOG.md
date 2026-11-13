@@ -5,7 +5,7 @@ Versions of the Claude Code plugin. Dates are UTC. Earlier versions were not pub
 ## 0.4.5 - unreleased
 
 - Quick look-ups are recognized more broadly: ones that start with "which", "what" or "how many" ("check which port app.py runs on"), ones that end by asking for the answer ("... and tell me its src", "... and report back"), and ones handed to an agent. An answer clause that asks for a judgement or a change ("... and tell me how to fix it") still counts as work.
-- Two levels of reminder. Clear work (long, several steps, a judgement, or a verb that produces something such as fix, write or review) gets the directive reminder as before. A request that only retrieves something ("Get the error logs from the staging server"), or that names a file with signs of work the word rules don't count, gets a conditional reminder: run the skill if this is substantive work, skip it for a quick look-up. No retry reminder follows a conditional one.
+- Two levels of reminder. Clear work (long, several steps, or a request that is not a question and asks for a judgement or for something to be made, such as fix, write or review) gets the directive reminder as before. A question, or a request that only retrieves something ("Get the error logs from the staging server"), gets a conditional reminder when the word rules count it as work: run the skill if this is substantive work, skip it for a quick look-up. So does a request to make something that the word rules miss ("grab notes.txt and turn it into a postmortem"). No retry reminder follows a conditional one.
 - Includes the 0.4.3 and 0.4.4 changes below.
 - Tested offline so far.
 

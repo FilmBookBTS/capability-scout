@@ -30,6 +30,12 @@ CASES = [
     ("have a subagent check whether verbose is set to True in cli.py and report back", None),
     ("how many functions are in utils.py?", None),
     ("thanks!", None),
+    ("what port does server.py listen on?", None),
+    ("Can you rewrite utils.py so the parser is pure? Keep the API the same.", "clear"),
+    ("do a full review of server.py and report back with patches", "clear"),
+    ("pull up notes.md and turn it into a status update for execs", "clear"),
+    ("Morning! Hope you're well.", None),
+    ("Explain what a hook is in one sentence.", None),
 ]
 
 

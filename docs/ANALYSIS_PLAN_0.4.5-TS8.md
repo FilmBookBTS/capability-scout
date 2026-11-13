@@ -47,4 +47,8 @@ As estimated for ts-7 (same sizes, ts-6 means): $20.81. Hard budget $30. Spent o
 
 ## Changes to this plan
 
-None yet.
+- 2026-11-13, before any live session: offline, the e7163a3 hook gives the directive reminder to 3
+  of the 16 quick look-ups (`F05`, `F12`, `F15`) and the conditional one to 2 more, and no reminder
+  to one real task (`M08`). With three look-ups on the directive reminder, criterion 1 (at most 5 of
+  48) was very unlikely to pass, so the live run was not made. ts-8 has been looked at and is now a
+  development set. The changed hook is tested on a new held-out set, ts-9, under its own plan.
