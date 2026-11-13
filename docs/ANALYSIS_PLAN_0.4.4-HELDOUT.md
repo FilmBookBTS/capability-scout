@@ -59,4 +59,10 @@ Estimate $17.29. Hard budget $30, as approved by the project owner for 0.4.4 tes
 
 ## Changes to this plan
 
-None yet.
+- 2026-11-13, after this plan was committed, before the run: offline, the 0.4.4 hook treats all 10
+  real tasks as work, and 3 of the 12 quick look-ups: `Q06` ("find the img tag in landing.html and
+  tell me its src"), `Q10` ("can you spin up a background agent to check which port app.py runs
+  on") and `Q11` ("have a subagent grab the deploy version number from outage-notes.txt and report
+  back"). The two repeats and the 4 controls are quiet. The hook is not changed because of this.
+  Criterion 1 allows 4 of 36, so it can pass only if the skill runs in at most 4 of the 9 sessions
+  of each model on those three prompts. Hard budget: $30.
