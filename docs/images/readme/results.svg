@@ -1,0 +1,230 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 498" width="1280" height="498" role="img" aria-labelledby="t d">
+<title id="t">Capability Scout held-out test results</title>
+<desc id="d">Held-out test of version 0.4.6, 192 sessions, one dot per session. Real tasks: Sonnet 35 of 36, Opus 36 of 36 sessions where the skill ran; Quick look-ups on one file: Sonnet 0 of 48, Opus 0 of 48 false triggers; Controls: Sonnet 0 of 12, Opus 0 of 12 false triggers. Source: rows with task set ts-10 in results/ledger.csv.</desc>
+<style>.pop{animation:pop .35s ease-out both}@keyframes pop{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:none}}@media (prefers-reduced-motion:reduce){*{animation:none!important}}</style>
+<rect width="1280" height="498" rx="24" fill="#0B1220"/>
+<text x="44" y="48" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="15" fill="#F5B544" font-weight="600" letter-spacing="2">HELD-OUT TEST  ·  VERSION 0.4.6</text>
+<text x="44" y="84" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="28" fill="#E9EEF7" font-weight="800">192 sessions, one dot each</text>
+<text x="44" y="114" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="15" fill="#93A3BF">Claude Code 2.1.323  ·  2026-11-13  ·  prompts written without seeing the hook</text>
+<text x="380" y="160" font-family="ui-monospace,'SF Mono','Cascadia Code',Menlo,Consolas,'DejaVu Sans Mono','Liberation Mono',monospace" font-size="15" fill="#93A3BF">Sonnet  (claude-sonnet-5-5)</text>
+<text x="820" y="160" font-family="ui-monospace,'SF Mono','Cascadia Code',Menlo,Consolas,'DejaVu Sans Mono','Liberation Mono',monospace" font-size="15" fill="#93A3BF">Opus  (claude-opus-5-5)</text>
+<text x="44" y="194" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="20" fill="#E9EEF7" font-weight="700">Real tasks</text>
+<text x="44" y="218" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="15" fill="#93A3BF">skill should run</text>
+<circle class="pop" style="animation-delay:0.000s;transform-origin:386.0px 188.0px" cx="386.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.025s;transform-origin:403.0px 188.0px" cx="403.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.050s;transform-origin:420.0px 188.0px" cx="420.0" cy="188.0" r="5.0" fill="#0B1220" stroke="#FF7A6B" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.075s;transform-origin:437.0px 188.0px" cx="437.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.100s;transform-origin:454.0px 188.0px" cx="454.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.125s;transform-origin:471.0px 188.0px" cx="471.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.150s;transform-origin:488.0px 188.0px" cx="488.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.175s;transform-origin:505.0px 188.0px" cx="505.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.200s;transform-origin:522.0px 188.0px" cx="522.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.225s;transform-origin:539.0px 188.0px" cx="539.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.250s;transform-origin:556.0px 188.0px" cx="556.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.275s;transform-origin:573.0px 188.0px" cx="573.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.300s;transform-origin:590.0px 188.0px" cx="590.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.325s;transform-origin:607.0px 188.0px" cx="607.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.350s;transform-origin:624.0px 188.0px" cx="624.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.375s;transform-origin:641.0px 188.0px" cx="641.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.400s;transform-origin:658.0px 188.0px" cx="658.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.425s;transform-origin:675.0px 188.0px" cx="675.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.450s;transform-origin:386.0px 205.0px" cx="386.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.475s;transform-origin:403.0px 205.0px" cx="403.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.500s;transform-origin:420.0px 205.0px" cx="420.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.525s;transform-origin:437.0px 205.0px" cx="437.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.550s;transform-origin:454.0px 205.0px" cx="454.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.575s;transform-origin:471.0px 205.0px" cx="471.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.600s;transform-origin:488.0px 205.0px" cx="488.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.625s;transform-origin:505.0px 205.0px" cx="505.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.650s;transform-origin:522.0px 205.0px" cx="522.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.675s;transform-origin:539.0px 205.0px" cx="539.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.700s;transform-origin:556.0px 205.0px" cx="556.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.725s;transform-origin:573.0px 205.0px" cx="573.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.750s;transform-origin:590.0px 205.0px" cx="590.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.775s;transform-origin:607.0px 205.0px" cx="607.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.800s;transform-origin:624.0px 205.0px" cx="624.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.825s;transform-origin:641.0px 205.0px" cx="641.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.850s;transform-origin:658.0px 205.0px" cx="658.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.875s;transform-origin:675.0px 205.0px" cx="675.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<text x="700" y="194" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="20" fill="#5EE6C8" font-weight="800">35 of 36</text>
+<text x="700" y="214" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="13" fill="#93A3BF">ran</text>
+<circle class="pop" style="animation-delay:0.000s;transform-origin:826.0px 188.0px" cx="826.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.025s;transform-origin:843.0px 188.0px" cx="843.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.050s;transform-origin:860.0px 188.0px" cx="860.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.075s;transform-origin:877.0px 188.0px" cx="877.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.100s;transform-origin:894.0px 188.0px" cx="894.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.125s;transform-origin:911.0px 188.0px" cx="911.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.150s;transform-origin:928.0px 188.0px" cx="928.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.175s;transform-origin:945.0px 188.0px" cx="945.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.200s;transform-origin:962.0px 188.0px" cx="962.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.225s;transform-origin:979.0px 188.0px" cx="979.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.250s;transform-origin:996.0px 188.0px" cx="996.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.275s;transform-origin:1013.0px 188.0px" cx="1013.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.300s;transform-origin:1030.0px 188.0px" cx="1030.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.325s;transform-origin:1047.0px 188.0px" cx="1047.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.350s;transform-origin:1064.0px 188.0px" cx="1064.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.375s;transform-origin:1081.0px 188.0px" cx="1081.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.400s;transform-origin:1098.0px 188.0px" cx="1098.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.425s;transform-origin:1115.0px 188.0px" cx="1115.0" cy="188.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.450s;transform-origin:826.0px 205.0px" cx="826.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.475s;transform-origin:843.0px 205.0px" cx="843.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.500s;transform-origin:860.0px 205.0px" cx="860.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.525s;transform-origin:877.0px 205.0px" cx="877.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.550s;transform-origin:894.0px 205.0px" cx="894.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.575s;transform-origin:911.0px 205.0px" cx="911.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.600s;transform-origin:928.0px 205.0px" cx="928.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.625s;transform-origin:945.0px 205.0px" cx="945.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.650s;transform-origin:962.0px 205.0px" cx="962.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.675s;transform-origin:979.0px 205.0px" cx="979.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.700s;transform-origin:996.0px 205.0px" cx="996.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.725s;transform-origin:1013.0px 205.0px" cx="1013.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.750s;transform-origin:1030.0px 205.0px" cx="1030.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.775s;transform-origin:1047.0px 205.0px" cx="1047.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.800s;transform-origin:1064.0px 205.0px" cx="1064.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.825s;transform-origin:1081.0px 205.0px" cx="1081.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.850s;transform-origin:1098.0px 205.0px" cx="1098.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.875s;transform-origin:1115.0px 205.0px" cx="1115.0" cy="205.0" r="5.0" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<text x="1140" y="194" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="20" fill="#5EE6C8" font-weight="800">36 of 36</text>
+<text x="1140" y="214" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="13" fill="#93A3BF">ran</text>
+<text x="44" y="280" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="20" fill="#E9EEF7" font-weight="700">Quick look-ups on one file</text>
+<text x="44" y="304" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="15" fill="#93A3BF">skill should stay quiet</text>
+<circle class="pop" style="animation-delay:0.600s;transform-origin:386.0px 274.0px" cx="386.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.625s;transform-origin:403.0px 274.0px" cx="403.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.650s;transform-origin:420.0px 274.0px" cx="420.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.675s;transform-origin:437.0px 274.0px" cx="437.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.700s;transform-origin:454.0px 274.0px" cx="454.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.725s;transform-origin:471.0px 274.0px" cx="471.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.750s;transform-origin:488.0px 274.0px" cx="488.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.775s;transform-origin:505.0px 274.0px" cx="505.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.800s;transform-origin:522.0px 274.0px" cx="522.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.825s;transform-origin:539.0px 274.0px" cx="539.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.850s;transform-origin:556.0px 274.0px" cx="556.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.875s;transform-origin:573.0px 274.0px" cx="573.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.900s;transform-origin:590.0px 274.0px" cx="590.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.925s;transform-origin:607.0px 274.0px" cx="607.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.950s;transform-origin:624.0px 274.0px" cx="624.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.975s;transform-origin:641.0px 274.0px" cx="641.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.000s;transform-origin:658.0px 274.0px" cx="658.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.025s;transform-origin:675.0px 274.0px" cx="675.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.050s;transform-origin:386.0px 291.0px" cx="386.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.075s;transform-origin:403.0px 291.0px" cx="403.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.100s;transform-origin:420.0px 291.0px" cx="420.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.125s;transform-origin:437.0px 291.0px" cx="437.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.150s;transform-origin:454.0px 291.0px" cx="454.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.175s;transform-origin:471.0px 291.0px" cx="471.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.200s;transform-origin:488.0px 291.0px" cx="488.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.225s;transform-origin:505.0px 291.0px" cx="505.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.250s;transform-origin:522.0px 291.0px" cx="522.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.275s;transform-origin:539.0px 291.0px" cx="539.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.300s;transform-origin:556.0px 291.0px" cx="556.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.325s;transform-origin:573.0px 291.0px" cx="573.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.350s;transform-origin:590.0px 291.0px" cx="590.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.375s;transform-origin:607.0px 291.0px" cx="607.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.400s;transform-origin:624.0px 291.0px" cx="624.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.425s;transform-origin:641.0px 291.0px" cx="641.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.450s;transform-origin:658.0px 291.0px" cx="658.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.475s;transform-origin:675.0px 291.0px" cx="675.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.500s;transform-origin:386.0px 308.0px" cx="386.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.525s;transform-origin:403.0px 308.0px" cx="403.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.550s;transform-origin:420.0px 308.0px" cx="420.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.575s;transform-origin:437.0px 308.0px" cx="437.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.600s;transform-origin:454.0px 308.0px" cx="454.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.625s;transform-origin:471.0px 308.0px" cx="471.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.650s;transform-origin:488.0px 308.0px" cx="488.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.675s;transform-origin:505.0px 308.0px" cx="505.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.700s;transform-origin:522.0px 308.0px" cx="522.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.725s;transform-origin:539.0px 308.0px" cx="539.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.750s;transform-origin:556.0px 308.0px" cx="556.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.775s;transform-origin:573.0px 308.0px" cx="573.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<text x="700" y="280" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="20" fill="#5EE6C8" font-weight="800">0 of 48</text>
+<text x="700" y="300" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="13" fill="#93A3BF">false triggers</text>
+<circle class="pop" style="animation-delay:0.600s;transform-origin:826.0px 274.0px" cx="826.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.625s;transform-origin:843.0px 274.0px" cx="843.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.650s;transform-origin:860.0px 274.0px" cx="860.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.675s;transform-origin:877.0px 274.0px" cx="877.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.700s;transform-origin:894.0px 274.0px" cx="894.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.725s;transform-origin:911.0px 274.0px" cx="911.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.750s;transform-origin:928.0px 274.0px" cx="928.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.775s;transform-origin:945.0px 274.0px" cx="945.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.800s;transform-origin:962.0px 274.0px" cx="962.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.825s;transform-origin:979.0px 274.0px" cx="979.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.850s;transform-origin:996.0px 274.0px" cx="996.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.875s;transform-origin:1013.0px 274.0px" cx="1013.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.900s;transform-origin:1030.0px 274.0px" cx="1030.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.925s;transform-origin:1047.0px 274.0px" cx="1047.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.950s;transform-origin:1064.0px 274.0px" cx="1064.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:0.975s;transform-origin:1081.0px 274.0px" cx="1081.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.000s;transform-origin:1098.0px 274.0px" cx="1098.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.025s;transform-origin:1115.0px 274.0px" cx="1115.0" cy="274.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.050s;transform-origin:826.0px 291.0px" cx="826.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.075s;transform-origin:843.0px 291.0px" cx="843.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.100s;transform-origin:860.0px 291.0px" cx="860.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.125s;transform-origin:877.0px 291.0px" cx="877.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.150s;transform-origin:894.0px 291.0px" cx="894.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.175s;transform-origin:911.0px 291.0px" cx="911.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.200s;transform-origin:928.0px 291.0px" cx="928.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.225s;transform-origin:945.0px 291.0px" cx="945.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.250s;transform-origin:962.0px 291.0px" cx="962.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.275s;transform-origin:979.0px 291.0px" cx="979.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.300s;transform-origin:996.0px 291.0px" cx="996.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.325s;transform-origin:1013.0px 291.0px" cx="1013.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.350s;transform-origin:1030.0px 291.0px" cx="1030.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.375s;transform-origin:1047.0px 291.0px" cx="1047.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.400s;transform-origin:1064.0px 291.0px" cx="1064.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.425s;transform-origin:1081.0px 291.0px" cx="1081.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.450s;transform-origin:1098.0px 291.0px" cx="1098.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.475s;transform-origin:1115.0px 291.0px" cx="1115.0" cy="291.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.500s;transform-origin:826.0px 308.0px" cx="826.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.525s;transform-origin:843.0px 308.0px" cx="843.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.550s;transform-origin:860.0px 308.0px" cx="860.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.575s;transform-origin:877.0px 308.0px" cx="877.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.600s;transform-origin:894.0px 308.0px" cx="894.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.625s;transform-origin:911.0px 308.0px" cx="911.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.650s;transform-origin:928.0px 308.0px" cx="928.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.675s;transform-origin:945.0px 308.0px" cx="945.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.700s;transform-origin:962.0px 308.0px" cx="962.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.725s;transform-origin:979.0px 308.0px" cx="979.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.750s;transform-origin:996.0px 308.0px" cx="996.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.775s;transform-origin:1013.0px 308.0px" cx="1013.0" cy="308.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<text x="1140" y="280" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="20" fill="#5EE6C8" font-weight="800">0 of 48</text>
+<text x="1140" y="300" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="13" fill="#93A3BF">false triggers</text>
+<text x="44" y="383" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="20" fill="#E9EEF7" font-weight="700">Controls</text>
+<text x="44" y="407" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="15" fill="#93A3BF">thanks, a fact, arithmetic, a slash command</text>
+<circle class="pop" style="animation-delay:1.200s;transform-origin:386.0px 377.0px" cx="386.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.225s;transform-origin:403.0px 377.0px" cx="403.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.250s;transform-origin:420.0px 377.0px" cx="420.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.275s;transform-origin:437.0px 377.0px" cx="437.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.300s;transform-origin:454.0px 377.0px" cx="454.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.325s;transform-origin:471.0px 377.0px" cx="471.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.350s;transform-origin:488.0px 377.0px" cx="488.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.375s;transform-origin:505.0px 377.0px" cx="505.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.400s;transform-origin:522.0px 377.0px" cx="522.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.425s;transform-origin:539.0px 377.0px" cx="539.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.450s;transform-origin:556.0px 377.0px" cx="556.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.475s;transform-origin:573.0px 377.0px" cx="573.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<text x="700" y="383" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="20" fill="#5EE6C8" font-weight="800">0 of 12</text>
+<text x="700" y="403" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="13" fill="#93A3BF">false triggers</text>
+<circle class="pop" style="animation-delay:1.200s;transform-origin:826.0px 377.0px" cx="826.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.225s;transform-origin:843.0px 377.0px" cx="843.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.250s;transform-origin:860.0px 377.0px" cx="860.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.275s;transform-origin:877.0px 377.0px" cx="877.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.300s;transform-origin:894.0px 377.0px" cx="894.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.325s;transform-origin:911.0px 377.0px" cx="911.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.350s;transform-origin:928.0px 377.0px" cx="928.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.375s;transform-origin:945.0px 377.0px" cx="945.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.400s;transform-origin:962.0px 377.0px" cx="962.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.425s;transform-origin:979.0px 377.0px" cx="979.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.450s;transform-origin:996.0px 377.0px" cx="996.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<circle class="pop" style="animation-delay:1.475s;transform-origin:1013.0px 377.0px" cx="1013.0" cy="377.0" r="5.0" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<text x="1140" y="383" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="20" fill="#5EE6C8" font-weight="800">0 of 12</text>
+<text x="1140" y="403" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="13" fill="#93A3BF">false triggers</text>
+<circle cx="50" cy="463" r="5" fill="#5EE6C8" stroke="#5EE6C8" stroke-width="2"/>
+<text x="62" y="468" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="14" fill="#93A3BF">skill ran on a real task</text>
+<circle cx="261.6" cy="463" r="5" fill="#0B1220" stroke="#FF7A6B" stroke-width="2"/>
+<text x="273.6" y="468" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="14" fill="#93A3BF">real task missed</text>
+<circle cx="414.0" cy="463" r="5" fill="#0B1220" stroke="#56657F" stroke-width="2"/>
+<text x="426.0" y="468" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="14" fill="#93A3BF">stayed quiet, as it should</text>
+<circle cx="640.4" cy="463" r="5" fill="#FF7A6B" stroke="#FF7A6B" stroke-width="2"/>
+<text x="652.4" y="468" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="14" fill="#93A3BF">false trigger</text>
+<text x="1236" y="468" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="14" fill="#56657F" text-anchor="end">Source: results/ledger.csv, task set ts-10</text>
+</svg>

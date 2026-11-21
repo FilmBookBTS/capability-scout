@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-labelledby="t d">
+<title id="t">Capability Scout mark</title>
+<desc id="d">A small radar sweep, the Capability Scout mark.</desc>
+<style>.sw{transform-origin:60px 60px;animation:spin 6s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}@media (prefers-reduced-motion:reduce){*{animation:none!important}}</style>
+<circle cx="60" cy="60" r="58" fill="#0B1220"/>
+<circle cx="60" cy="60" r="38" fill="none" stroke="#24324F" stroke-width="2"/>
+<circle cx="60" cy="60" r="20" fill="none" stroke="#24324F" stroke-width="2"/>
+<g class="sw"><path d="M60 60L31.7 31.7A40 40 0 0 1 60 20Z" fill="#5EE6C8" fill-opacity=".35"/><path d="M60 60V20" stroke="#5EE6C8" stroke-width="3"/></g>
+<circle cx="84" cy="44" r="5" fill="#F5B544"/><circle cx="44" cy="80" r="4" fill="#5EE6C8"/>
+<circle cx="60" cy="60" r="4" fill="#5EE6C8"/>
+</svg>

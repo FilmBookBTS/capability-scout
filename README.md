@@ -1,44 +1,131 @@
-# Capability Scout
+<p align="center">
+  <img src="docs/images/readme/hero.svg" alt="Capability Scout. A radar sweeps over the capabilities in a session: a skill, a built-in tool and a plugin that work, a connector that needs sign-in, and one worth adding. Beside it, Claude answers a security-review request with a short capability plan before doing the work." width="100%">
+</p>
 
-A skill that makes Claude check which tools actually work for a task, and say so, before it starts the task.
+<p align="center">
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-0.4.6-F5B544?style=flat" alt="Version 0.4.6" height="20"></a>
+  &nbsp;
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-5EE6C8?style=flat" alt="MIT license" height="20"></a>
+  &nbsp;
+  <a href="docs/INSTALL.md"><img src="https://img.shields.io/badge/Claude_Code-plugin-0B1220?style=flat" alt="Claude Code plugin" height="20"></a>
+  &nbsp;
+  <a href="chat-edition/capability-scout/SKILL.md"><img src="https://img.shields.io/badge/claude.ai-skill-0B1220?style=flat" alt="Skill for claude.ai chat" height="20"></a>
+  &nbsp;
+  <a href="#does-it-work"><img src="https://img.shields.io/badge/held--out_test-192_sessions-5EE6C8?style=flat" alt="Held-out test: 192 sessions" height="20"></a>
+</p>
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+<p align="center">
+  A skill that makes Claude check which tools actually work for a task, and say so, before it starts the task.<br>
+  It picks the best working option for each part of the job, points out what is missing,<br>
+  and never installs or connects anything without your approval.
+</p>
 
-**Status:** version 0.4.6. Last verification run: 2026-11-13 (held-out live test in Claude Code 2.1.323, Sonnet 5.5 and Opus 5.5 requested by name; see [How it was tested](#how-it-was-tested)). Maintained by Polyperchon LLC.
+<p align="center">
+  <a href="#get-started"><b>Get started</b></a>
+  &nbsp;&nbsp;&nbsp;
+  <a href="#see-it-work"><b>See it work</b></a>
+  &nbsp;&nbsp;&nbsp;
+  <a href="#does-it-work"><b>Results</b></a>
+  &nbsp;&nbsp;&nbsp;
+  <a href="#how-it-works"><b>How it works</b></a>
+  &nbsp;&nbsp;&nbsp;
+  <a href="#limitations"><b>Limitations</b></a>
+  &nbsp;&nbsp;&nbsp;
+  <a href="docs/"><b>Docs</b></a>
+</p>
+
+> [!NOTE]
+> **Status:** version 0.4.6. Last verification run: 2026-11-13 (held-out live test in Claude Code 2.1.323, Sonnet 5.5 and Opus 5.5 requested by name; see [How it was tested](#how-it-was-tested)). Maintained by Polyperchon LLC, an independent publisher; this project is not made or endorsed by Anthropic.
+
+<details>
+<summary><b>Contents</b></summary>
+
+- [What it does](#what-it-does)
+- [See it work](#see-it-work)
+- [Does it work?](#does-it-work)
+- [How it works](#how-it-works)
+- [Get started](#get-started)
+  - [Use it in Claude chat (no coding)](#use-it-in-claude-chat-no-coding)
+  - [Use it in Claude Code](#use-it-in-claude-code)
+- [Requirements](#requirements)
+- [Example output](#example-output)
+- [How it was tested](#how-it-was-tested)
+- [Limitations](#limitations)
+- [Files](#files)
+- [Help and contributing](#help-and-contributing)
+- [Changelog and license](#changelog-and-license)
+
+</details>
 
 ## What it does
 
 Claude can use many add-ons, but it often starts work without checking which ones are present and working. Capability Scout tells Claude to check first, pick the best working option for each part of the task, and point out anything useful that is missing. It never installs or connects anything without your approval.
 
-- A **skill** is a set of written instructions Claude reads when a task matches the skill's description. A **capability** is anything Claude can use for a task: a skill, a plugin, a **connector** to an outside service such as email, or a built-in tool.
-- A **plugin** is a package for Claude Code, the command-line version of Claude. This one adds a **hook**, a small program that runs each time you send a message and reminds Claude to use the skill.
-- There are two editions: the Claude Code plugin, and a **chat edition** for claude.ai, which is the skill's instructions alone.
+| Word | Meaning |
+|---|---|
+| **Skill** | A set of written instructions Claude reads when a task matches the skill's description. |
+| **Capability** | Anything Claude can use for a task: a skill, a plugin, a **connector** to an outside service such as email, or a built-in tool. |
+| **Plugin** | A package for Claude Code, the command-line version of Claude. This one adds a **hook**, a small program that runs each time you send a message and reminds Claude to use the skill. |
+| **Two editions** | The Claude Code plugin, and a **chat edition** for claude.ai, which is the skill's instructions alone. |
+
+## See it work
+
+<p align="center">
+  <img src="docs/images/readme/demo.svg" alt="Replay of a real Claude Code session from the live test. The prompt asks for a security review of app.py without modifying files. Claude first answers with a capability plan: it uses its own read-only review and names a first-party security plugin worth adding, which it has not installed. Then it lists prioritized fixes and says it modified no files." width="100%">
+</p>
+
+<p align="center"><sub>An animated replay of the text of one real reply, shortened where marked with "…". It is not a screen recording. Full reply: <a href="results/examples/ts1-stage1-default-ABC-0328.txt">ts1-stage1-default-ABC-0328.txt</a>.</sub></p>
 
 **Before and after.** Both replies below answer the same prompt in Claude Code, with the same model: "Review app.py in this folder for security vulnerabilities and give me a prioritized list of fixes. Do not modify any files."
 
-Without Capability Scout, Claude read the file and went straight to the review ([full reply](results/examples/ts1-stage1-default-ABC-0213.txt)):
+<table>
+<tr>
+<th width="50%">Without Capability Scout</th>
+<th width="50%">With Capability Scout</th>
+</tr>
+<tr>
+<td valign="top">
+
+Claude read the file and went straight to the review ([full reply](results/examples/ts1-stage1-default-ABC-0213.txt)):
 
 ```
 ## 1. Critical: command injection in `/export` (line 30)
-`fmt` comes straight from the query string and is interpolated into a command run with `shell=True`. ...
+`fmt` comes straight from the query string and is
+interpolated into a command run with `shell=True`. ...
 ```
 
-With Capability Scout, Claude first gave a short capability plan, then did the same review ([full reply](results/examples/ts1-stage1-default-ABC-0328.txt)):
+</td>
+<td valign="top">
+
+Claude first gave a short capability plan, then did the same review ([full reply](results/examples/ts1-stage1-default-ABC-0328.txt)):
 
 ```
 Capability plan
-- Using: my own read-only code review of app.py (session, verified). No installed specialist skill covers a dedicated security scan.
-- Worth adding (optional): `claude-security@anthropic-plugin-directory` (first-party). It does deeper vulnerability scanning and challenges each finding before reporting it. I haven't installed it. If you want it, I'll propose it in the full approval format first.
+- Using: my own read-only code review of app.py
+  (session, verified). No installed specialist skill
+  covers a dedicated security scan.
+- Worth adding (optional):
+  `claude-security@anthropic-plugin-directory`
+  (first-party). ... I haven't installed it.
 
 ## Prioritized fixes for app.py
-
 **1. Critical: command injection in `/export` (line 30)**
 ...
 ```
 
-In these two sessions the reviews themselves were similar. What the skill added was the check and the plan.
+</td>
+</tr>
+</table>
+
+In these two sessions the reviews themselves were similar. What the skill added was the check and the plan. (Long lines are wrapped and parts are shortened with "..."; the linked files are the exact replies.)
 
 ## Does it work?
+
+<p align="center">
+  <img src="docs/images/readme/results.svg" alt="Held-out test of version 0.4.6, 192 sessions, one dot per session. Real tasks: Sonnet 35 of 36, Opus 36 of 36 sessions where the skill ran; Quick look-ups on one file: Sonnet 0 of 48, Opus 0 of 48 false triggers; Controls: Sonnet 0 of 12, Opus 0 of 12 false triggers. Source: rows with task set ts-10 in results/ledger.csv." width="100%">
+</p>
+
+<p align="center"><sub>Drawn from <a href="results/ledger.csv">results/ledger.csv</a> by <a href="tools/readme_art.py">tools/readme_art.py</a>, one dot per session. The tables below have the same numbers, with links to each count.</sub></p>
 
 Two models were tested: Sonnet and Opus. For 0.4.0 the first was the default model of the Claude Code installation (which served Sonnet); from 0.4.1 on both were requested by name, because the default model of Claude Code 2.1.322 served Opus. A **session** is one new Claude Code conversation with one prompt. A **substantive** prompt asks for real work, such as a review, tests, research or a multi-step change. A **false trigger** is the skill running on a prompt that did not need it, such as a greeting or a request that names a different tool. The chat edition's text was run inside Claude Code, which is not a test in claude.ai chat.
 
@@ -124,11 +211,13 @@ Read these with care:
 
 Raw data: [results/ledger.csv](results/ledger.csv), one row per session. All tables: [results/RESULTS.md](results/RESULTS.md).
 
-In short: with the hook on, the skill ran in every substantive session, before any other work. It also ran on some prompts that did not need it, which missed the [10% limit](docs/ANALYSIS_PLAN.md#pass-criteria) set before the test. The chat edition has not been formally tested in claude.ai chat.
+In short: in the 0.4.6 held-out test, the skill ran on 35 of 36 real tasks with Sonnet and 36 of 36 with Opus, and in none of the 120 sessions with quick look-ups and controls. In the earlier 0.4.0 test, with the hook on, it ran in every substantive session but also on some prompts that did not need it, which missed the [10% limit](docs/ANALYSIS_PLAN.md#pass-criteria) set before that test. The chat edition has not been formally tested in claude.ai chat.
 
 ## How it works
 
-![Five boxes from left to right: you send a request; Claude Code's hook checks whether it is substantive work; the skill checks which capabilities work here; Claude shows a short capability plan; Claude does the task, installing nothing without approval.](docs/images/how-it-works.svg)
+<p align="center">
+  <img src="docs/images/readme/how-it-works.svg" alt="Five steps from left to right: you send a request; in Claude Code a hook checks whether it is substantive work; the skill checks which capabilities work here; Claude shows a short capability plan; Claude does the task and installs nothing without approval. In claude.ai chat there is no hook." width="100%">
+</p>
 
 The hook exists only in the Claude Code plugin. In chat, step 2 is skipped and Claude decides from the skill's description whether to run it. Details: [docs/HOW_IT_WORKS.md](docs/HOW_IT_WORKS.md).
 
@@ -144,22 +233,32 @@ The hook exists only in the Claude Code plugin. In chat, step 2 is skipped and C
 6. Add the ZIP file as a skill.
 7. Check that the Capability Scout skill is switched on.
 
-These steps were not tested: the build machine has no claude.ai browser session. Menu names are as of November 2026.
+> [!WARNING]
+> These steps were not tested: the build machine has no claude.ai browser session. Menu names are as of November 2026.
 
 ### Use it in Claude Code
 
-1. In a terminal, add this repository as a plugin marketplace: `claude plugin marketplace add FilmBookBTS/capability-scout`
-2. Install the plugin: `claude plugin install capability-scout@capability-scout`
+1. In a terminal, add this repository as a plugin marketplace:
+   ```bash
+   claude plugin marketplace add FilmBookBTS/capability-scout
+   ```
+2. Install the plugin:
+   ```bash
+   claude plugin install capability-scout@capability-scout
+   ```
 3. Start a new Claude Code session.
 
-To turn the hook off, add `{ "env": { "CAPABILITY_SCOUT_HOOK": "off" } }` to your Claude Code `settings.json`. The install was tested from a local copy of this repository, in a clean Claude Code configuration, with Claude Code 2.1.318 (0.4.0), 2.1.322 (0.4.1 and 0.4.2) and 2.1.323 (0.4.3 to 0.4.6). More detail and how to uninstall: [docs/INSTALL.md](docs/INSTALL.md).
+> [!TIP]
+> To turn the hook off, add `{ "env": { "CAPABILITY_SCOUT_HOOK": "off" } }` to your Claude Code `settings.json`.
+
+The install was tested from a local copy of this repository, in a clean Claude Code configuration, with Claude Code 2.1.318 (0.4.0), 2.1.322 (0.4.1 and 0.4.2) and 2.1.323 (0.4.3 to 0.4.6). More detail and how to uninstall: [docs/INSTALL.md](docs/INSTALL.md).
 
 ## Requirements
 
 | Need | Chat edition | Claude Code plugin |
 |---|---|---|
 | A Claude account | required | required |
-| Claude Code | not used | required (tested with 2.1.318 and 2.1.322) |
+| Claude Code | not used | required (tested with 2.1.318, 2.1.322 and 2.1.323) |
 | `python3` on the PATH | not used | required for the hook and the `scout-probe` script; without it, the skill still works from its instructions |
 | Network access to the plugin marketplace | not used | optional; needed to suggest plugins you do not have |
 
@@ -178,9 +277,16 @@ The reply then explained that it had nothing to group yet and offered three ways
 
 ## How it was tested
 
+The live tests of 0.4.0 to 0.4.6 ran on one machine, in Claude Code sessions that each started from an empty configuration, with pass criteria committed before each run. From task set ts-6 on, each test set was written by a separate agent that never saw the hook. Method: [docs/TEST_METHOD.md](docs/TEST_METHOD.md). Plans: [docs/ANALYSIS_PLAN.md](docs/ANALYSIS_PLAN.md) and the versioned plans in [docs/](docs/).
+
+<details>
+<summary><b>Full test history, 0.4.0 to 0.4.6</b></summary>
+
 The live test ran [1,008 sessions](results/RESULTS.md#completeness-and-cost-by-batch) in Claude Code 2.1.318 on 2026-11-05 and 2026-11-06, in one Linux cloud container, with two models: the installation's default model (`claude-sonnet-5-5`) and Opus (`claude-opus-5-5`). Each session started from an empty Claude Code configuration, so the test machine's own skills and plugins did not load. No connector's tools were loaded, although Claude could still list the connectors of the signed-in account. Pass criteria were committed before the first session. The full method, including what counts as activation and what was not tested, is in [docs/TEST_METHOD.md](docs/TEST_METHOD.md) and [docs/ANALYSIS_PLAN.md](docs/ANALYSIS_PLAN.md). Version 0.4.1 changed only the hook's word rules. It was tested on 2026-11-11 on a new task set, ts-2, written and committed before the change: [576 sessions](results/RESULTS.md#completeness-and-cost-by-batch) in Claude Code 2.1.322, a newer version than the 0.4.0 test used, with `claude-sonnet-5-5` and `claude-opus-5-5` requested by name, in the same setup, with the plugin as published and with the hook off. Its plan and pass criteria: [docs/ANALYSIS_PLAN_0.4.1.md](docs/ANALYSIS_PLAN_0.4.1.md). All six criteria were met on both models. The 0.4.0 results above come from Claude Code 2.1.318 and ts-1, so the two tables are not a like-for-like comparison. Version 0.4.2 changed only the hook again, for the two findings of the 0.4.1 test, and was retested on those cases only: a new task set, ts-3, committed before the change, [102 sessions](results/RESULTS.md#completeness-and-cost-by-batch) with the plugin as published, same setup and models. Its plan: [docs/ANALYSIS_PLAN_0.4.2.md](docs/ANALYSIS_PLAN_0.4.2.md). All four criteria were met on both models.
 
 Versions 0.4.3 to 0.4.6 changed only the hook, to stop the skill running on small jobs and quick look-ups, and were tested on 2026-11-13 in Claude Code 2.1.323, arm C only, each on a task set committed before its run. 0.4.3, 0.4.4 and 0.4.5 each missed a criterion and were not released (table above). A test set written in the same sitting as a fix made 0.4.4 look better than it was, so from then on each test set was written by a separate agent that saw only a description of the files and never the hook, after the hook was frozen. Two such sets (ts-7, ts-8) were checked offline first, predicted a miss, and were not run live; they were then used for development. The design that passed gives the directive reminder only for clear work and a conditional reminder, which lets Claude skip a quick look-up, for questions and requests that only retrieve something. 0.4.6 met all five criteria on the held-out set ts-10 ([192 sessions](results/RESULTS.md#completeness-and-cost-by-batch)); its plan: [docs/ANALYSIS_PLAN_0.4.6.md](docs/ANALYSIS_PLAN_0.4.6.md). The offline tests run with `python3 -I tools/run_offline.py <label>`.
+
+</details>
 
 ## Limitations
 
@@ -200,6 +306,9 @@ All limitations: [docs/LIMITATIONS.md](docs/LIMITATIONS.md).
 
 ## Files
 
+<details>
+<summary><b>Repository layout</b></summary>
+
 ```
 .claude-plugin/marketplace.json   marketplace entry for Claude Code
 plugins/capability-scout/         the Claude Code plugin
@@ -209,11 +318,13 @@ plugins/capability-scout/         the Claude Code plugin
   lib/                            the hook's state storage
   evals/                          example evaluation cases
 chat-edition/capability-scout/    the chat edition (SKILL.md only)
-docs/                             install, how it works, test method, analysis plan, limitations
+docs/                             install, how it works, test method, analysis plan, limitations; images/readme/ holds the README graphics
 results/                          ledger, generated results, chart, examples, run manifests
 tests/                            offline tests, live harness and task set, fixture, earlier tests
-tools/                            summarize.py, run_offline.py, run guards
+tools/                            summarize.py, run_offline.py, run guards, readme_art.py (README graphics)
 ```
+
+</details>
 
 ## Help and contributing
 
@@ -226,3 +337,9 @@ tools/                            summarize.py, run_offline.py, run guards
 Changes by version: [CHANGELOG.md](CHANGELOG.md).
 
 MIT License. Copyright (c) 2026 Polyperchon LLC. See [LICENSE](LICENSE).
+
+<p align="center">
+  <br>
+  <img src="docs/images/readme/mark.svg" alt="Capability Scout mark: a small radar sweep" width="72"><br>
+  <sub>Check what works. Then do the work.</sub>
+</p>

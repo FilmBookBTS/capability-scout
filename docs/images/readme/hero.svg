@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 480" width="1280" height="480" role="img" aria-labelledby="t d">
+<title id="t">Capability Scout</title>
+<desc id="d">Capability Scout. A radar sweeps over the capabilities in a session: a skill, a built-in tool and a plugin that work, a connector that needs sign-in, and one worth adding. Beside it, a request is typed and Claude answers with a short capability plan before doing the work.</desc>
+<style>.sweep{transform-origin:1010px 240px;animation:spin 6s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.caret{animation:blink 1s steps(1) infinite}@keyframes blink{50%{opacity:0}}.p0{transform-origin:1083.9px 145.4px;animation:ping 6s ease-out 0.63s infinite}.p1{transform-origin:1149.1px 296.2px;animation:ping 6s ease-out 1.87s infinite}.p2{transform-origin:975.8px 334.0px;animation:ping 6s ease-out 3.33s infinite}.p3{transform-origin:880.2px 187.6px;animation:ping 6s ease-out 4.87s infinite}.p4{transform-origin:913.8px 59.0px;animation:ping 6s ease-out 5.53s infinite}@keyframes ping{0%{transform:scale(.6);opacity:.9}18%{transform:scale(2.4);opacity:0}100%{transform:scale(2.4);opacity:0}}.ty{animation:ty 12s infinite}@keyframes ty{0%,2.5%{transform:translateX(-476px);animation-timing-function:steps(42,end)}20.83%,100%{transform:translateX(0)}}.h0{animation:h0 12s linear infinite}@keyframes h0{0%,23.33%{opacity:0;transform:translateY(6px)}27.5%,92%{opacity:1;transform:none}95%,100%{opacity:0;transform:none}}.l0{animation:l0 12s linear infinite}@keyframes l0{0%,27.5%{opacity:0;transform:translateY(6px)}31.67%,92%{opacity:1;transform:none}95%,100%{opacity:0;transform:none}}.l1{animation:l1 12s linear infinite}@keyframes l1{0%,32.08%{opacity:0;transform:translateY(6px)}36.25%,92%{opacity:1;transform:none}95%,100%{opacity:0;transform:none}}.l2{animation:l2 12s linear infinite}@keyframes l2{0%,36.67%{opacity:0;transform:translateY(6px)}40.84%,92%{opacity:1;transform:none}95%,100%{opacity:0;transform:none}}@media (prefers-reduced-motion:reduce){*{animation:none!important}}</style>
+<rect width="1280" height="480" rx="24" fill="#0B1220"/>
+<defs><radialGradient id="glow" cx="1010" cy="240" r="260" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5EE6C8" stop-opacity=".10"/><stop offset="1" stop-color="#5EE6C8" stop-opacity="0"/></radialGradient><linearGradient id="beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5EE6C8" stop-opacity="0"/><stop offset="1" stop-color="#5EE6C8" stop-opacity=".38"/></linearGradient></defs>
+<circle cx="1010" cy="240" r="260" fill="url(#glow)"/>
+<circle cx="1010" cy="240" r="60" fill="none" stroke="#24324F" stroke-width="1.5"/>
+<circle cx="1010" cy="240" r="120" fill="none" stroke="#24324F" stroke-width="1.5"/>
+<circle cx="1010" cy="240" r="180" fill="none" stroke="#24324F" stroke-width="1.5"/>
+<path d="M830 240H1190M1010 60V420" stroke="#24324F" stroke-width="1.5"/>
+<g class="sweep"><path d="M1010 240L894.3 102.1A180 180 0 0 1 1010 60Z" fill="url(#beam)"/><path d="M1010 240V60" stroke="#5EE6C8" stroke-width="2" stroke-opacity=".8"/></g>
+<circle class="p0" cx="1083.9" cy="145.4" r="9" fill="none" stroke="#5EE6C8" stroke-width="2"/>
+<circle cx="1083.9" cy="145.4" r="7" fill="#5EE6C8"/>
+<text x="1099.9" y="150.4" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="15" fill="#93A3BF">skill</text>
+<circle class="p1" cx="1149.1" cy="296.2" r="9" fill="none" stroke="#5EE6C8" stroke-width="2"/>
+<circle cx="1149.1" cy="296.2" r="7" fill="#5EE6C8"/>
+<text x="1165.1" y="301.2" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="15" fill="#93A3BF">built-in tool</text>
+<circle class="p2" cx="975.8" cy="334.0" r="9" fill="none" stroke="#FF7A6B" stroke-width="2"/>
+<circle cx="975.8" cy="334.0" r="6" fill="#0B1220" stroke="#FF7A6B" stroke-width="2.5"/>
+<text x="959.8" y="339.0" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="15" fill="#93A3BF" text-anchor="end">connector: needs sign-in</text>
+<circle class="p3" cx="880.2" cy="187.6" r="9" fill="none" stroke="#5EE6C8" stroke-width="2"/>
+<circle cx="880.2" cy="187.6" r="7" fill="#5EE6C8"/>
+<text x="864.2" y="192.6" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="15" fill="#93A3BF" text-anchor="end">plugin</text>
+<circle class="p4" cx="913.8" cy="59.0" r="9" fill="none" stroke="#F5B544" stroke-width="2"/>
+<circle cx="913.8" cy="59.0" r="7" fill="#0B1220" stroke="#F5B544" stroke-width="2.5" stroke-dasharray="3 3"/>
+<text x="897.8" y="64.0" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="15" fill="#93A3BF" text-anchor="end">worth adding</text>
+<circle cx="1010" cy="240" r="5" fill="#5EE6C8"/>
+<text x="72" y="92" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="15" fill="#F5B544" font-weight="600" letter-spacing="2">A SKILL FOR CLAUDE  ·  A PLUGIN FOR CLAUDE CODE</text>
+<text x="68" y="170" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="74" fill="#E9EEF7" font-weight="800" letter-spacing="-1.5">Capability Scout</text>
+<text x="72" y="214" font-family="ui-sans-serif,'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="25" fill="#5EE6C8" font-weight="500">Checks what actually works here. Then does the work.</text>
+<rect x="72" y="244" width="600" height="46" rx="12" fill="#111B2E" stroke="#24324F"/>
+<text x="92" y="274" font-family="ui-monospace,'SF Mono','Cascadia Code',Menlo,Consolas,'DejaVu Sans Mono','Liberation Mono',monospace" font-size="20" fill="#F5B544" font-weight="700">›</text>
+<text x="116" y="274" font-family="ui-monospace,'SF Mono','Cascadia Code',Menlo,Consolas,'DejaVu Sans Mono','Liberation Mono',monospace" font-size="18" fill="#E9EEF7">Review app.py for security vulnerabilities</text>
+<clipPath id="pill"><rect x="73" y="245" width="598" height="44" rx="11"/></clipPath>
+<g clip-path="url(#pill)"><g class="ty"><rect x="592" y="252" width="496" height="32" fill="#111B2E"/><rect class="caret" x="592" y="258" width="10" height="21" rx="2" fill="#5EE6C8"/></g></g>
+<g class="h0"><text x="72" y="328" font-family="ui-monospace,'SF Mono','Cascadia Code',Menlo,Consolas,'DejaVu Sans Mono','Liberation Mono',monospace" font-size="16" fill="#F5B544" font-weight="700">Capability plan</text></g>
+<g class="l0"><rect x="72" y="350" width="10" height="10" rx="2" fill="#5EE6C8"/><text x="94" y="360" font-family="ui-monospace,'SF Mono','Cascadia Code',Menlo,Consolas,'DejaVu Sans Mono','Liberation Mono',monospace" font-size="16"><tspan fill="#5EE6C8" font-weight="700">Using:</tspan><tspan fill="#E9EEF7"> my own read-only review of app.py</tspan></text></g>
+<g class="l1"><rect x="72" y="382" width="10" height="10" rx="2" fill="#F5B544"/><text x="94" y="392" font-family="ui-monospace,'SF Mono','Cascadia Code',Menlo,Consolas,'DejaVu Sans Mono','Liberation Mono',monospace" font-size="16"><tspan fill="#F5B544" font-weight="700">Worth adding:</tspan><tspan fill="#E9EEF7"> a first-party security plugin</tspan></text></g>
+<g class="l2"><rect x="72" y="414" width="10" height="10" rx="2" fill="#93A3BF"/><text x="94" y="424" font-family="ui-monospace,'SF Mono','Cascadia Code',Menlo,Consolas,'DejaVu Sans Mono','Liberation Mono',monospace" font-size="16"><tspan fill="#93A3BF" font-weight="700">Not installed:</tspan><tspan fill="#E9EEF7"> it asks for your approval first</tspan></text></g>
+</svg>
